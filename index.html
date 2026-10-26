@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d1010">
+  <meta name="description" content="The Villains — chọn một lá bài để khám phá thành viên của nhóm.">
+  <title>The Villains — Choose Your Player</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Đi đến nội dung chính</a>
+  <header class="masthead shell">
+    <a class="brand" href="#top" aria-label="The Villains - Trang chủ">
+      <span class="brand-mark" aria-hidden="true">V</span>
+      <span><span class="brand-name">THE VILLAINS</span><span class="brand-caption">A CLOSE-KNIT CREW</span></span>
+    </a>
+    <div class="table-status"><span class="status-dot" aria-hidden="true"></span>THE TABLE IS OPEN</div>
+  </header>
+
+  <main class="shell" id="main">
+    <section class="intro" id="top" aria-labelledby="pageTitle">
+      <p class="intro-kicker">FIVE PLAYERS · ONE TABLE</p>
+      <h1 id="pageTitle">Choose your <span>player.</span></h1>
+      <p class="intro-copy">Mỗi lá bài là một cá tính. Chọn một người để bước vào thế giới của họ.</p>
+      <div class="table-rule" aria-hidden="true">✦</div>
+    </section>
+
+    <section class="table-stage" id="tableStage" aria-label="Bàn bài The Villains">
+      <div class="table-etching" aria-hidden="true"></div>
+      <div class="arc-caption" aria-hidden="true"><span>THE HAND</span><span>EST. 2026</span></div>
+      <div class="card-arc" id="cardArc" aria-label="Chọn một thành viên"></div>
+      <aside class="selected-member" id="memberDetail" aria-live="polite" hidden>
+        <div class="featured-card-slot" id="featuredCardSlot"></div>
+        <div class="member-copy">
+          <p class="member-kicker" id="memberKicker"></p>
+          <h2 id="memberName"></h2>
+          <p class="member-role" id="memberRole"></p>
+          <p class="member-description" id="memberDescription"></p>
+          <div class="member-tags" id="memberTags"></div>
+          <div class="member-actions">
+            <button class="action-button primary" id="previewButton" type="button">Preview profile <span aria-hidden="true">↗</span></button>
+            <button class="action-button" id="clearSelection" type="button">Back to the hand</button>
+          </div>
+        </div>
+      </aside>
+      <div class="empty-detail" id="emptyDetail">
+        <strong>The hand is yours.</strong>
+        Pick a card to meet the player, hear their story, and explore their personal page.
+      </div>
+    </section>
+    <p class="table-instruction"><span aria-hidden="true">✦</span> Select a card to bring its player into focus.</p>
+    <footer class="footer"><span>THE VILLAINS · FIVE PLAYERS, DIFFERENT WORLDS</span><span>THE NEXT MOVE IS YOURS</span></footer>
+  </main>
+
+  <dialog class="profile-preview" id="profilePreview" aria-labelledby="previewTitle">
+    <div class="preview-header">
+      <div class="preview-heading"><span>PLAYER PROFILE</span><strong id="previewTitle"></strong></div>
+      <button class="preview-close" id="closePreview" type="button" aria-label="Close profile preview">×</button>
+    </div>
+    <iframe class="preview-frame" id="previewFrame" title="Member profile preview" loading="eager"></iframe>
+    <div class="preview-footer">
+      <span class="preview-hint">A preview of their world · press Escape to return</span>
+      <a class="action-button primary" id="enterProfile" href="#">Enter profile <span aria-hidden="true">↗</span></a>
+    </div>
+  </dialog>
+  <div class="visually-hidden" id="announcement" role="status" aria-live="polite"></div>
+
+  <script>
+    // Keep member details and links together here so the table is easy to update.
+    const MEMBERS = [
+      {
+        id: "ky",
+        name: "Nguyễn Vĩnh Kỳ",
+        rank: "A",
+        suit: "♠",
+        color: "black",
+        label: "ACE OF SPADES",
+        role: "Sinh viên Công nghệ thông tin · Kỹ thuật phần mềm",
+        description: "Sinh viên năm hai tại Đại học Bình Dương, quan tâm đến lập trình và phát triển website. Đang xây nền tảng kỹ thuật, tư duy logic và kinh nghiệm thực hành.",
+        tags: ["Software", "Web", "Problem solving"],
+        image: "html/NguyenVinhKy_25050052/images/anh_ca_nhan.jpg",
+        initials: "K",
+        page: "html/NguyenVinhKy_25050052/index.html"
+      },
+      {
+        id: "toan",
+        name: "Lê Minh Toàn",
+        rank: "A",
+        suit: "♥",
+        color: "red",
+        label: "ACE OF HEARTS",
+        role: "Sinh viên Công nghệ thông tin",
+        description: "Người hướng nội, thích khám phá máy móc và không ngừng học hỏi. Mong muốn trở thành kỹ sư IT, xây dựng những giải pháp công nghệ hữu ích.",
+        tags: ["AI", "Robotics", "Technology"],
+        image: "html/LeMinhToan/avatar.jpeg",
+        initials: "T",
+        page: "html/LeMinhToan/LMT.html"
+      },
+      {
+        id: "gia-an",
+        name: "Dương Quang Gia Ân",
+        rank: "J",
+        suit: "✦",
+        color: "joker",
+        label: "THE JOKER",
+        role: "Người học hỏi · Thành viên bí ẩn",
+        description: "Luôn tò mò về cách mọi thứ hoạt động, thích thử điều chưa biết và biến những ý tưởng nhỏ thành trải nghiệm thật trên web.",
+        tags: ["Curiosity", "Creative web", "Ideas"],
+        image: "html/DuongQuangGiaAn/pedro-the-raccoon.gif",
+        profileImage: "html/DuongQuangGiaAn/profile.png",
+        initials: "Â",
+        page: "html/DuongQuangGiaAn/index.html"
+      },
+      {
+        id: "hoang",
+        name: "Trì Gia Hoàng",
+        rank: "A",
+        suit: "♦",
+        color: "red",
+        label: "ACE OF DIAMONDS",
+        role: "Sinh viên Thiết kế Web",
+        description: "Sinh viên Công nghệ thông tin tại Đại học Bình Dương. Tự nhận mình vui vẻ, hòa đồng, thích giúp đỡ mọi người và luôn chịu khó.",
+        tags: ["Web design", "Friendly", "Helpful"],
+        image: "html/TriGiaHoang/anhdaidien.png",
+        initials: "H",
+        page: "html/TriGiaHoang/full%20b%C3%A0i%20wed.html"
+      },
+      {
+        id: "thai",
+        name: "Trương Quang Thái",
+        rank: "A",
+        suit: "♣",
+        color: "black",
+        label: "ACE OF CLUBS",
+        role: "Sinh viên năm 2 · Khóa 25",
+        description: "Đang rèn luyện kiến thức nền tảng, chủ động thực hành và nhìn lại từng sản phẩm để cải thiện. Tin vào cách học: Học – Hỏi – Hiểu – Hành.",
+        tags: ["Practice", "Learning", "Growth"],
+        image: "html/TruongQuangThai/imges/TQT.jpg",
+        initials: "Th",
+        page: "html/TruongQuangThai/index.html"
+      }
+    ];
+
+    const cardArc = document.getElementById("cardArc");
+    const tableStage = document.getElementById("tableStage");
+    const memberDetail = document.getElementById("memberDetail");
+    const featuredCardSlot = document.getElementById("featuredCardSlot");
+    const profilePreview = document.getElementById("profilePreview");
+    const previewFrame = document.getElementById("previewFrame");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const cardSounds = {
+      swap: new Audio("sound/card-swap.mp3"),
+      flip: new Audio("sound/card-flip.mp3"),
+      joker: new Audio("sound/roblox-explosion-sound.mp3"),
+      laugh: new Audio("sound/muhehehe.mp3")
+    };
+    Object.values(cardSounds).forEach((audio) => { audio.preload = "auto"; });
+    let selectedMember = null;
+    let jokerTransformTimer = 0;
+    let jokerTransformed = false;
+
+    function playCardSound(audio) {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.play().catch((error) => {
+        console.warn("Card sound playback was unavailable in this browser.", error);
+      });
+    }
+
+    function makeCard(member, featured = false) {
+      const featuredJoker = featured && member.id === "gia-an";
+      const card = document.createElement(featured && !featuredJoker ? "div" : "button");
+      card.className = featured ? "playing-card featured-playing-card" : "playing-card";
+      if (!featured || featuredJoker) {
+        card.type = "button";
+        if (!featured) {
+          card.dataset.memberId = member.id;
+          card.setAttribute("aria-pressed", "false");
+          card.setAttribute("aria-label", `${member.label}: ${member.name}, ${member.role}`);
+        } else {
+          card.setAttribute("aria-label", "Play the Joker laugh");
+        }
+      } else {
+        card.setAttribute("aria-hidden", "true");
+      }
+      const face = document.createElement("span");
+      face.className = `card-face ${member.color === "joker" ? "is-joker" : `is-${member.color}`}`;
+
+      if (member.color === "joker") {
+        const topCorner = document.createElement("span");
+        topCorner.className = "joker-corner";
+        const topRank = document.createElement("span");
+        topRank.textContent = "JOKER";
+        const topSuit = document.createElement("small");
+        topSuit.textContent = "✦";
+        topCorner.append(topRank, topSuit);
+        const bottomCorner = document.createElement("span");
+        bottomCorner.className = "joker-corner joker-corner-bottom";
+        const bottomRank = document.createElement("span");
+        bottomRank.textContent = "JOKER";
+        const bottomSuit = document.createElement("small");
+        bottomSuit.textContent = "✦";
+        bottomCorner.append(bottomRank, bottomSuit);
+        const crown = document.createElement("span");
+        crown.className = "joker-crown";
+        crown.textContent = "✦";
+        const emblem = document.createElement("span");
+        emblem.className = "joker-emblem";
+        const image = document.createElement("img");
+        image.src = jokerTransformed ? member.profileImage : member.image;
+        image.alt = "";
+        emblem.append(image);
+        const flourish = document.createElement("span");
+        flourish.className = "joker-flourish";
+        flourish.setAttribute("aria-hidden", "true");
+        flourish.textContent = "✦  ♦  ✦";
+        const name = document.createElement("span");
+        name.className = "joker-name";
+        name.textContent = member.name;
+        face.append(topCorner, bottomCorner, crown, emblem, flourish, name);
+      } else {
+        const topCorner = document.createElement("span");
+        topCorner.className = "card-corner";
+        const topRank = document.createElement("span");
+        topRank.textContent = member.rank;
+        const topSuit = document.createElement("small");
+        topSuit.textContent = member.suit;
+        topCorner.append(topRank, topSuit);
+        const portrait = document.createElement("span");
+        portrait.className = "card-portrait";
+        if (member.image) {
+          const image = document.createElement("img");
+          image.src = member.image;
+          image.alt = "";
+          image.loading = "lazy";
+          image.addEventListener("error", () => {
+            const initial = document.createElement("span");
+            initial.className = "portrait-initial";
+            initial.textContent = member.initials;
+            portrait.replaceChildren(initial);
+          }, { once: true });
+          portrait.append(image);
+        } else {
+          const initial = document.createElement("span");
+          initial.className = "portrait-initial";
+          initial.textContent = member.initials;
+          portrait.append(initial);
+        }
+        const name = document.createElement("span");
+        name.className = "card-name";
+        name.textContent = member.name;
+        const role = document.createElement("span");
+        role.className = "card-role";
+        role.textContent = member.role;
+        const bottomCorner = document.createElement("span");
+        bottomCorner.className = "card-corner card-corner-bottom";
+        const bottomRank = document.createElement("span");
+        bottomRank.textContent = member.rank;
+        const bottomSuit = document.createElement("small");
+        bottomSuit.textContent = member.suit;
+        bottomCorner.append(bottomRank, bottomSuit);
+        face.append(topCorner, portrait, name, role, bottomCorner);
+      }
+      card.append(face);
+      return card;
+    }
+
+    function selectMember(member) {
+      const source = cardArc.querySelector(`[data-member-id="${member.id}"]`);
+      if (!source) return;
+      playCardSound(cardSounds.flip);
+      cardArc.querySelectorAll(".playing-card").forEach((card) => {
+        const isSelected = card === source;
+        card.classList.toggle("is-selected", isSelected);
+        card.setAttribute("aria-pressed", String(isSelected));
+      });
+      selectedMember = member;
+      tableStage.classList.add("has-selection");
+      memberDetail.classList.remove("is-leaving");
+      memberDetail.hidden = false;
+      document.getElementById("memberKicker").textContent = member.label;
+      document.getElementById("memberName").textContent = member.name;
+      document.getElementById("memberRole").textContent = member.role;
+      document.getElementById("memberDescription").textContent = member.description;
+      document.getElementById("memberTags").replaceChildren(...member.tags.map((tag) => {
+        const chip = document.createElement("span");
+        chip.textContent = tag;
+        return chip;
+      }));
+      const previewButton = document.getElementById("previewButton");
+      previewButton.querySelector("span").textContent = "↗";
+      previewButton.firstChild.textContent = "Preview profile ";
+      document.getElementById("announcement").textContent = `${member.name} selected. ${member.description}`;
+
+      const featured = makeCard(member, true);
+      featuredCardSlot.replaceChildren(featured);
+      if (member.id === "gia-an") {
+        featured.addEventListener("click", () => playCardSound(cardSounds.laugh));
+      }
+      if (member.id === "gia-an" && !jokerTransformed) triggerJokerSupernova(featured, source, member);
+    }
+
+    function triggerJokerSupernova(featuredCard, sourceCard, member) {
+      window.clearTimeout(jokerTransformTimer);
+      const emblem = featuredCard.querySelector(".joker-emblem");
+      emblem.classList.add("is-exploding");
+      playCardSound(cardSounds.joker);
+      jokerTransformTimer = window.setTimeout(() => {
+        jokerTransformed = true;
+        [sourceCard, featuredCard].forEach((card) => {
+          const emblem = card.querySelector(".joker-emblem");
+          const image = emblem.querySelector("img");
+          if (image) {
+            image.src = member.profileImage;
+          }
+        });
+        emblem.classList.remove("is-exploding");
+      }, 480);
+    }
+
+    function clearSelection() {
+      if (!selectedMember) return;
+      playCardSound(cardSounds.flip);
+      selectedMember = null;
+      tableStage.classList.remove("has-selection");
+      memberDetail.classList.add("is-leaving");
+      memberDetail.addEventListener("animationend", (event) => {
+        if (event.animationName === "fade-panel-out" && memberDetail.classList.contains("is-leaving")) {
+          memberDetail.hidden = true;
+          memberDetail.classList.remove("is-leaving");
+        }
+      }, { once: true });
+      featuredCardSlot.replaceChildren();
+      cardArc.querySelectorAll(".playing-card").forEach((card) => {
+        card.classList.remove("is-selected");
+        card.setAttribute("aria-pressed", "false");
+      });
+      document.getElementById("announcement").textContent = "Selection cleared. Choose a card.";
+    }
+
+    MEMBERS.forEach((member) => cardArc.append(makeCard(member)));
+    cardArc.addEventListener("click", (event) => {
+      const button = event.target.closest(".playing-card[data-member-id]");
+      if (!button) return;
+      const member = MEMBERS.find((candidate) => candidate.id === button.dataset.memberId);
+      if (member) selectMember(member);
+    });
+    cardArc.addEventListener("pointerover", (event) => {
+      const card = event.target.closest(".playing-card[data-member-id]");
+      if (card && !card.contains(event.relatedTarget)) playCardSound(cardSounds.swap);
+    });
+    document.getElementById("clearSelection").addEventListener("click", clearSelection);
+
+    document.getElementById("previewButton").addEventListener("click", () => {
+      if (!selectedMember) return;
+      document.getElementById("previewTitle").textContent = selectedMember.name;
+      document.getElementById("enterProfile").href = selectedMember.page;
+      previewFrame.title = `${selectedMember.name} — profile preview`;
+      previewFrame.src = selectedMember.page;
+      profilePreview.classList.remove("is-leaving");
+      profilePreview.showModal();
+      document.getElementById("closePreview").focus({ preventScroll: true });
+    });
+    function closePreview() {
+      if (!profilePreview.open) return;
+      profilePreview.close();
+    }
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && profilePreview.open) {
+        event.preventDefault();
+        closePreview();
+      }
+    });
+    profilePreview.addEventListener("close", () => {
+      previewFrame.removeAttribute("src");
+      profilePreview.classList.remove("is-leaving");
+    });
+    profilePreview.addEventListener("cancel", () => {
+      previewFrame.removeAttribute("src");
+      profilePreview.classList.remove("is-leaving");
+    });
+    document.getElementById("closePreview").addEventListener("click", closePreview);
+    profilePreview.addEventListener("click", (event) => {
+      if (event.target === profilePreview) closePreview();
+    });
+    document.getElementById("enterProfile").addEventListener("click", (event) => {
+      if (!selectedMember) return;
+      event.preventDefault();
+      const targetPage = selectedMember.page;
+      profilePreview.classList.add("is-leaving");
+      window.setTimeout(() => { window.location.href = targetPage; }, reducedMotion.matches ? 0 : 420);
+    });
+  </script>
+</body>
+</html>
