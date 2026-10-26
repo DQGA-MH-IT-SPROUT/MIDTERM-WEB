@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#faf8f2">
+    <meta name="description" content="Trang giới thiệu Trương Quang Thái, sinh viên năm 2 khóa 25 học tại Trường Đại học Bình Dương." data-i18n-content="metaDescription">
+    <title>Trương Quang Thái — Giới thiệu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content" data-i18n="skipLink">Đi đến nội dung chính</a>
+    <header class="header">
+        <nav class="navbar navbar-expand-md nav container" aria-label="Điều hướng chính">
+            <a class="navbar-brand brand" href="#home">Trương Quang Thái<span>.</span></a>
+            <button class="navbar-toggler menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#nav-links" aria-expanded="false" aria-controls="nav-links" aria-label="Mở menu" data-i18n-aria-label="openMenu">
+                <span aria-hidden="true">☰</span>
+            </button>
+            <div class="collapse navbar-collapse nav-links" id="nav-links">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="#about" data-i18n="navAbout">Giới thiệu</a>
+                    <a class="nav-link" href="#education" data-i18n="navEducation">Học vấn</a>
+                    <a class="nav-link" href="#skills" data-i18n="navSkills">Kỹ năng</a>
+                    <a class="nav-link" href="#work" data-i18n="navWork">Thực hành</a>
+                    <a class="nav-link" href="#contact" data-i18n="navContact">Liên hệ</a>
+                    <a class="nav-link" href="#challenge" data-i18n="navChallenge">Thử thách</a>
+                </div>
+                <div class="site-controls">
+                    <button class="site-control theme-toggle" id="theme-toggle" type="button" aria-label="Chuyển sang giao diện tối" data-i18n-aria-label="toggleTheme">
+                        <span class="control-icon theme-icon" aria-hidden="true">☾</span><span class="control-label" data-i18n="themeDark">Tối</span>
+                    </button>
+                    <button class="site-control language-toggle" id="language-toggle" type="button" aria-label="Switch to English" data-i18n-aria-label="toggleLanguage">
+                        <span class="control-icon" aria-hidden="true">文</span><span id="language-label">EN</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div class="reading-progress" id="reading-progress" role="progressbar" aria-label="Tiến độ đọc trang" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-i18n-aria-label="readingProgress"><span></span></div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero container" id="home">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span><span data-i18n="studentStatus">Sinh viên năm 2 · Khóa 25</span></p>
+                    <h1 data-i18n-html="heroTitle">Xin chào,<br>em là <span>Thái.</span></h1>
+                    <p class="lead" data-i18n="heroLead">Đây là web của thiết kế — nơi ghi lại hành trình học Công nghệ thông tin, những điều đang khám phá và sản phẩm em tự tay thực hiện.</p>
+                    <div class="hero-tags" aria-label="Đôi nét về mình" data-i18n-aria-label="aboutMe">
+                        <span data-i18n="tagCurious">✦ Ham học hỏi</span>
+                        <span data-i18n="tagTech">? Thích công nghệ</span>
+                        <span data-i18n="tagExplore">↗ Luôn thử điều mới</span>
+                    </div>
+                    <div class="actions">
+                        <a class="button primary" href="#about"><span data-i18n="heroAboutButton">Khám phá câu chuyện</span> <span aria-hidden="true">↓</span></a>
+                        <a class="button" href="#work"><span data-i18n="heroWorkButton">Xem dự án</span> <span aria-hidden="true">↗</span></a>
+                    </div>
+                </div>
+                <div class="hero-portrait">
+                    <span class="portrait-sticker sticker-top" aria-hidden="true">HELLO<br>WORLD!</span>
+                    <button class="flip-card" type="button" aria-pressed="false" aria-label="Lật thẻ để xem sở thích mẫu" data-i18n-aria-label="flipToBack">
+                        <span class="flip-inner">
+                            <span class="flip-face flip-front" aria-hidden="false">
+                                <img class="flip-photo" src="imges/TQT.jpg" alt="" aria-hidden="true">
+                                <span class="flip-hint"><span data-i18n="flipToInterests">Nhấn hoặc chạm để xem mặt sau</span> ↻</span>
+                            </span>
+                            <span class="flip-face flip-back" aria-hidden="true">
+                                <span class="back-header">
+                                    <span class="back-kicker"><span aria-hidden="true">✦</span> <span data-i18n="backKicker">THÁI Ở PHIÊN BẢN ĐỜI THƯỜNG</span></span>
+                                    <span class="back-count">MY VIBE</span>
+                                </span>
+                                <span class="back-title"><span data-i18n="backTitle">Một chút về</span><br><span data-i18n="backTitleAccent">con người mình</span></span>
+                                <span class="back-group">
+                                    <span class="back-group-heading"><span class="back-group-icon" aria-hidden="true">☺</span><span data-i18n="traitsTitle">TÍNH CÁCH</span><span class="back-group-note" data-i18n="traitsCount">6 nét riêng</span></span>
+                                    <span class="back-chips trait-chips">
+                                        <span class="back-chip"><span aria-hidden="true">☀</span><span data-i18n="traitFriendly">Thân thiện</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">♡</span><span data-i18n="traitHonest">Trung thực</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">✳</span><span data-i18n="traitCareful">Kỹ lưỡng</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">◉</span><span data-i18n="traitEmpathetic">Thấu hiểu</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">☯</span><span data-i18n="traitCalm">Bình tĩnh</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">🌿</span><span data-i18n="traitPatient">Điềm đạm, không dễ nóng giận</span></span>
+                                    </span>
+                                </span>
+                                <span class="back-group interest-group">
+                                    <span class="back-group-heading"><span class="back-group-icon" aria-hidden="true">✧</span><span data-i18n="interestsTitle">LÚC RẢNH MÌNH THÍCH</span></span>
+                                    <span class="back-chips interest-chips">
+                                        <span class="back-chip"><span aria-hidden="true">📚</span><span data-i18n="interestLearning">Học hỏi</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">⚡</span><span data-i18n="interestChallenge">Thử thách</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">☁</span><span data-i18n="interestQuiet">Yên tĩnh</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">♫</span><span data-i18n="interestMusic">Âm nhạc</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">⚽</span><span data-i18n="interestSports">Thể thao</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">🎧</span><span data-i18n="interestAudio">Audio</span></span>
+                                    </span>
+                                </span>
+                                <span class="back-footer"><span data-i18n="learningMotto">HỌC · HỎI · HIỂU · HÀNH</span><span class="flip-hint"><span data-i18n="flipBack">Lật lại</span> <span aria-hidden="true">↻</span></span></span>
+                            </span>
+                        </span>
+                    </button>
+                    <span class="portrait-sticker sticker-bottom" aria-hidden="true" data-i18n="stickerMotto">HỌC · HỎI · LÀM</span>
+                </div>
+            </div>
+            <div class="quick-info" aria-label="Thông tin cơ bản" data-i18n-aria-label="basicInfo">
+                <div><span data-i18n="schoolLabel">Trường</span><strong data-i18n="schoolName">Trường Đại học Bình Dương</strong></div>
+                <div><span data-i18n="majorLabel">Ngành</span><strong data-i18n="majorName">Công nghệ thông tin</strong></div>
+                <div><span data-i18n="classLabel">Lớp</span><strong>28TH01</strong></div>
+                <div><span data-i18n="nameLabel">Họ và tên</span><strong>Trương Quang Thái</strong></div>
+                <div><span data-i18n="studentIdLabel">Mã số sinh viên</span><strong>25050055</strong></div>
+                <div><span data-i18n="courseLabel">Khóa học</span><strong>2024-2029</strong></div>
+            </div>
+        </section>
+
+        <div class="marquee" aria-label="Thông điệp: Học hỏi mỗi ngày, sáng tạo theo cách riêng" data-i18n-aria-label="marqueeLabel">
+            <div class="marquee-track" aria-hidden="true">
+                <span data-i18n="marqueeLearn">HỌC HỎI MỖI NGÀY</span><i>✳</i><span data-i18n="marqueeCreate">SÁNG TẠO THEO CÁCH RIÊNG</span><i>✳</i><span data-i18n="marqueeLearn">HỌC HỎI MỖI NGÀY</span><i>✳</i><span data-i18n="marqueeCreate">SÁNG TẠO THEO CÁCH RIÊNG</span><i>✳</i>
+            </div>
+        </div>
+
+        <section class="section" id="about">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="aboutLabel">Giới thiệu</p>
+                </div>
+                <div class="content-grid">
+                    <article class="panel">
+                        <span class="panel-kicker" data-i18n="aboutKicker">MỘT CHÚT VỀ MÌNH</span>
+                        <h3 data-i18n="aboutTitle">Đang lớn từng ngày học tập.</h3>
+                        <p data-i18n="aboutParagraph1">Em là Trương Quang Thái, sinh viên Trường Đại học Bình Dương. Em mong muốn đạt điểm tốt môn Thiết kế Web và luôn cố gắng học thêm điều mới qua từng bài tập.</p>
+                        <p data-i18n="aboutParagraph2">Em từng làm đội trưởng nhóm học tập và tham gia chiến dịch Mùa hè xanh tại xã An Long năm 2026. Trong thời gian tới, em muốn tiếp tục xây nền tảng vững chắc, thực hành nhiều hơn và tạo ra những sản phẩm tốt hơn.</p>
+                    </article>
+                    <aside class="panel note">
+                        <span class="note-icon" aria-hidden="true">✳</span>
+                        <span class="panel-kicker" data-i18n="guidingPrinciple">KIM CHỈ NAM</span>
+                        <h3 data-i18n="learningMethod">Phương pháp của em</h3>
+                        <p class="quote"><span data-i18n="learn">Học</span> <span aria-hidden="true">→</span> <span data-i18n="ask">Hỏi</span> <span aria-hidden="true">→</span> <span data-i18n="understand">Hiểu</span> <span aria-hidden="true">→</span> <span data-i18n="practice">Hành</span></p>
+                        <p data-i18n="learningMethodCopy">Học thì phải hỏi thì hiểu và hãy hành động.</p>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="education">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="educationLabel">Học vấn</p>
+                    <div><h2 data-i18n="educationTitle">Hành trình học tập.</h2><p class="section-intro" data-i18n="educationIntro">Một vài thông tin về quá trình học tập hiện tại của mình.</p></div>
+                </div>
+                <div class="education">
+                    <article class="education-item"><span data-i18n="currentStatus">HIỆN TẠI</span><strong data-i18n="schoolName">Trường Đại học Bình Dương</strong><p data-i18n="studentStatus">Sinh viên năm 2 · Khóa 25</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="skillsLabel">Kỹ năng</p>
+                    <div><h2 data-i18n="skillsTitle">Những điều mình đang rèn luyện.</h2><p class="section-intro" data-i18n="skillsIntro">Các kỹ năng dưới đây phản ánh quá trình học tập và thực hành hiện tại.</p></div>
+                </div>
+                <div class="skill-list">
+                    <div class="skill-item"><strong data-i18n="skillC">C cơ bản</strong><span data-i18n="paused">Tạm hoãn</span></div>
+                    <div class="skill-item"><strong>C++ cơ bản</strong><span data-i18n="learning">Đang học</span></div>
+                    <div class="skill-item"><strong>Python cơ bản</strong><span data-i18n="practicing">Đang thực hành</span></div>
+                    <div class="skill-item"><strong>HTML</strong><span data-i18n="learning">Đang học</span></div>
+                    <div class="skill-item"><strong data-i18n="skillDatabase">Cơ sở dữ liệu</strong><span data-i18n="learning">Đang học</span></div>
+                    <div class="skill-item"><strong data-i18n="skillNetworking">Mạng cơ bản</strong><span data-i18n="learning">Đang học</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="work">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="workLabel">Dự án</p>
+                    <div><h2 data-i18n="workTitle">Những điều mình đang thực hiện.</h2><p class="section-intro" data-i18n="workIntro">Một số sản phẩm học tập và dự án cá nhân trong quá trình tìm hiểu, thực hành.</p></div>
+                </div>
+                <div class="work-list">
+                    <article class="work-item">
+                        <div class="work-mark"><img src="imges/html.webp" alt="Biểu tượng HTML5" data-i18n-alt="htmlAlt"></div>
+                        <div class="work-copy"><span data-i18n="personalProject">DỰ ÁN CÁ NHÂN</span><h3 data-i18n="portfolioProject">Website giới thiệu cá nhân</h3><p data-i18n="portfolioDescription">Trang responsive giới thiệu hồ sơ, kỹ năng và cách liên hệ.</p></div>
+                    </article>
+                    <article class="work-item">
+                        <div class="work-mark"><img src="imges/pc.webp" alt="Máy tính dùng cho dự án cơ sở dữ liệu mua bán" data-i18n-alt="databaseAlt"></div>
+                        <div class="work-copy"><span data-i18n="groupProject">DỰ ÁN NHÓM</span><h3 data-i18n="databaseProject">Quản lý cơ sở dữ liệu mua bán máy tính</h3><p data-i18n="databaseDescription">Bài tập nhóm xây dựng cơ sở dữ liệu cho hoạt động mua bán máy tính.</p></div>
+                    </article>
+                    <article class="work-item">
+                        <div class="work-mark"><img src="imges/unnamed.webp" alt="Hình minh họa vận động viên" data-i18n-alt="athleteAlt"></div>
+                        <div class="work-copy"><span data-i18n="personalProject">Dự án cá nhân</span><h3 data-i18n="athleteProject">Quản lý vận động viên (OOP)</h3><p data-i18n="athleteDescription">Bài tập cá nhân xây dựng ứng dụng quản lý vận động viên sử dụng lập trình hướng đối tượng.</p></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="challenge">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="challengeLabel">MINI GAME · CARO</p>
+                    <div>
+                        <h2 data-i18n="challengeTitle">Caro — Đấu với bot.</h2>
+                        <p class="section-intro" data-i18n="challengeIntro">Nối 5 quân liên tiếp trước bot để giành chiến thắng. Bạn cầm X, bot cầm O.</p>
+                    </div>
+                </div>
+                <iframe class="challenge-frame" id="challenge-frame" src="minigame.html" title="Trạm thử thách vui" data-i18n-title="minigameTitle" loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <section class="container" id="contact">
+            <div class="contact">
+                <div class="contact-details">
+                    <h2 data-i18n="contactTitle">Liên hệ</h2>
+                    <a class="contact-message-link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=25050055%40student.bdu.edu.vn" target="_blank" rel="noopener noreferrer">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                            <path d="M3.5 6.5h17v11h-17zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span data-i18n="contactMessage">Để lại lời nhắn</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container footer">
+        <span data-i18n="copyright">© 2026 Trương Quang Thái · Trang giới thiệu cá nhân</span>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+const translations = {
+            vi: {
+                metaDescription: "Trang giới thiệu Trương Quang Thái, sinh viên năm 2 khóa 25 học tại Trường Đại học Bình Dương.",
+                skipLink: "Đi đến nội dung chính", mainNavigation: "Điều hướng chính", openMenu: "Mở menu",
+                navAbout: "Giới thiệu", navEducation: "Học vấn", navSkills: "Kỹ năng", navWork: "Thực hành", navContact: "Liên hệ", navChallenge: "Thử thách",
+                toggleTheme: "Chuyển sang giao diện tối", toggleThemeLight: "Chuyển sang giao diện sáng", themeDark: "Tối", themeLight: "Sáng", toggleLanguage: "Switch to English",
+                studentStatus: "Sinh viên năm 2 · Khóa 25", heroTitle: "Xin chào,<br>em là <span>Thái.</span>",
+                heroLead: "Đây là web của thiết kế — nơi ghi lại hành trình học Công nghệ thông tin, những điều đang khám phá và sản phẩm em tự tay thực hiện.",
+                aboutMe: "Đôi nét về mình", tagCurious: "✦ Ham học hỏi", tagTech: "⌘ Thích công nghệ", tagExplore: "↗ Luôn thử điều mới",
+                heroAboutButton: "Khám phá câu chuyện", heroWorkButton: "Xem dự án", flipToBack: "Lật thẻ để xem sở thích mẫu", flipToFront: "Lật thẻ về mặt ảnh đại diện",
+                flipToInterests: "Nhấn hoặc chạm để xem mặt sau", backKicker: "THÁI Ở PHIÊN BẢN ĐỜI THƯỜNG", backTitle: "Một chút về", backTitleAccent: "con người mình",
+                traitsTitle: "TÍNH CÁCH", traitsCount: "6 nét riêng", traitFriendly: "Thân thiện", traitHonest: "Trung thực", traitCareful: "Kỹ lưỡng", traitEmpathetic: "Thấu hiểu", traitCalm: "Bình tĩnh", traitPatient: "Điềm đạm, không dễ nóng giận",
+                interestsTitle: "LÚC RẢNH MÌNH THÍCH", interestLearning: "Học hỏi", interestChallenge: "Thử thách", interestQuiet: "Yên tĩnh", interestMusic: "Âm nhạc", interestSports: "Thể thao", interestAudio: "Audio",
+                learningMotto: "HỌC · HỎI · HIỂU · HÀNH", flipBack: "Lật lại", stickerMotto: "HỌC · HỎI · HIỂU · HÀNH",
+                basicInfo: "Thông tin cơ bản", schoolLabel: "Trường", schoolName: "Trường Đại học Bình Dương", majorLabel: "Ngành", majorName: "Công nghệ thông tin",
+                classLabel: "Lớp", nameLabel: "Họ và tên", studentIdLabel: "Mã số sinh viên", courseLabel: "Khóa học",
+                marqueeLabel: "Thông điệp: Học hỏi mỗi ngày, sáng tạo theo cách riêng", marqueeLearn: "HỌC HỎI MỖI NGÀY", marqueeCreate: "SÁNG TẠO THEO CÁCH RIÊNG",
+                aboutLabel: "Giới thiệu", aboutKicker: "MỘT CHÚT VỀ MÌNH", aboutTitle: "Đang lớn từng ngày học tập.",
+                aboutParagraph1: "Em là Trương Quang Thái, sinh viên Trường Đại học Bình Dương. Em mong muốn đạt điểm tốt môn Thiết kế Web và luôn cố gắng học thêm điều mới qua từng bài tập.",
+                aboutParagraph2: "Em từng làm đội trưởng nhóm học tập và tham gia chiến dịch Mùa hè xanh tại xã An Long năm 2026. Trong thời gian tới, em muốn tiếp tục xây nền tảng vững chắc, thực hành nhiều hơn và tạo ra những sản phẩm tốt hơn.",
+                guidingPrinciple: "KIM CHỈ NAM", learningMethod: "Phương pháp của em", learn: "Học", ask: "Hỏi", understand: "Hiểu", practice: "Hành",
+                learningMethodCopy: "Học thì phải hỏi thì hiểu và hãy hành động.",
+                educationLabel: "Học vấn", educationTitle: "Hành trình học tập.", educationIntro: "Một vài thông tin về quá trình học tập hiện tại của mình.", currentStatus: "HIỆN TẠI",
+                skillsLabel: "Kỹ năng", skillsTitle: "Những điều mình đang rèn luyện.", skillsIntro: "Các kỹ năng dưới đây phản ánh quá trình học tập và thực hành hiện tại.",
+                skillC: "C cơ bản", paused: "Tạm hoãn", learning: "Đang học", practicing: "Đang thực hành", skillDatabase: "Cơ sở dữ liệu", skillNetworking: "Mạng cơ bản",
+                workLabel: "Dự án", workTitle: "Những điều mình đang thực hiện.", workIntro: "Một số sản phẩm học tập và dự án cá nhân trong quá trình tìm hiểu, thực hành.",
+                htmlAlt: "Biểu tượng HTML5", databaseAlt: "Máy tính dùng cho dự án cơ sở dữ liệu mua bán", athleteAlt: "Hình minh họa vận động viên",
+                personalProject: "DỰ ÁN CÁ NHÂN", groupProject: "DỰ ÁN NHÓM", portfolioProject: "Website giới thiệu cá nhân",
+                portfolioDescription: "Trang responsive giới thiệu hồ sơ, kỹ năng và cách liên hệ.",
+                databaseProject: "Quản lý cơ sở dữ liệu mua bán máy tính", databaseDescription: "Bài tập nhóm xây dựng cơ sở dữ liệu cho hoạt động mua bán máy tính.",
+                athleteProject: "Quản lý vận động viên (OOP)", athleteDescription: "Bài tập cá nhân xây dựng ứng dụng quản lý vận động viên sử dụng lập trình hướng đối tượng.",
+                challengeLabel: "MINI GAME · CARO", challengeTitle: "Caro — Đấu với bot.",
+                challengeIntro: "Nối 5 quân liên tiếp trước bot để giành chiến thắng. Bạn cầm X, bot cầm O.",
+                minigameTitle: "Caro — Đấu với bot",
+                contactTitle: "Liên hệ", contactMessage: "Để lại lời nhắn",
+                copyright: "© 2026 Trương Quang Thái · Trang giới thiệu cá nhân", readingProgress: "Tiến độ đọc trang"
+            },
+            en: {
+                metaDescription: "Meet Truong Quang Thai, a second-year Information Technology student at Binh Duong University.",
+                skipLink: "Skip to main content", mainNavigation: "Main navigation", openMenu: "Open menu",
+                navAbout: "About", navEducation: "Education", navSkills: "Skills", navWork: "Projects", navContact: "Contact", navChallenge: "Challenge",
+                toggleTheme: "Switch to dark mode", toggleThemeLight: "Switch to light mode", themeDark: "Dark", themeLight: "Light", toggleLanguage: "Chuyển sang Tiếng Việt",
+                studentStatus: "Second-year student · Cohort 25", heroTitle: "Hello,<br>I'm <span>Thai.</span>",
+                heroLead: "This is my little corner of the internet — a place to share my IT learning journey, the things I'm exploring, and projects I've built myself.",
+                aboutMe: "A little about me", tagCurious: "✦ Curious learner", tagTech: "⌘ Into technology", tagExplore: "↗ Always exploring",
+                heroAboutButton: "Discover my story", heroWorkButton: "Explore projects", flipToBack: "Flip the card to see my interests", flipToFront: "Flip the card back to my photo",
+                flipToInterests: "Tap or click to see the back", backKicker: "A LITTLE LOOK AT THE REAL ME", backTitle: "A little about", backTitleAccent: "who I am",
+                traitsTitle: "MY PERSONALITY", traitsCount: "6 little traits", traitFriendly: "Friendly", traitHonest: "Honest", traitCareful: "Detail-minded", traitEmpathetic: "Empathetic", traitCalm: "Calm", traitPatient: "Patient and even-tempered",
+                interestsTitle: "IN MY FREE TIME", interestLearning: "Learning", interestChallenge: "Challenges", interestQuiet: "Quiet time", interestMusic: "Music", interestSports: "Sports", interestAudio: "Podcasts",
+                learningMotto: "LEARN · ASK · UNDERSTAND · DO", flipBack: "Flip back", stickerMotto: "LEARN · ASK · UNDERSTAND · DO",
+                basicInfo: "Basic information", schoolLabel: "University", schoolName: "Binh Duong University", majorLabel: "Major", majorName: "Information Technology",
+                classLabel: "Class", nameLabel: "Name", studentIdLabel: "Student ID", courseLabel: "Cohort",
+                marqueeLabel: "Message: Learn every day, create in your own way", marqueeLearn: "LEARN SOMETHING EVERY DAY", marqueeCreate: "CREATE IN YOUR OWN WAY",
+                aboutLabel: "About", aboutKicker: "A LITTLE ABOUT ME", aboutTitle: "Growing one line of code at a time.",
+                aboutParagraph1: "I'm Truong Quang Thai, a student at Binh Duong University. I hope to do well in Web Design and keep learning something new with every assignment.",
+                aboutParagraph2: "I have been a study group leader and joined the 2026 Green Summer campaign in An Long. I hope to keep building a strong foundation, practice more, and create better projects.",
+                guidingPrinciple: "MY GUIDING PRINCIPLE", learningMethod: "How I learn", learn: "Learn", ask: "Ask", understand: "Understand", practice: "Practice",
+                learningMethodCopy: "Every small project is a chance to understand more and take another step forward.",
+                educationLabel: "Education", educationTitle: "My learning journey.", educationIntro: "A quick look at where I am in my studies.", currentStatus: "CURRENT",
+                skillsLabel: "Skills", skillsTitle: "Things I'm learning.", skillsIntro: "These skills reflect what I'm currently studying and practicing.",
+                skillC: "C fundamentals", paused: "On hold", learning: "Learning", practicing: "Practicing", skillDatabase: "Databases", skillNetworking: "Networking basics",
+                workLabel: "Projects", workTitle: "Things I'm working on.", workIntro: "A few school assignments and personal projects from my learning journey.",
+                htmlAlt: "HTML5 logo", databaseAlt: "Computer for the computer sales database project", athleteAlt: "Athlete illustration",
+                personalProject: "PERSONAL PROJECT", groupProject: "GROUP PROJECT", portfolioProject: "Personal portfolio website",
+                portfolioDescription: "A responsive site introducing my profile, skills, and contact information.",
+                databaseProject: "Computer Sales Database Management", databaseDescription: "A group project building a database for computer sales.",
+                athleteProject: "Athlete Management (OOP)", athleteDescription: "A personal project building an athlete management app with object-oriented programming.",
+                challengeLabel: "MINI GAME · GOMOKU", challengeTitle: "Gomoku — Play the bot.",
+                challengeIntro: "Connect five in a row before the bot does. You're X and the bot is O.",
+                minigameTitle: "Gomoku — Play the bot",
+                contactTitle: "Contact", contactMessage: "Send me a message",
+                copyright: "© 2026 Truong Quang Thai · Personal portfolio", readingProgress: "Page reading progress"
+            }
+        };
+
+        const preferenceKeys = { theme: "tqt-theme", language: "tqt-language" };
+        function readPreference(key, fallback) {
+            try {
+                return localStorage.getItem(key) || fallback;
+            } catch (error) {
+                console.error(`Could not read ${key} preference:`, error);
+                return fallback;
+            }
+        }
+        function savePreference(key, value) {
+            try {
+                localStorage.setItem(key, value);
+            } catch (error) {
+                console.error(`Could not save ${key} preference:`, error);
+            }
+        }
+
+        let currentLanguage = readPreference(preferenceKeys.language, "vi") === "en" ? "en" : "vi";
+        function applyLanguage(language) {
+            currentLanguage = language === "en" ? "en" : "vi";
+            const strings = translations[currentLanguage];
+            document.documentElement.lang = currentLanguage;
+            document.title = currentLanguage === "en" ? "Truong Quang Thai — Portfolio" : "Trương Quang Thái — Giới thiệu";
+            document.querySelectorAll("[data-i18n]").forEach((element) => {
+                const value = strings[element.dataset.i18n];
+                if (value !== undefined) element.textContent = value;
+            });
+            document.querySelectorAll("[data-i18n-html]").forEach((element) => {
+                const value = strings[element.dataset.i18nHtml];
+                if (value !== undefined) element.innerHTML = value;
+            });
+            document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+                const value = strings[element.dataset.i18nAriaLabel];
+                if (value !== undefined) element.setAttribute("aria-label", value);
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+                const value = strings[element.dataset.i18nTitle];
+                if (value !== undefined) element.title = value;
+            });
+            document.querySelectorAll("[data-i18n-content]").forEach((element) => {
+                const value = strings[element.dataset.i18nContent];
+                if (value !== undefined) element.content = value;
+            });
+            document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+                const value = strings[element.dataset.i18nAlt];
+                if (value !== undefined) element.alt = value;
+            });
+            document.querySelector("#language-label").textContent = currentLanguage === "vi" ? "EN" : "VI";
+            const flipped = document.querySelector(".flip-card").getAttribute("aria-pressed") === "true";
+            document.querySelector(".flip-card").setAttribute("aria-label", strings[flipped ? "flipToFront" : "flipToBack"]);
+            updateThemeControlLabel();
+            syncMiniGamePreferences();
+        }
+
+        function updateThemeControlLabel() {
+            const isDark = document.documentElement.dataset.theme === "dark";
+            const strings = translations[currentLanguage];
+            document.querySelector(".theme-icon").textContent = isDark ? "☀" : "☾";
+            document.querySelector(".control-label").textContent = strings[isDark ? "themeLight" : "themeDark"];
+            document.querySelector(".theme-toggle").setAttribute("aria-label", strings[isDark ? "toggleThemeLight" : "toggleTheme"]);
+        }
+
+        function applyTheme(theme) {
+            const selectedTheme = theme === "dark" ? "dark" : "light";
+            document.documentElement.dataset.theme = selectedTheme;
+            updateThemeControlLabel();
+            document.querySelector('meta[name="theme-color"]').content = selectedTheme === "dark" ? "#171b25" : "#faf8f2";
+            syncMiniGamePreferences();
+        }
+
+        function syncMiniGamePreferences() {
+            document.querySelector("#challenge-frame")?.contentWindow?.postMessage({
+                type: "mini-game-preferences",
+                language: currentLanguage,
+                theme: document.documentElement.dataset.theme === "dark" ? "dark" : "light"
+            }, "*");
+        }
+
+        document.querySelector("#theme-toggle").addEventListener("click", () => {
+            const theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+            applyTheme(theme);
+            savePreference(preferenceKeys.theme, theme);
+        });
+        document.querySelector("#language-toggle").addEventListener("click", () => {
+            const language = currentLanguage === "vi" ? "en" : "vi";
+            applyLanguage(language);
+            savePreference(preferenceKeys.language, language);
+        });
+        window.addEventListener("storage", (event) => {
+            if (event.key === preferenceKeys.theme && event.newValue) applyTheme(event.newValue);
+            if (event.key === preferenceKeys.language && event.newValue) applyLanguage(event.newValue);
+        });
+
+        applyLanguage(currentLanguage);
+        applyTheme(readPreference(preferenceKeys.theme, "light"));
+
+        const challengeFrame = document.querySelector("#challenge-frame");
+        window.addEventListener("message", (event) => {
+            if (event.source !== challengeFrame.contentWindow || event.data?.type !== "mini-game-height") return;
+            const height = Number(event.data.height);
+            if (Number.isFinite(height)) challengeFrame.height = String(Math.max(360, Math.min(Math.ceil(height), 1200)));
+        });
+        challengeFrame.addEventListener("load", syncMiniGamePreferences);
+        window.addEventListener("resize", syncMiniGamePreferences);
+        let challengeFrameWidth = challengeFrame.getBoundingClientRect().width;
+        if ("ResizeObserver" in window) {
+            new ResizeObserver(() => {
+                const width = challengeFrame.getBoundingClientRect().width;
+                if (width === challengeFrameWidth) return;
+                challengeFrameWidth = width;
+                syncMiniGamePreferences();
+            }).observe(challengeFrame);
+        }
+
+        const flipCard = document.querySelector(".flip-card");
+        const flipFront = document.querySelector(".flip-front");
+        const flipBack = document.querySelector(".flip-back");
+        flipCard.addEventListener("click", () => {
+            const isFlipped = flipCard.classList.toggle("is-flipped");
+            flipCard.setAttribute("aria-pressed", String(isFlipped));
+            flipCard.setAttribute("aria-label", isFlipped ? "Lật thẻ về mặt ảnh đại diện" : "Lật thẻ để xem sở thích");
+            flipFront.setAttribute("aria-hidden", String(isFlipped));
+            flipBack.setAttribute("aria-hidden", String(!isFlipped));
+        });
+
+        const readingProgress = document.querySelector("#reading-progress");
+        let progressFrame = 0;
+        function updateReadingProgress() {
+            if (progressFrame) return;
+            progressFrame = requestAnimationFrame(() => {
+                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = scrollableHeight > 0 ? Math.round((window.scrollY / scrollableHeight) * 100) : 0;
+                readingProgress.style.setProperty("--progress", `${progress}%`);
+                readingProgress.setAttribute("aria-valuenow", String(progress));
+                progressFrame = 0;
+            });
+        }
+        window.addEventListener("scroll", updateReadingProgress, { passive: true });
+        window.addEventListener("resize", updateReadingProgress);
+        updateReadingProgress();
+
+        const navigation = document.querySelector(".nav-links");
+        navigation.addEventListener("click", (event) => {
+            if (event.target instanceof HTMLAnchorElement) {
+                bootstrap.Collapse.getOrCreateInstance(navigation).hide();
+            }
+        });
+    </script>
+</body>
+</html>

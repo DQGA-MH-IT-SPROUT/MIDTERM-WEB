@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f5fb">
+    <title>CARO NEON — Đấu với bot</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body.minigame-embed { --game-ink: #252b3c; --game-muted: #68738b; --game-bg: #f3f5fb; --game-border: rgba(93, 92, 166, .2); overflow-x: hidden; background: radial-gradient(ellipse at 50% -10%, #e7e4ff, transparent 48%), var(--game-bg); color: var(--game-ink); }
+        html[data-theme="dark"] body.minigame-embed { --game-ink: #f4f4ff; --game-muted: #a6abc4; --game-bg: #090b18; --game-border: rgba(173, 185, 255, .16); background: var(--game-bg); color: var(--game-ink); }
+        .pulse-section { position: relative; isolation: isolate; padding: 32px 0 36px !important; overflow: hidden; }
+        .pulse-section::before { position: absolute; z-index: -1; inset: -90px -5% auto; height: 460px; background: radial-gradient(ellipse, rgba(99, 64, 255, .16), transparent 68%); content: ""; pointer-events: none; }
+        .pulse-container { width: min(100% - 36px, 1040px) !important; }
+        .pulse-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 22px !important; }
+        .pulse-eyebrow { margin: 0 0 7px; color: #6c48d7; font-size: .7rem; font-weight: 850; letter-spacing: .2em; text-transform: uppercase; }
+        html[data-theme="dark"] .pulse-eyebrow { color: #91ffe8; }
+        .pulse-title { margin: 0 0 6px; color: var(--game-ink); font-size: clamp(1.7rem, 4vw, 2.7rem); font-weight: 850; letter-spacing: -.055em; line-height: 1.05; }
+        .pulse-intro { max-width: 570px; margin: 0; color: var(--game-muted); font-size: .9rem; }
+        .pulse-version { flex: 0 0 auto; padding: 8px 11px; border: 1px solid var(--game-border); border-radius: 999px; color: var(--game-muted); font-size: .65rem; font-weight: 800; letter-spacing: .14em; }
+        .pulse-console { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 230px; min-height: 360px; overflow: hidden; border: 1px solid var(--game-border); border-radius: 22px; background: linear-gradient(135deg, #f0efff, #fafbff 72%); box-shadow: 0 22px 60px rgba(30, 34, 70, .12), inset 0 1px rgba(255, 255, 255, .7); }
+        html[data-theme="dark"] .pulse-console { background: linear-gradient(135deg, rgba(21, 26, 51, .98), rgba(12, 15, 31, .98)); box-shadow: 0 22px 60px rgba(0, 0, 0, .24), inset 0 1px rgba(255, 255, 255, .05); }
+        .pulse-console::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(119, 124, 178, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(119, 124, 178, .045) 1px, transparent 1px); background-size: 34px 34px; content: ""; pointer-events: none; }
+        html[data-theme="dark"] .pulse-console::before { background-image: linear-gradient(rgba(141, 155, 218, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(141, 155, 218, .035) 1px, transparent 1px); }
+        .pulse-stage { position: relative; display: grid; min-width: 0; min-height: 360px; place-items: center; padding: clamp(12px, 3vw, 26px); }
+        .pulse-board-wrap { position: relative; z-index: 1; width: min(100%, 470px); }
+        .pulse-board { display: grid; width: 100%; aspect-ratio: 1; grid-template-columns: repeat(15, minmax(0, 1fr)); grid-template-rows: repeat(15, minmax(0, 1fr)); overflow: hidden; border: 1px solid rgba(103, 83, 188, .44); border-radius: 12px; background-color: #e9e4d6; background-image: linear-gradient(rgba(102, 91, 159, .23) 1px, transparent 1px), linear-gradient(90deg, rgba(102, 91, 159, .23) 1px, transparent 1px); background-size: calc(100% / 15) calc(100% / 15); box-shadow: 0 16px 45px rgba(57, 46, 105, .18), inset 0 0 0 1px rgba(255, 255, 255, .45); }
+        .pulse-cell { position: relative; display: grid; min-width: 0; min-height: 0; place-items: center; padding: 0; border: 0; background: transparent; color: #303344; cursor: pointer; font: inherit; font-size: clamp(.55rem, 3vw, 1.15rem); font-weight: 950; line-height: 1; -webkit-tap-highlight-color: transparent; }
+        .pulse-cell:focus-visible { z-index: 2; outline: 2px solid #754cff; outline-offset: -2px; }
+        .pulse-cell:not(:disabled):hover { background: rgba(117, 76, 255, .15); }
+        .pulse-cell[data-mark="X"] { color: #5838c8; text-shadow: 0 0 12px rgba(111, 73, 255, .35); }
+        .pulse-cell[data-mark="O"] { color: #087c90; text-shadow: 0 0 12px rgba(36, 214, 225, .48); }
+        .pulse-cell.is-winning { z-index: 1; border-radius: 4px; background: rgba(123, 255, 219, .6); box-shadow: 0 0 13px rgba(19, 204, 174, .56); }
+        .pulse-cell.is-last { background-color: rgba(131, 103, 255, .16); }
+        html[data-theme="dark"] .pulse-board { border-color: rgba(178, 157, 255, .45); background-color: #191a2b; background-image: linear-gradient(rgba(174, 165, 217, .22) 1px, transparent 1px), linear-gradient(90deg, rgba(174, 165, 217, .22) 1px, transparent 1px); box-shadow: 0 16px 45px rgba(0, 0, 0, .3), inset 0 0 0 1px rgba(255, 255, 255, .04); }
+        html[data-theme="dark"] .pulse-cell { color: #f0f1ff; }
+        html[data-theme="dark"] .pulse-cell[data-mark="X"] { color: #c1aaff; text-shadow: 0 0 12px rgba(157, 117, 255, .6); }
+        html[data-theme="dark"] .pulse-cell[data-mark="O"] { color: #85fff0; text-shadow: 0 0 12px rgba(36, 214, 225, .64); }
+        html[data-theme="dark"] .pulse-cell.is-winning { background: rgba(71, 255, 216, .24); }
+        html[data-theme="dark"] .pulse-cell.is-last { background-color: rgba(131, 103, 255, .18); }
+        .pulse-stats { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; padding: 22px 18px; border-left: 1px solid var(--game-border); background: rgba(255, 255, 255, .5); }
+        html[data-theme="dark"] .pulse-stats { background: rgba(7, 9, 21, .4); }
+        .pulse-stat-label { margin: 0 0 8px; color: var(--game-muted); font-size: .64rem; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+        .pulse-turn { display: flex; align-items: center; gap: 9px; color: var(--game-ink); font-size: 1rem; font-weight: 850; }
+        .pulse-mark { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(117, 76, 255, .32); border-radius: 11px; background: rgba(117, 76, 255, .1); color: #5838c8; font-size: 1.1rem; font-weight: 950; }
+        html[data-theme="dark"] .pulse-mark { border-color: rgba(157, 117, 255, .4); background: rgba(117, 76, 255, .16); color: #c1aaff; }
+        .pulse-mark[data-mark="O"] { border-color: rgba(22, 173, 189, .35); background: rgba(22, 173, 189, .1); color: #087c90; }
+        html[data-theme="dark"] .pulse-mark[data-mark="O"] { border-color: rgba(36, 214, 225, .4); background: rgba(22, 173, 189, .16); color: #85fff0; }
+        .pulse-status { min-height: 50px; margin: 10px 0 0; color: var(--game-muted); font-size: .8rem; line-height: 1.55; }
+        .pulse-status[data-result="win"] { color: #087c70; font-weight: 750; }
+        .pulse-status[data-result="loss"] { color: #b94468; font-weight: 750; }
+        html[data-theme="dark"] .pulse-status[data-result="win"] { color: #79f4d9; }
+        html[data-theme="dark"] .pulse-status[data-result="loss"] { color: #ff9bb0; }
+        .pulse-records { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+        .pulse-record { display: grid; justify-items: center; gap: 3px; padding: 9px 5px; border: 1px solid var(--game-border); border-radius: 10px; color: var(--game-muted); font-size: .65rem; font-weight: 750; }
+        .pulse-record strong { color: var(--game-ink); font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+        .pulse-record[data-result="win"] strong { color: #087c70; }
+        .pulse-record[data-result="loss"] strong { color: #b94468; }
+        html[data-theme="dark"] .pulse-record[data-result="win"] strong { color: #79f4d9; }
+        html[data-theme="dark"] .pulse-record[data-result="loss"] strong { color: #ff9bb0; }
+        .pulse-action { display: inline-flex; width: 100%; min-height: 44px; align-items: center; justify-content: center; gap: 8px; padding: 8px 14px; border: 1px solid rgba(117, 76, 255, .36); border-radius: 11px; background: linear-gradient(135deg, #704cf5, #4c67df); color: white; font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; box-shadow: 0 8px 18px rgba(96, 75, 211, .2); transition: transform .18s ease, box-shadow .18s ease; }
+        .pulse-action:hover { transform: translateY(-1px); box-shadow: 0 11px 24px rgba(96, 75, 211, .28); }
+        .pulse-action:focus-visible { outline: 3px solid #8e76ff; outline-offset: 3px; }
+        .pulse-sound { display: inline-flex; width: 100%; min-height: 40px; align-items: center; justify-content: center; gap: 7px; padding: 7px 12px; border: 1px solid var(--game-border); border-radius: 10px; background: transparent; color: var(--game-ink); font: inherit; font-size: .76rem; font-weight: 750; cursor: pointer; }
+        .pulse-sound:hover { background: rgba(117, 76, 255, .08); }
+        .pulse-sound:focus-visible { outline: 3px solid #8e76ff; outline-offset: 3px; }
+        .pulse-sound[aria-pressed="false"] { color: var(--game-muted); }
+        .pulse-rule { margin: 0; color: var(--game-muted); font-size: .73rem; line-height: 1.6; }
+        .pulse-rule strong { color: var(--game-ink); }
+        .pulse-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-top: 13px; color: var(--game-muted); font-size: .72rem; }
+        .pulse-bottom span:last-child { font-weight: 800; letter-spacing: .12em; }
+        @media (max-width: 620px) {
+            .pulse-section { padding: 24px 0 28px !important; }
+            .pulse-container { width: min(100% - 24px, 1040px) !important; }
+            .pulse-heading { align-items: start; margin-bottom: 17px !important; }
+            .pulse-version { display: none; }
+            .pulse-console { grid-template-columns: 1fr; }
+            .pulse-stage { min-height: auto; padding: 14px; }
+            .pulse-board-wrap { width: min(100%, 430px); }
+            .pulse-stats { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 10px 14px; padding: 15px 18px; border-top: 1px solid var(--game-border); border-left: 0; }
+            .pulse-status { min-height: 40px; }
+            .pulse-action { grid-column: 2; grid-row: 1 / span 2; }
+            .pulse-rule { grid-column: 1 / -1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .pulse-action { transition: none; }
+        }
+    </style>
+</head>
+<body class="minigame-embed">
+    <main>
+        <section class="section pulse-section" id="challenge">
+            <div class="container pulse-container">
+                <div class="section-heading pulse-heading">
+                    <div>
+                        <p class="pulse-eyebrow" data-i18n="eyebrow">MINI GAME · CARO 15×15</p>
+                        <h2 class="pulse-title" data-i18n="title">Bạn đấu với bot.</h2>
+                        <p class="pulse-intro" data-i18n="intro">Mỗi ván sẽ ngẫu nhiên chọn người đi trước. Nối 5 quân liên tiếp để giành chiến thắng!</p>
+                    </div>
+                    <span class="pulse-version" aria-hidden="true">TQT LABS&nbsp; / &nbsp;002</span>
+                </div>
+                <div class="pulse-console">
+                    <div class="pulse-stage">
+                        <div class="pulse-board-wrap">
+                            <div class="pulse-board" id="caro-board" role="grid" aria-label="Bàn cờ caro 15 nhân 15"></div>
+                        </div>
+                    </div>
+                    <aside class="pulse-stats">
+                        <div>
+                            <p class="pulse-stat-label" data-i18n="turnLabel">LƯỢT CỦA BẠN</p>
+                            <div class="pulse-turn"><span class="pulse-mark" id="turn-mark" data-mark="X">X</span><span id="turn-text" data-i18n="youTurn">Lượt của bạn</span></div>
+                            <p class="pulse-status" id="game-status" role="status" aria-live="polite">Ván mới sẽ chọn ngẫu nhiên người đi trước.</p>
+                        </div>
+                        <div class="pulse-records" role="group" aria-label="Thống kê thắng thua">
+                            <div class="pulse-record" data-result="win"><span data-i18n="winsLabel">Thắng</span><strong id="wins-count">0</strong></div>
+                            <div class="pulse-record" data-result="loss"><span data-i18n="lossesLabel">Thua</span><strong id="losses-count">0</strong></div>
+                            <div class="pulse-record" data-result="draw"><span data-i18n="drawsLabel">Hòa</span><strong id="draws-count">0</strong></div>
+                        </div>
+                        <button class="pulse-action" id="restart-game" type="button"><span aria-hidden="true">↻</span><span data-i18n="restart">Ván mới</span></button>
+                        <button class="pulse-sound" id="sound-toggle" type="button" aria-pressed="true" aria-label="Tắt âm thanh">
+                            <span id="sound-icon" aria-hidden="true">🔊</span><span data-i18n="soundOn">Âm thanh: bật</span>
+                        </button>
+                        <p class="pulse-rule"><strong data-i18n="ruleTitle">Luật chơi</strong><br><span data-i18n="ruleCopy">Nối liền 5 quân theo hàng ngang, dọc hoặc chéo để thắng. Bạn là X, bot là O.</span></p>
+                    </aside>
+                </div>
+                <div class="pulse-bottom"><span data-i18n="footerLeft">Mỗi nước đi đều quan trọng — chặn bot trước khi quá muộn!</span><span data-i18n="footerRight">YOUR MOVE</span></div>
+            </div>
+        </section>
+    </main>
+    <script>
+        const copy = {
+            vi: {
+                eyebrow: "MINI GAME · CARO 15×15", title: "Bạn đấu với bot.",
+                intro: "Mỗi ván sẽ ngẫu nhiên chọn người đi trước. Nối 5 quân liên tiếp để giành chiến thắng!",
+                turnLabel: "LƯỢT ĐANG ĐI", youTurn: "Lượt của bạn", botTurn: "Lượt của bot",
+                winsLabel: "Thắng", lossesLabel: "Thua", drawsLabel: "Hòa", restart: "Ván mới",
+                soundOn: "Âm thanh: bật", soundOff: "Âm thanh: tắt", soundOnAria: "Tắt âm thanh", soundOffAria: "Bật âm thanh",
+                recordsAria: "Thống kê thắng thua",
+                ruleTitle: "Luật chơi", ruleCopy: "Nối liền 5 quân ngang, dọc hoặc chéo để thắng. Quân X/O và lượt đi trước được chọn ngẫu nhiên mỗi ván.",
+                footerLeft: "Mỗi nước đi đều quan trọng — chặn bot trước khi quá muộn!",
+                footerRight: "YOUR MOVE", statusStart: "Đến lượt bạn — đánh quân {mark} nhé.",
+                statusThink: "Bot đang tính nước đi...", statusPlayerWin: "Bạn thắng rồi! Nước đi quá đỉnh! ✨",
+                statusBotWin: "Bot thắng ván này. Chơi lại để phục thù nhé!",
+                statusDraw: "Hòa rồi! Hai bên đều kín kẽ. Đánh ván nữa nhé?",
+                ariaBoard: "Bàn cờ caro 15 nhân 15", emptyCell: "Hàng {row}, cột {column}, ô trống",
+                playerCell: "Hàng {row}, cột {column}, quân {mark} của bạn",
+                botCell: "Hàng {row}, cột {column}, quân {mark} của bot",
+                titleDocument: "CARO NEON — Đấu với bot"
+            },
+            en: {
+                eyebrow: "MINI GAME · 15×15 GOMOKU", title: "You vs. the bot.",
+                intro: "Who goes first is randomized each round. Connect five in a row to win!",
+                turnLabel: "CURRENT TURN", youTurn: "Your turn", botTurn: "Bot's turn",
+                winsLabel: "Wins", lossesLabel: "Losses", drawsLabel: "Draws", restart: "New game",
+                soundOn: "Sound: on", soundOff: "Sound: off", soundOnAria: "Turn sound off", soundOffAria: "Turn sound on",
+                recordsAria: "Win and loss record",
+                ruleTitle: "How to play", ruleCopy: "Connect five horizontally, vertically, or diagonally to win. X/O and who goes first are randomized each round.",
+                footerLeft: "Every move counts — block the bot before it's too late!",
+                footerRight: "YOUR MOVE", statusStart: "Your turn — play {mark}.",
+                statusThink: "The bot is thinking...", statusPlayerWin: "You win! What a brilliant move! ✨",
+                statusBotWin: "The bot wins this round. Start a rematch!",
+                statusDraw: "It's a draw! Neither side gave in. Play another?",
+                ariaBoard: "15 by 15 Gomoku board", emptyCell: "Row {row}, column {column}, empty",
+                playerCell: "Row {row}, column {column}, your {mark}",
+                botCell: "Row {row}, column {column}, bot {mark}",
+                titleDocument: "NEON GOMOKU — Play the bot"
+            }
+        };
+        const size = 15;
+        let player = "X";
+        let bot = "O";
+        const boardElement = document.querySelector("#caro-board");
+        const statusElement = document.querySelector("#game-status");
+        const turnMark = document.querySelector("#turn-mark");
+        const turnText = document.querySelector("#turn-text");
+        const winsElement = document.querySelector("#wins-count");
+        const lossesElement = document.querySelector("#losses-count");
+        const drawsElement = document.querySelector("#draws-count");
+        const recordsElement = document.querySelector(".pulse-records");
+        const soundButton = document.querySelector("#sound-toggle");
+        const soundIcon = document.querySelector("#sound-icon");
+        const directions = [[1, 0], [0, 1], [1, 1], [1, -1]];
+        const recordStorageKey = "tqt-caro-record";
+        let board = Array(size * size).fill("");
+        let currentTurn = player;
+        let gameOver = false;
+        let language = "vi";
+        let matchRecord = readMatchRecord();
+        let soundEnabled = true;
+        let audioContext = null;
+        let lastMove = -1;
+        let winningCells = [];
+        let botTimer;
+
+        function text(key) {
+            return copy[language][key];
+        }
+
+        function readMatchRecord() {
+            try {
+                const saved = localStorage.getItem(recordStorageKey);
+                if (!saved) return { wins: 0, losses: 0, draws: 0 };
+                const record = JSON.parse(saved);
+                if (record && typeof record === "object" && ["wins", "losses", "draws"].every((key) =>
+                    Number.isSafeInteger(record[key]) && record[key] >= 0)) {
+                    return record;
+                }
+                console.warn("Ignoring invalid saved Caro results.");
+            } catch (error) {
+                console.error("Could not read saved Caro results:", error);
+            }
+            return { wins: 0, losses: 0, draws: 0 };
+        }
+
+        function updateMatchRecordDisplay() {
+            winsElement.textContent = String(matchRecord.wins);
+            lossesElement.textContent = String(matchRecord.losses);
+            drawsElement.textContent = String(matchRecord.draws);
+        }
+
+        function saveMatchRecord() {
+            updateMatchRecordDisplay();
+            try {
+                localStorage.setItem(recordStorageKey, JSON.stringify(matchRecord));
+            } catch (error) {
+                console.error("Could not save Caro results:", error);
+            }
+        }
+
+        function updateSoundControl() {
+            soundButton.setAttribute("aria-pressed", String(soundEnabled));
+            soundButton.setAttribute("aria-label", text(soundEnabled ? "soundOnAria" : "soundOffAria"));
+            soundIcon.textContent = soundEnabled ? "🔊" : "🔇";
+            soundButton.querySelector("[data-i18n]").textContent = text(soundEnabled ? "soundOn" : "soundOff");
+        }
+
+        function prepareAudio() {
+            if (!soundEnabled) return;
+            if (typeof window.AudioContext !== "function") {
+                soundEnabled = false;
+                updateSoundControl();
+                console.warn("Audio playback is not supported in this browser.");
+                return;
+            }
+            if (!audioContext) audioContext = new window.AudioContext();
+            if (audioContext.state === "suspended") {
+                audioContext.resume().catch((error) => {
+                    console.error("Could not resume game audio:", error);
+                });
+            }
+        }
+
+        async function playOutcomeSound(outcome) {
+            if (!soundEnabled || !audioContext) return;
+            if (audioContext.state === "suspended") {
+                try {
+                    await audioContext.resume();
+                } catch (error) {
+                    console.error("Could not resume game audio:", error);
+                    return;
+                }
+            }
+            const notes = outcome === "win"
+                ? [{ frequency: 523.25, delay: 0 }, { frequency: 659.25, delay: 0.12 }, { frequency: 783.99, delay: 0.24 }]
+                : [{ frequency: 392, delay: 0 }, { frequency: 311.13, delay: 0.16 }, { frequency: 233.08, delay: 0.32 }];
+            const startAt = audioContext.currentTime;
+            notes.forEach(({ frequency, delay }) => {
+                const oscillator = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                const noteStart = startAt + delay;
+                oscillator.type = "sine";
+                oscillator.frequency.setValueAtTime(frequency, noteStart);
+                gain.gain.setValueAtTime(0.0001, noteStart);
+                gain.gain.exponentialRampToValueAtTime(0.12, noteStart + 0.025);
+                gain.gain.exponentialRampToValueAtTime(0.0001, noteStart + 0.2);
+                oscillator.connect(gain);
+                gain.connect(audioContext.destination);
+                oscillator.start(noteStart);
+                oscillator.stop(noteStart + 0.21);
+            });
+        }
+
+        function cellName(index) {
+            const row = Math.floor(index / size) + 1;
+            const column = index % size + 1;
+            if (board[index] === player) return text("playerCell").replace("{row}", row).replace("{column}", column).replace("{mark}", player);
+            if (board[index] === bot) return text("botCell").replace("{row}", row).replace("{column}", column).replace("{mark}", bot);
+            return text("emptyCell").replace("{row}", row).replace("{column}", column);
+        }
+
+        function renderBoard() {
+            boardElement.setAttribute("aria-label", text("ariaBoard"));
+            boardElement.innerHTML = board.map((mark, index) => {
+                const winning = winningCells.includes(index);
+                const classes = [
+                    "pulse-cell",
+                    winning ? "is-winning" : "",
+                    index === lastMove ? "is-last" : ""
+                ].filter(Boolean).join(" ");
+                const disabled = gameOver || currentTurn !== player || Boolean(mark);
+                return `<button class="${classes}" type="button" role="gridcell" data-index="${index}" data-mark="${mark}" aria-label="${cellName(index)}" ${disabled ? "disabled" : ""}>${mark}</button>`;
+            }).join("");
+            sendHeight();
+        }
+
+        function updateTurn() {
+            turnMark.textContent = currentTurn;
+            turnMark.dataset.mark = currentTurn;
+            turnText.textContent = currentTurn === player ? text("youTurn") : text("botTurn");
+        }
+
+        function updateCurrentStatus() {
+            if (currentTurn === bot) {
+                statusElement.textContent = text("statusThink");
+            } else {
+                statusElement.textContent = text("statusStart").replace("{mark}", player);
+            }
+        }
+
+        function countInDirection(row, column, rowStep, columnStep, mark) {
+            let count = 0;
+            const cells = [];
+            let nextRow = row + rowStep;
+            let nextColumn = column + columnStep;
+            while (nextRow >= 0 && nextRow < size && nextColumn >= 0 && nextColumn < size
+                && board[nextRow * size + nextColumn] === mark) {
+                count += 1;
+                cells.push(nextRow * size + nextColumn);
+                nextRow += rowStep;
+                nextColumn += columnStep;
+            }
+            return cells;
+        }
+
+        function findWinningRun(index, mark) {
+            const row = Math.floor(index / size);
+            const column = index % size;
+            for (const [rowStep, columnStep] of directions) {
+                const before = countInDirection(row, column, -rowStep, -columnStep, mark);
+                const after = countInDirection(row, column, rowStep, columnStep, mark);
+                if (before.length + after.length + 1 >= 5) {
+                    return [index, ...before, ...after];
+                }
+            }
+            return null;
+        }
+
+        function finishGame(winner, index) {
+            gameOver = true;
+            winningCells = findWinningRun(index, winner) || [];
+            if (winner === player) {
+                matchRecord.wins += 1;
+                statusElement.textContent = text("statusPlayerWin");
+                statusElement.dataset.result = "win";
+                playOutcomeSound("win");
+            } else {
+                matchRecord.losses += 1;
+                statusElement.textContent = text("statusBotWin");
+                statusElement.dataset.result = "loss";
+                playOutcomeSound("loss");
+            }
+            saveMatchRecord();
+            renderBoard();
+        }
+
+        function makeMove(index, mark) {
+            if (board[index] || gameOver) return false;
+            board[index] = mark;
+            lastMove = index;
+            const winningRun = findWinningRun(index, mark);
+            if (winningRun) {
+                finishGame(mark, index);
+                return true;
+            }
+            if (board.every(Boolean)) {
+                gameOver = true;
+                matchRecord.draws += 1;
+                statusElement.textContent = text("statusDraw");
+                statusElement.dataset.result = "draw";
+                saveMatchRecord();
+                renderBoard();
+                return true;
+            }
+            currentTurn = mark === player ? bot : player;
+            updateTurn();
+            if (currentTurn === bot) {
+                statusElement.textContent = text("statusThink");
+                statusElement.dataset.result = "";
+                renderBoard();
+                botTimer = window.setTimeout(playBot, 420);
+            } else {
+                updateCurrentStatus();
+                statusElement.dataset.result = "";
+                renderBoard();
+            }
+            return true;
+        }
+
+        function candidateMoves() {
+            const candidates = new Set();
+            if (board.every((cell) => !cell)) return [Math.floor((size * size) / 2)];
+            board.forEach((mark, index) => {
+                if (!mark) return;
+                const row = Math.floor(index / size);
+                const column = index % size;
+                for (let rowOffset = -2; rowOffset <= 2; rowOffset += 1) {
+                    for (let columnOffset = -2; columnOffset <= 2; columnOffset += 1) {
+                        const nextRow = row + rowOffset;
+                        const nextColumn = column + columnOffset;
+                        if (nextRow < 0 || nextRow >= size || nextColumn < 0 || nextColumn >= size) continue;
+                        const nextIndex = nextRow * size + nextColumn;
+                        if (!board[nextIndex]) candidates.add(nextIndex);
+                    }
+                }
+            });
+            return [...candidates];
+        }
+
+        function windowScore(own, opponent) {
+            if (own && opponent) return 0;
+            if (own === 5) return 10000000;
+            if (opponent === 5) return 10000000;
+            const scores = [0, 2, 15, 180, 50000];
+            return scores[own] + scores[opponent] * 1.12;
+        }
+
+        function moveScore(index, mark) {
+            let score = 0;
+            const row = Math.floor(index / size);
+            const column = index % size;
+            for (const [rowStep, columnStep] of directions) {
+                for (let offset = -4; offset <= 0; offset += 1) {
+                    let own = 0;
+                    let opponent = 0;
+                    let includesMove = false;
+                    for (let position = offset; position < offset + 5; position += 1) {
+                        const nextRow = row + rowStep * position;
+                        const nextColumn = column + columnStep * position;
+                        if (nextRow < 0 || nextRow >= size || nextColumn < 0 || nextColumn >= size) break;
+                        if (position === 0) includesMove = true;
+                        const current = board[nextRow * size + nextColumn] || (position === 0 ? mark : "");
+                        if (current === mark) own += 1;
+                        else if (current) opponent += 1;
+                    }
+                    if (includesMove) score += windowScore(own, opponent);
+                }
+            }
+            const centerDistance = Math.abs(row - 7) + Math.abs(column - 7);
+            return score + Math.max(0, 14 - centerDistance) * 0.01 + Math.random() * 0.001;
+        }
+
+        function playBot() {
+            if (gameOver || currentTurn !== bot) return;
+            const candidates = candidateMoves();
+            let bestMove = candidates[0];
+            let bestScore = -Infinity;
+            for (const index of candidates) {
+                board[index] = bot;
+                const botWins = Boolean(findWinningRun(index, bot));
+                board[index] = player;
+                const playerWins = Boolean(findWinningRun(index, player));
+                board[index] = "";
+                const score = (botWins ? 20000000 : 0) + (playerWins ? 12000000 : 0)
+                    + moveScore(index, bot) + moveScore(index, player) * 0.92;
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = index;
+                }
+            }
+            makeMove(bestMove, bot);
+        }
+
+        function startNewGame() {
+            clearTimeout(botTimer);
+            board = Array(size * size).fill("");
+            player = Math.random() < 0.5 ? "X" : "O";
+            bot = player === "X" ? "O" : "X";
+            currentTurn = Math.random() < 0.5 ? player : bot;
+            gameOver = false;
+            lastMove = -1;
+            winningCells = [];
+            updateCurrentStatus();
+            statusElement.dataset.result = "";
+            updateTurn();
+            renderBoard();
+            if (currentTurn === bot) botTimer = window.setTimeout(playBot, 420);
+        }
+
+        function applyLanguage(nextLanguage) {
+            language = nextLanguage === "en" ? "en" : "vi";
+            document.documentElement.lang = language;
+            document.title = text("titleDocument");
+            document.querySelectorAll("[data-i18n]").forEach((element) => {
+                element.textContent = text(element.dataset.i18n);
+            });
+            recordsElement.setAttribute("aria-label", text("recordsAria"));
+            if (gameOver) {
+                const message = winningCells.length
+                    ? (board[winningCells[0]] === player ? text("statusPlayerWin") : text("statusBotWin"))
+                    : text("statusDraw");
+                statusElement.textContent = message;
+            } else {
+                updateCurrentStatus();
+            }
+            updateTurn();
+            updateSoundControl();
+            renderBoard();
+        }
+
+        function applyTheme(theme) {
+            const dark = theme === "dark";
+            document.documentElement.dataset.theme = dark ? "dark" : "light";
+            document.querySelector('meta[name="theme-color"]').content = dark ? "#090b18" : "#f3f5fb";
+        }
+
+        function sendHeight() {
+            window.parent.postMessage({ type: "mini-game-height", height: document.body.scrollHeight }, "*");
+        }
+
+        boardElement.addEventListener("click", (event) => {
+            const cell = event.target.closest("[data-index]");
+            if (!cell || !boardElement.contains(cell) || currentTurn !== player || gameOver) return;
+            prepareAudio();
+            makeMove(Number(cell.dataset.index), player);
+        });
+        document.querySelector("#restart-game").addEventListener("click", startNewGame);
+        soundButton.addEventListener("click", () => {
+            soundEnabled = !soundEnabled;
+            updateSoundControl();
+            if (soundEnabled) prepareAudio();
+        });
+        updateMatchRecordDisplay();
+        updateSoundControl();
+        startNewGame();
+        applyLanguage(new URLSearchParams(window.location.search).get("lang"));
+        applyTheme(new URLSearchParams(window.location.search).get("theme"));
+        window.addEventListener("message", (event) => {
+            if (event.source !== window.parent || event.data?.type !== "mini-game-preferences") return;
+            applyLanguage(event.data.language);
+            applyTheme(event.data.theme);
+            sendHeight();
+        });
+        if ("ResizeObserver" in window) new ResizeObserver(sendHeight).observe(document.body);
+        window.addEventListener("load", sendHeight);
+        window.addEventListener("resize", sendHeight);
+        sendHeight();
+    </script>
+</body>
+</html>
