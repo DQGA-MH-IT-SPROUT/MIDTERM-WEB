@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d20">
+  <meta name="description" content="Một góc nhỏ giữa vũ trụ rộng lớn — chào bạn, mình là Dương Quang Gia Ân.">
+  <title>Dương Quang Gia Ân · Personal Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content" data-i18n="skip">Đi đến nội dung chính</a>
+  <div class="screen-flash" id="screenFlash" aria-hidden="true"></div>
+  <span class="visually-hidden" id="novaStatus" role="status" aria-live="polite"></span>
+  <header class="topbar">
+    <div class="topbar-inner page-shell">
+      <a class="wordmark" href="#home" aria-label="Gia Ân · Trang chủ"><span class="wordmark-star" aria-hidden="true">✳</span><span>PERSONAL UNIVERSE</span></a>
+      <nav class="top-nav" aria-label="Điều hướng chính">
+        <a href="#about" data-i18n="navAbout">Về mình</a>
+        <a href="#interests" data-i18n="navInterests">Quỹ đạo</a>
+        <a href="#projects" data-i18n="navProjects">Tín hiệu</a>
+        <a href="#contact" data-i18n="navContact">Kết nối</a>
+      </nav>
+      <div class="top-controls">
+        <label class="visually-hidden" for="languageSelect" data-i18n="languageLabel">Ngôn ngữ</label>
+        <select class="control language-select" id="languageSelect" aria-label="Language">
+          <option value="vi">VI · VI</option>
+          <option value="en">EN · EN</option>
+        </select>
+        <button class="control theme-toggle" id="themeToggle" type="button" aria-pressed="false">
+          <span id="themeIcon" aria-hidden="true">☼</span><span class="theme-label" id="themeLabel">Giao diện sáng</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="page-shell">
+      <section class="hero" id="home" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <span class="orbit-label" data-i18n="eyebrow">CHÀO BẠN, DU HÀNH GIA</span>
+          <h1 id="heroTitle"><span data-i18n="heroHello">Mình là</span><br><span class="name-gradient"><span id="profileNameFirst"></span><br><span id="profileNameLast"></span></span></h1>
+          <p class="hero-subtitle"><strong id="profileRole"></strong> <span data-i18n="heroSuffix">đang khám phá một vũ trụ thật rộng.</span></p>
+          <p class="hero-description" id="heroDescription"></p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects"><span data-i18n="heroButton">Khám phá những tín hiệu</span><span aria-hidden="true">↗</span></a>
+            <a class="button" href="#about"><span data-i18n="aboutButton">Một chút về mình</span><span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-footnote"><span aria-hidden="true">✦</span><span id="profileLocation"></span><span aria-hidden="true">·</span><span data-i18n="footnote">đang phát tín hiệu từ Trái Đất</span></div>
+        </div>
+        <div class="cosmos-art" role="group" aria-label="Một hành tinh nhỏ trong vũ trụ">
+          <div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="orbit"></div>
+          <span class="satellite" aria-hidden="true"></span><span class="satellite satellite-two" aria-hidden="true"></span>
+          <button class="planet" id="planetButton" type="button" aria-describedby="planetTooltip">
+            <img class="planet-image" id="profileImage" alt="">
+            <span class="profile-placeholder" aria-hidden="true"></span>
+          </button>
+          <span class="planet-tooltip" id="planetTooltip" data-i18n="novaHint">Click to detonate a super nova explosion</span>
+          <span class="nova-burst" aria-hidden="true"></span>
+          <div class="planet-label"><span>✦</span> <span id="planetLabel"></span></div>
+        </div>
+        <div class="scroll-cue" data-i18n="scrollCue">CUỘN ĐỂ KHÁM PHÁ</div>
+      </section>
+
+      <section class="stats" aria-label="Thông tin nhanh">
+        <article class="stat"><span class="stat-label" data-i18n="statOneLabel">BẢN CHẤT</span><span class="stat-value" id="statOne"></span><span class="stat-detail" data-i18n="statOneDetail">Luôn có điều mới để khám phá</span></article>
+        <article class="stat"><span class="stat-label" data-i18n="statTwoLabel">QUỸ ĐẠO HIỆN TẠI</span><span class="stat-value" id="statTwo"></span><span class="stat-detail" data-i18n="statTwoDetail">Học, thử, rồi học thêm</span></article>
+        <article class="stat"><span class="stat-label" data-i18n="statThreeLabel">ĐIỂM ĐẾN</span><span class="stat-value" id="statThree"></span><span class="stat-detail" data-i18n="statThreeDetail">Chưa biết — nên mới thú vị</span></article>
+      </section>
+
+      <section class="content-section" id="about" aria-labelledby="aboutTitle">
+        <div class="section-heading">
+          <div><span class="section-eyebrow" data-i18n="aboutEyebrow">01 — NGƯỜI DU HÀNH</span><h2 id="aboutTitle" data-i18n="aboutTitle">Một hành tinh, nhiều câu chuyện.</h2></div>
+          <p class="section-intro" data-i18n="aboutIntro">Chưa phải tiểu sử chính thức. Chỉ là vài dòng để bắt đầu.</p>
+        </div>
+        <div class="about-grid">
+          <article class="glass-panel about-copy"><p id="aboutFirst"></p><p id="aboutSecond"></p></article>
+          <dl class="glass-panel fact-panel">
+            <div class="fact"><dt data-i18n="factName">Tên gọi</dt><dd id="factName"></dd></div>
+            <div class="fact"><dt data-i18n="factRole">Hiện tại</dt><dd id="factRole"></dd></div>
+            <div class="fact"><dt data-i18n="factLocation">Tọa độ</dt><dd id="factLocation"></dd></div>
+            <div class="fact"><dt data-i18n="factStatus">Trạng thái</dt><dd data-i18n="factStatusValue">Đang khám phá ✦</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="content-section" id="interests" aria-labelledby="interestsTitle">
+        <div class="section-heading">
+          <div><span class="section-eyebrow" data-i18n="interestEyebrow">02 — CÁC QUỸ ĐẠO</span><h2 id="interestsTitle" data-i18n="interestTitle">Điều gì giữ mình tò mò.</h2></div>
+          <p class="section-intro" data-i18n="interestIntro">Những chủ đề cứ kéo mình quay lại để khám phá thêm.</p>
+        </div>
+        <div class="interest-orbit" id="interestOrbit"></div>
+      </section>
+
+      <section class="content-section" id="projects" aria-labelledby="projectsTitle">
+        <div class="section-heading">
+          <div><span class="section-eyebrow" data-i18n="projectEyebrow">03 — TÍN HIỆU ĐÃ GỬI</span><h2 id="projectsTitle" data-i18n="projectTitle">Ý tưởng tìm đường về Trái Đất.</h2></div>
+          <p class="section-intro" data-i18n="projectIntro">Những thử nghiệm nhỏ — mỗi cái là một bước tiếp theo.</p>
+        </div>
+        <div class="projects" id="projectList"></div>
+      </section>
+
+      <section class="content-section" id="contact" aria-labelledby="contactTitle">
+        <div class="glass-panel contact">
+          <div class="contact-copy"><span class="section-eyebrow" data-i18n="contactEyebrow">04 — MỞ KÊNH LIÊN LẠC</span><h2 id="contactTitle" data-i18n="contactTitle">Hai quỹ đạo giao nhau?</h2><p data-i18n="contactText">Nếu bạn có ý tưởng, câu hỏi, hay chỉ muốn nói lời chào — kênh liên lạc đang mở.</p></div>
+          <div class="contact-actions">
+            <a class="button button-primary" id="emailLink"><span data-i18n="emailButton">Gửi tín hiệu</span><span aria-hidden="true">↗</span></a>
+            <button class="button" id="shareButton" type="button"><span data-i18n="shareButton">Chia sẻ trang</span><span aria-hidden="true">⤴</span></button>
+          </div>
+        </div>
+        <p class="contact-note" id="contactNote"></p>
+      </section>
+
+      <footer class="footer"><span data-i18n="footerText">Được tạo ra dưới cùng một bầu trời đầy sao.</span><span>© <span id="year"></span> <span id="footerName"></span></span></footer>
+    </div>
+  </main>
+
+  <script>
+    /*
+     * EDIT YOUR DETAILS HERE.
+     * Change the text, photo, email, interests, and project entries in this object.
+     * Keep both "vi" and "en" values so the language switch stays complete.
+     */
+    const PROFILE = {
+      name: "Dương Quang Gia Ân",
+      nameFirstLine: "Dương Quang",
+      nameLastLine: "Gia Ân",
+      shortName: "Gia Ân",
+      image: "pedro-the-raccoon.gif",
+      profilePhoto: "profile.png",
+      location: { vi: "Việt Nam", en: "Vietnam" },
+      role: { vi: "Người học hỏi", en: "Curious learner" },
+      description: {
+        vi: "Mình thích tìm hiểu cách mọi thứ hoạt động, thử sức với những điều chưa biết, và biến những ý tưởng nhỏ thành thứ gì đó có thật.",
+        en: "I like finding out how things work, trying the unfamiliar, and turning small ideas into something real."
+      },
+      about: {
+        first: {
+          vi: "Chào bạn, mình là Gia Ân. Mình đang trên hành trình khám phá thế giới sáng tạo trên web — từ những dòng mã đầu tiên đến các chi tiết nhỏ làm trải nghiệm trở nên thú vị.",
+          en: "Hello, I'm Gia Ân. I'm exploring the creative side of the web — from the first lines of code to the little details that make an experience feel special."
+        },
+        second: {
+          vi: "Mình tin rằng không cần biết hết mọi thứ mới có thể bắt đầu. Cứ tò mò, thử nghiệm, và xem chuyến đi đưa mình đến đâu.",
+          en: "I believe you don't need to know everything before you begin. Stay curious, experiment, and see where the journey takes you."
+        }
+      },
+      facts: {
+        vi: { role: "Người học hỏi", status: "Đang khám phá ✦" },
+        en: { role: "Curious learner", status: "Exploring ✦" }
+      },
+      stats: {
+        vi: ["Tò mò", "Sáng tạo web", "Phía trước"],
+        en: ["Curiosity", "Web creation", "What’s next"]
+      },
+      interests: [
+        { symbol: "⌘", title: { vi: "Thế giới web", en: "The web" }, detail: { vi: "Cách mọi thứ kết nối", en: "How things connect" } },
+        { symbol: "✳", title: { vi: "Sáng tạo", en: "Making things" }, detail: { vi: "Ý tưởng thành hình", en: "Ideas taking shape" } },
+        { symbol: "◌", title: { vi: "Khám phá", en: "Exploration" }, detail: { vi: "Luôn có điều mới", en: "Always something new" } },
+        { symbol: "⌁", title: { vi: "Âm nhạc", en: "Music" }, detail: { vi: "Nhạc nền cho chuyến đi", en: "A soundtrack for the ride" } }
+      ],
+      projects: [
+        {
+          symbol: "✧",
+          type: { vi: "GÓC CÁ NHÂN", en: "PERSONAL SPACE" },
+          title: { vi: "Vũ trụ của mình", en: "My little universe" },
+          description: { vi: "Một góc trên mạng để gom góp những điều mình đang học và làm.", en: "A little corner of the internet for things I'm learning and making." },
+          tags: ["HTML", "CSS", "JavaScript"]
+        },
+        {
+          symbol: "◈",
+          type: { vi: "ĐANG HỌC", en: "IN PROGRESS" },
+          title: { vi: "Thử nghiệm tiếp theo", en: "The next experiment" },
+          description: { vi: "Mỗi dự án là một cơ hội để thử điều mới và tiến bộ thêm một chút.", en: "Every project is a chance to try something new and get a little better." },
+          tags: ["Learning", "Ideas"]
+        },
+        {
+          symbol: "✳",
+          type: { vi: "CHỜ KHÁM PHÁ", en: "TO BE DISCOVERED" },
+          title: { vi: "Chưa biết nữa!", en: "Not sure yet!" },
+          description: { vi: "Điều thú vị nhất đôi khi là điều mình chưa nghĩ ra.", en: "Sometimes the most exciting idea is the one I haven't found yet." },
+          tags: ["Curiosity", "Next"]
+        }
+      ],
+      email: "hello@example.com"
+    };
+
+    const TEXT = {
+      vi: {
+        skip: "Đi đến nội dung chính", languageLabel: "Ngôn ngữ", navAbout: "Về mình", navInterests: "Quỹ đạo", navProjects: "Tín hiệu", navContact: "Kết nối",
+        themeLight: "Giao diện sáng", themeDark: "Giao diện tối", eyebrow: "CHÀO BẠN, DU HÀNH GIA", heroHello: "Mình là", heroSuffix: "đang khám phá một vũ trụ thật rộng.",
+        heroButton: "Khám phá những tín hiệu", aboutButton: "Một chút về mình", footnote: "đang phát tín hiệu từ Trái Đất", scrollCue: "CUỘN ĐỂ KHÁM PHÁ",
+        statOneLabel: "BẢN CHẤT", statOneDetail: "Luôn có điều mới để khám phá", statTwoLabel: "QUỸ ĐẠO HIỆN TẠI", statTwoDetail: "Học, thử, rồi học thêm", statThreeLabel: "ĐIỂM ĐẾN", statThreeDetail: "Chưa biết — nên mới thú vị",
+        aboutEyebrow: "01 — NGƯỜI DU HÀNH", aboutTitle: "Một hành tinh, nhiều câu chuyện.", aboutIntro: "Chưa phải tiểu sử chính thức. Chỉ là vài dòng để bắt đầu.",
+        factName: "Tên gọi", factRole: "Hiện tại", factLocation: "Tọa độ", factStatus: "Trạng thái", factStatusValue: "Đang khám phá ✦",
+        interestEyebrow: "02 — CÁC QUỸ ĐẠO", interestTitle: "Điều gì giữ mình tò mò.", interestIntro: "Những chủ đề cứ kéo mình quay lại để khám phá thêm.",
+        projectEyebrow: "03 — TÍN HIỆU ĐÃ GỬI", projectTitle: "Ý tưởng tìm đường về Trái Đất.", projectIntro: "Những thử nghiệm nhỏ — mỗi cái là một bước tiếp theo.",
+        contactEyebrow: "04 — MỞ KÊNH LIÊN LẠC", contactTitle: "Hai quỹ đạo giao nhau?", contactText: "Nếu bạn có ý tưởng, câu hỏi, hay chỉ muốn nói lời chào — kênh liên lạc đang mở.",
+        emailButton: "Gửi tín hiệu", shareButton: "Chia sẻ trang", emailPlaceholder: "Hãy thêm email của bạn vào PROFILE.email.", copied: "Đã sao chép liên kết!", shareError: "Không thể sao chép tự động. Hãy sao chép đường dẫn trên trình duyệt.",
+        footerText: "Được tạo ra dưới cùng một bầu trời đầy sao.", shareTitle: "Chia sẻ trang",
+        novaHint: "Click to detonate a super nova explosion", novaReady: "Kích hoạt vụ nổ siêu tân tinh", novaDone: "Ảnh đại diện của Gia Ân — nhấn để phát tiếng cười", novaStatus: "Siêu tân tinh đã phát nổ. Ảnh đại diện của Gia Ân đã xuất hiện trong khung 3:4."
+      },
+      en: {
+        skip: "Skip to main content", languageLabel: "Language", navAbout: "About", navInterests: "Orbit", navProjects: "Signals", navContact: "Contact",
+        themeLight: "Light theme", themeDark: "Dark theme", eyebrow: "HELLO THERE, FELLOW TRAVELER", heroHello: "I'm", heroSuffix: "exploring a rather large universe.",
+        heroButton: "Explore the signals", aboutButton: "A little about me", footnote: "broadcasting from Earth", scrollCue: "SCROLL TO EXPLORE",
+        statOneLabel: "NATURE", statOneDetail: "There's always something new to find", statTwoLabel: "CURRENT ORBIT", statTwoDetail: "Learn, try, then learn some more", statThreeLabel: "DESTINATION", statThreeDetail: "Unknown — that's the fun part",
+        aboutEyebrow: "01 — THE TRAVELER", aboutTitle: "One planet, plenty of stories.", aboutIntro: "Not quite a formal bio. Just a few lines to start with.",
+        factName: "Known as", factRole: "Currently", factLocation: "Coordinates", factStatus: "Status", factStatusValue: "Exploring ✦",
+        interestEyebrow: "02 — ORBITS", interestTitle: "Things that keep me curious.", interestIntro: "Topics that keep drawing me back for another look.",
+        projectEyebrow: "03 — SIGNALS SENT", projectTitle: "Ideas finding their way to Earth.", projectIntro: "Small experiments — each one is a step forward.",
+        contactEyebrow: "04 — OPEN CHANNEL", contactTitle: "Might our orbits cross?", contactText: "Have an idea, a question, or just want to say hello? My channel is open.",
+        emailButton: "Send a signal", shareButton: "Share this page", emailPlaceholder: "Add your email address to PROFILE.email.", copied: "Link copied!", shareError: "Couldn't copy automatically. Please copy the address from your browser.",
+        footerText: "Made beneath the same starry sky.", shareTitle: "Share this page",
+        novaHint: "Click to detonate a super nova explosion", novaReady: "Detonate a supernova", novaDone: "Gia Ân's profile picture — click to play a laugh", novaStatus: "Supernova detonated. Gia Ân's profile picture is revealed in its 3:4 frame."
+      }
+    };
+
+    const root = document.documentElement;
+    const languageSelect = document.getElementById("languageSelect");
+    const themeToggle = document.getElementById("themeToggle");
+    const supernovaSound = new Audio("../../sound/roblox-explosion-sound.mp3");
+    const profileLaugh = new Audio("../../sound/muhehehe.mp3");
+    supernovaSound.preload = "auto";
+    profileLaugh.preload = "auto";
+    let language = localStorage.getItem("gia-an-language") || "vi";
+    let theme = localStorage.getItem("gia-an-theme") || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+    function playEffect(audio) {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.play().catch((error) => {
+        console.warn("Profile sound playback was unavailable in this browser.", error);
+      });
+    }
+
+    function renderProfile() {
+      const t = TEXT[language];
+      const cosmosArt = document.querySelector(".cosmos-art");
+      const profileImage = document.getElementById("profileImage");
+      root.lang = language;
+      document.title = language === "vi" ? `${PROFILE.name} · Góc vũ trụ cá nhân` : `${PROFILE.name} · Personal Universe`;
+      languageSelect.setAttribute("aria-label", t.languageLabel);
+      cosmosArt.setAttribute("aria-label", language === "vi" ? "Một hành tinh nhỏ trong vũ trụ" : "A small planet in the universe");
+      document.getElementById("planetButton").setAttribute("aria-label", cosmosArt.classList.contains("nova-done") ? t.novaDone : t.novaReady);
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        if (t[key] !== undefined) element.textContent = t[key];
+      });
+      document.getElementById("profileNameFirst").textContent = PROFILE.nameFirstLine;
+      document.getElementById("profileNameLast").textContent = PROFILE.nameLastLine;
+      document.getElementById("footerName").textContent = PROFILE.name;
+      document.getElementById("profileRole").textContent = PROFILE.role[language];
+      document.getElementById("heroDescription").textContent = PROFILE.description[language];
+      document.getElementById("profileLocation").textContent = PROFILE.location[language];
+      document.getElementById("planetLabel").textContent = PROFILE.shortName.toUpperCase();
+      if (cosmosArt.classList.contains("nova-done")) {
+        showProfilePhoto();
+      } else {
+        profileImage.src = PROFILE.image;
+        profileImage.alt = "";
+      }
+      document.getElementById("aboutFirst").textContent = PROFILE.about.first[language];
+      document.getElementById("aboutSecond").textContent = PROFILE.about.second[language];
+      document.getElementById("factName").textContent = PROFILE.name;
+      document.getElementById("factRole").textContent = PROFILE.facts[language].role;
+      document.getElementById("factLocation").textContent = PROFILE.location[language];
+      document.getElementById("statOne").textContent = PROFILE.stats[language][0];
+      document.getElementById("statTwo").textContent = PROFILE.stats[language][1];
+      document.getElementById("statThree").textContent = PROFILE.stats[language][2];
+      languageSelect.value = language;
+
+      document.getElementById("interestOrbit").replaceChildren(...PROFILE.interests.map((interest) => {
+        const card = document.createElement("article");
+        card.className = "interest";
+        const symbol = document.createElement("span");
+        symbol.className = "interest-symbol";
+        symbol.setAttribute("aria-hidden", "true");
+        symbol.textContent = interest.symbol;
+        const title = document.createElement("strong");
+        title.textContent = interest.title[language];
+        const detail = document.createElement("small");
+        detail.textContent = interest.detail[language];
+        card.append(symbol, title, detail);
+        return card;
+      }));
+      document.getElementById("projectList").replaceChildren(...PROFILE.projects.map((project) => {
+        const card = document.createElement("article");
+        card.className = "project glass-panel";
+        const visual = document.createElement("div");
+        visual.className = "project-visual";
+        visual.setAttribute("aria-hidden", "true");
+        const starOne = document.createElement("span");
+        starOne.className = "project-star";
+        starOne.textContent = "✦";
+        const starTwo = document.createElement("span");
+        starTwo.className = "project-star two";
+        starTwo.textContent = "✦";
+        const glyph = document.createElement("span");
+        glyph.className = "project-glyph";
+        glyph.textContent = project.symbol;
+        visual.append(starOne, starTwo, glyph);
+        const copy = document.createElement("div");
+        copy.className = "project-copy";
+        const type = document.createElement("span");
+        type.className = "project-kind";
+        type.textContent = project.type[language];
+        const title = document.createElement("h3");
+        title.textContent = project.title[language];
+        const description = document.createElement("p");
+        description.textContent = project.description[language];
+        const tags = document.createElement("div");
+        tags.className = "project-tags";
+        project.tags.forEach((tag) => {
+          const chip = document.createElement("span");
+          chip.textContent = tag;
+          tags.append(chip);
+        });
+        copy.append(type, title, description, tags);
+        card.append(visual, copy);
+        return card;
+      }));
+      const emailLink = document.getElementById("emailLink");
+      const contactNote = document.getElementById("contactNote");
+      if (PROFILE.email && PROFILE.email !== "hello@example.com") {
+        emailLink.href = `mailto:${PROFILE.email}`;
+        emailLink.removeAttribute("aria-disabled");
+        contactNote.textContent = "";
+      } else {
+        emailLink.removeAttribute("href");
+        emailLink.setAttribute("aria-disabled", "true");
+        contactNote.textContent = t.emailPlaceholder;
+      }
+      themeToggle.setAttribute("aria-label", theme === "dark" ? t.themeLight : t.themeDark);
+      document.getElementById("themeLabel").textContent = theme === "dark" ? t.themeLight : t.themeDark;
+      document.getElementById("themeIcon").textContent = theme === "dark" ? "☼" : "☾";
+      themeToggle.setAttribute("aria-pressed", String(theme === "light"));
+      document.getElementById("shareButton").setAttribute("aria-label", t.shareTitle);
+    }
+
+    function showProfilePhoto() {
+      const cosmosArt = document.querySelector(".cosmos-art");
+      const profileImage = document.getElementById("profileImage");
+      if (!PROFILE.profilePhoto) {
+        cosmosArt.classList.remove("has-profile-photo");
+        cosmosArt.classList.add("no-profile-photo");
+        profileImage.removeAttribute("src");
+        return;
+      }
+      profileImage.onerror = () => {
+        cosmosArt.classList.remove("has-profile-photo");
+        cosmosArt.classList.add("no-profile-photo");
+        profileImage.removeAttribute("src");
+      };
+      cosmosArt.classList.remove("no-profile-photo");
+      cosmosArt.classList.add("has-profile-photo");
+      profileImage.src = PROFILE.profilePhoto;
+      profileImage.alt = language === "vi" ? `Ảnh đại diện của ${PROFILE.name}` : `Profile picture of ${PROFILE.name}`;
+    }
+
+    function applyTheme() {
+      root.dataset.theme = theme;
+      themeToggle.setAttribute("aria-pressed", String(theme === "light"));
+      themeToggle.setAttribute("aria-label", theme === "dark" ? TEXT[language].themeLight : TEXT[language].themeDark);
+      document.getElementById("themeLabel").textContent = theme === "dark" ? TEXT[language].themeLight : TEXT[language].themeDark;
+      document.getElementById("themeIcon").textContent = theme === "dark" ? "☼" : "☾";
+    }
+
+    languageSelect.addEventListener("change", () => {
+      language = languageSelect.value;
+      localStorage.setItem("gia-an-language", language);
+      renderProfile();
+    });
+    themeToggle.addEventListener("click", () => {
+      theme = theme === "dark" ? "light" : "dark";
+      localStorage.setItem("gia-an-theme", theme);
+      applyTheme();
+    });
+    document.getElementById("planetButton").addEventListener("click", (event) => {
+      const planetButton = event.currentTarget;
+      const cosmosArt = planetButton.closest(".cosmos-art");
+      if (cosmosArt.classList.contains("nova-active")) return;
+      if (cosmosArt.classList.contains("nova-done")) {
+        playEffect(profileLaugh);
+        return;
+      }
+      playEffect(supernovaSound);
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reducedMotion) {
+        cosmosArt.classList.add("nova-active");
+        const screenFlash = document.getElementById("screenFlash");
+        screenFlash.classList.remove("is-active");
+        void screenFlash.offsetWidth;
+        screenFlash.classList.add("is-active");
+      }
+      window.setTimeout(() => {
+        cosmosArt.classList.remove("nova-active");
+        cosmosArt.classList.add("nova-done");
+        showProfilePhoto();
+        planetButton.setAttribute("aria-label", TEXT[language].novaDone);
+        document.getElementById("novaStatus").textContent = TEXT[language].novaStatus;
+      }, reducedMotion ? 0 : 950);
+    });
+    document.getElementById("shareButton").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      const originalText = TEXT[language].shareButton;
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: document.title, url: window.location.href });
+        } else if (navigator.clipboard) {
+          await navigator.clipboard.writeText(window.location.href);
+          button.querySelector("span").textContent = TEXT[language].copied;
+          window.setTimeout(() => { button.querySelector("span").textContent = originalText; }, 2000);
+        } else {
+          window.prompt(TEXT[language].shareError, window.location.href);
+        }
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          window.prompt(TEXT[language].shareError, window.location.href);
+        }
+      }
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    languageSelect.value = language;
+    renderProfile();
+    applyTheme();
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".hero, .content-section, .stats").forEach((section) => {
+        section.classList.add("reveal");
+        observer.observe(section);
+      });
+    } else {
+      document.querySelectorAll(".hero, .content-section, .stats").forEach((section) => section.classList.add("is-visible"));
+    }
+  </script>
+</body>
+</html>

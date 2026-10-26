@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lê Minh Toàn — Personal Portfolio</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #e16ca8; --pink-deep: #c6538a; --blue: #77b8ff;
+  --ink: #2f1f2a; --muted: #756b77; --paper: #f8f7fa;
+  --sidebar: #292532; --side-width: 240px;
+}
+body { background: var(--paper); color: var(--ink); font-family: "Be Vietnam Pro", sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+h1, h2, h3, .brand-mark, .side-brand { font-family: "Space Grotesk", sans-serif; }
+a { text-decoration: none; color: inherit; }
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--pink), var(--blue)); z-index: 1200; width: 0; }
+.sidebar { position: fixed; inset: 0 auto 0 0; width: var(--side-width); background: var(--sidebar); color: #f9f2f7; z-index: 1000; display: flex; flex-direction: column; padding: 20px 15px; box-shadow: 10px 0 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+.side-brand { display: flex; align-items: center; gap: 10px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; color: #fff; background: linear-gradient(140deg, var(--pink), #9e8be8); font-weight: 700; }
+.side-link { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 8px; color: #c8bdcc; font-size: 12px; font-weight: 500; transition: 0.2s; border: 1px solid transparent; }
+.side-link:hover { color: #fff; background: rgba(225, 108, 168, 0.1); }
+.side-link.active { color: #fff; background: rgba(225, 108, 168, 0.2); border-color: rgba(225, 108, 168, 0.3); }
+.main-area { margin-left: var(--side-width); min-height: 100vh; }
+.topbar { position: sticky; top: 0; background: rgba(248, 247, 250, 0.9); backdrop-filter: blur(10px); z-index: 500; border-bottom: 1px solid #e9e3eb; min-height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; }
+.content-wrap { padding: 30px; max-width: 1500px; margin: 0 auto; }
+.hero-board, .custom-card { border: 1px solid #e8e0e9; border-radius: 16px; background: #fff; box-shadow: 0 10px 30px rgba(48,35,51,0.03); }
+.hero-board { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 30px; padding: 40px; align-items: center; }
+.text-gradient { background: linear-gradient(100deg, var(--pink-deep), #8ebfff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.sidebar-scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 900; display: none; }
+@media(max-width: 991px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.is-open { transform: translateX(0); }
+  .sidebar-scrim.is-visible { display: block; }
+  .main-area { margin-left: 0; }
+  .hero-board { grid-template-columns: 1fr; padding: 25px; }
+}
+.typing-text { color: var(--pink-deep); }
+.typing-cursor { animation: blink 1s infinite; color: var(--blue); }
+@keyframes blink { 50% { opacity: 0; } }
+.skill-track { height: 6px; border-radius: 10px; background: #f0e9f1; overflow: hidden; }
+.skill-track > span { display: block; height: 100%; background: linear-gradient(90deg, var(--pink), var(--blue)); width: 0; transition: width 1s ease; }
+</style>
+</head>
+<body>
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="sidebar-scrim" id="sidebarScrim"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="side-brand text-white" href="#home">
+    <span class="brand-mark">T</span>
+    <div><strong>TOÀN LÊ</strong><br><small class="text-muted fs-6" style="font-size:8px!important;">PORTFOLIO 2026</small></div>
+  </a>
+  <div class="small fw-bold text-muted mt-3 mb-2 px-2" style="font-size:9px; letter-spacing:1px;">WORKSPACE</div>
+  <nav class="d-grid gap-1">
+    <a class="side-link active" href="#home"><span>00</span> Trang chủ</a>
+    <a class="side-link" href="#about"><span>01</span> Giới thiệu</a>
+    <a class="side-link" href="#education"><span>02</span> Học vấn</a>
+    <a class="side-link" href="#skills"><span>03</span> Kỹ năng</a>
+    <a class="side-link" href="#projects"><span>04</span> Dự án</a>
+    <a class="side-link" href="#interests"><span>05</span> Sở thích</a>
+    <a class="side-link" href="#contact"><span>06</span> Liên hệ</a>
+  </nav>
+  <div class="mt-auto pt-3 border-top border-secondary border-opacity-10 text-muted" style="font-size:9px;">
+    <div class="d-flex align-items: center gap-2 mb-2"><span class="bg-success rounded-circle" style="width:6px;height:6px;display:inline-block;"></span> Đang học tập, phát triển</div>
+    <div>VIỆT NAM · © <span id="sideYear">2026</span></div>
+  </div>
+</aside>
+<main class="main-area">
+  <header class="topbar">
+    <div class="d-flex align-items: center gap-3">
+      <button class="btn btn-outline-secondary btn-sm d-lg-none" id="menuToggle">☰</button>
+      <span class="text-muted small tracking-wide">PORTFOLIO / <strong id="currentSection" class="text-dark">OVERVIEW</strong></span>
+    </div>
+    <a href="#contact" class="btn btn-sm btn-outline-dark px-3 rounded-pill fw-bold" style="font-size:11px;">Kết nối ↗</a>
+  </header>
+  <div class="content-wrap">
+    <section class="hero-board mb-5" id="home">
+      <div>
+        <span class="badge bg-light text-secondary border mb-3">HELLO EARTH · 2026</span>
+        <p class="text-muted mb-1">Xin chào, tui tên</p>
+        <h1 class="display-4 fw-bold mb-3">Lê Minh <span class="text-gradient">Toàn.</span></h1>
+        <p class="fw-semibold mb-3">Tui là <span id="typingText" class="typing-text">sinh viên Công nghệ thông tin</span><span class="typing-cursor">|</span></p>
+        <p class="text-muted small lh-lg mb-4">Một sinh viên CNTT hướng nội, thích học hỏi, mê máy móc và luôn muốn biến những ý tưởng thành giải pháp thực tế cho cuộc sống và xã hội.</p>
+        <div class="d-flex gap-2">
+          <a href="#projects" class="btn btn-dark btn-sm px-4 rounded-3 fw-bold">Khám phá dự án ↗</a>
+          <a href="#about" class="btn btn-outline-secondary btn-sm px-4 rounded-3 fw-bold">Tìm hiểu về mình ↓</a>
+        </div>
+      </div>
+      <div class="p-3 border rounded-4 bg-light text-center position-relative">
+        <span class="badge bg-success bg-opacity-10 text-success mb-2">IT Student @ Binh Duong University</span>
+        <div class="my-3">
+          <img src="avatar.jpeg" alt="Lê Minh Toàn" class="rounded-circle border border-3 border-white shadow" style="width:120px; height:120px; object-fit:cover;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect width=%22120%22 height=%22120%22 fill=%22%23e16ca8%22/%3E%3Ctext x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22%23fff%22%3ELT%3C/text%3E%3C/svg%3E'">
+        </div>
+        <h5 class="fw-bold mb-1">Lê Minh Toàn</h5>
+        <p class="text-muted small mb-0">Phú Lợi, Hồ Chí Minh, Việt Nam</p>
+      </div>
+    </section>
+    <div class="row g-3 mb-5">
+      <div class="col-sm-6 col-xl-3"><div class="p-3 custom-card"><h3 class="fw-bold text-dark mb-0">08<span class="text-pink fs-6">/10</span></h3><small class="text-muted fw-bold" style="font-size:10px;">CÔNG NGHỆ & MÁY MÓC</small></div></div>
+      <div class="col-sm-6 col-xl-3"><div class="p-3 custom-card"><h3 class="fw-bold text-dark mb-0">05</h3><small class="text-muted fw-bold" style="font-size:10px;">DỰ ÁN TIÊU BIỂU</small></div></div>
+      <div class="col-sm-6 col-xl-3"><div class="p-3 custom-card"><h3 class="fw-bold text-dark mb-0">03</h3><small class="text-muted fw-bold" style="font-size:10px;">NHÓM CHỦ ĐỀ QUAN TÂM</small></div></div>
+      <div class="col-sm-6 col-xl-3"><div class="p-3 custom-card"><h3 class="fw-bold text-dark mb-0">“Stay curious.”</h3><small class="text-muted fw-bold" style="font-size:10px;">TRIẾT LÝ</small></div></div>
+    </div>
+    <section class="mb-5" id="about">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">01 / ABOUT ME</span>
+        <h2 class="fw-bold display-6">Một chút <span class="text-gradient">về tôi.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="p-4 custom-card bg-dark text-white h-100 d-flex flex-column justify-content-between">
+            <span class="small text-white-50">PHILOSOPHY</span>
+            <p class="fs-5 fw-semibold my-4">“Mình tin rằng mỗi giải pháp công nghệ đều có thể giúp đời sống con người tốt đẹp hơn.”</p>
+            <span class="small text-pink">THINK / MAKE / IMPROVE ↗</span>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="p-4 custom-card h-100 d-flex flex-column justify-content-between">
+            <div>
+              <p class="text-muted small lh-lg">Mình là <strong>Lê Minh Toàn</strong>, sinh viên ngành <strong>Công nghệ thông tin</strong> tại Đại học Bình Dương. Mình hướng nội, thích khám phá máy móc và không ngừng học hỏi để tiến bộ mỗi ngày.</p>
+              <p class="text-muted small lh-lg">Mục tiêu của mình là trở thành một kỹ sư IT chuyên nghiệp, sau đó phát triển công ty riêng để đưa các giải pháp công nghệ phục vụ đời sống và xã hội.</p>
+            </div>
+            <div class="row g-2 mt-3 pt-3 border-top">
+              <div class="col-6 col-md-3"><small class="text-muted d-block fw-bold">CHUYÊN NGÀNH</small><strong>CNTT</strong></div>
+              <div class="col-6 col-md-3"><small class="text-muted d-block fw-bold">TRẠNG THÁI</small><strong>Đang học</strong></div>
+              <div class="col-6 col-md-3"><small class="text-muted d-block fw-bold">QUAN TÂM</small><strong>AI · Robot</strong></div>
+              <div class="col-6 col-md-3"><small class="text-muted d-block fw-bold">TINH THẦN</small><strong>Cầu tiến</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mb-5" id="education">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">02 / EDUCATION</span>
+        <h2 class="fw-bold display-6">Hành trình <span class="text-gradient">học tập.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="p-4 custom-card border-top border-4 border-primary">
+            <span class="badge bg-primary bg-opacity-10 text-primary mb-2">HIỆN TẠI</span>
+            <h4 class="fw-bold">Sinh viên Công nghệ thông tin</h4>
+            <p class="text-muted small">Đang là sinh viên năm 2, học tập và rèn luyện các kiến thức lập trình, cấu trúc dữ liệu, hệ thống và phát triển ứng dụng tại Đại học Bình Dương.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-4 custom-card">
+            <span class="badge bg-secondary bg-opacity-10 text-secondary mb-2">TRƯỚC ĐÂY</span>
+            <h4 class="fw-bold">Học phổ thông</h4>
+            <p class="text-muted small">Xây dựng nền tảng tư duy logic, kỹ năng tự học và niềm đam mê với khoa học kỹ thuật tại THPT Huỳnh Thúc Kháng.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mb-5" id="skills">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">03 / MY TOOLKIT</span>
+        <h2 class="fw-bold display-6">Kỹ năng & <span class="text-gradient">công cụ.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <div class="p-4 custom-card">
+            <h5 class="fw-bold mb-4">Kỹ năng chuyên môn</h5>
+            <div class="d-grid gap-3">
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>HTML</span><span>7/10</span></div><div class="skill-track"><span style="width:70%"></span></div></div>
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>CSS</span><span>6/10</span></div><div class="skill-track"><span style="width:60%"></span></div></div>
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>JavaScript</span><span>2/10</span></div><div class="skill-track"><span style="width:20%"></span></div></div>
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>Python</span><span>10/10</span></div><div class="skill-track"><span style="width:100%"></span></div></div>
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>C++</span><span>8/10</span></div><div class="skill-track"><span style="width:80%"></span></div></div>
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>Hiểu máy tính</span><span>10/10</span></div><div class="skill-track"><span style="width:100%"></span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 d-grid gap-4">
+          <div class="p-4 custom-card">
+            <h5 class="fw-bold mb-3">Soft skills</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge bg-light text-dark border p-2">Tư duy logic máy móc</span>
+              <span class="badge bg-light text-dark border p-2">Sáng tạo độc lạ</span>
+              <span class="badge bg-light text-dark border p-2">Quản lí thời gian</span>
+              <span class="badge bg-light text-dark border p-2">Tư duy ngược</span>
+              <span class="badge bg-light text-dark border p-2">Phản biện tốt</span>
+            </div>
+          </div>
+          <div class="p-4 custom-card">
+            <h5 class="fw-bold mb-3">Công cụ</h5>
+            <div class="row g-2 small fw-bold">
+              <div class="col-4">💻 VSCodium</div>
+              <div class="col-4">🌐 Web Code</div>
+              <div class="col-4">🐙 GitHub</div>
+              <div class="col-4">📊 PPTX / Excel</div>
+              <div class="col-4">🗄️ MySQL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mb-5" id="projects">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">04 / SELECTED WORK</span>
+        <h2 class="fw-bold display-6">Dự án <span class="text-gradient">tiêu biểu.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="custom-card h-100 p-4 d-flex flex-column">
+            <span class="text-muted small fw-bold">PROJECT / 01</span>
+            <h4 class="fw-bold mt-2">Website bán đồ cũ</h4>
+            <p class="text-muted small mt-2">Thiết kế và xây dựng giao diện website mua bán đồ cũ, tập trung vào trải nghiệm người dùng và quy trình lọc sản phẩm.</p>
+            <div class="mt-auto pt-3"><span class="badge bg-light text-dark border me-1">HTML</span><span class="badge bg-light text-dark border">CSS</span></div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="custom-card h-100 p-4 d-flex flex-column">
+            <span class="text-muted small fw-bold">PROJECT / 02</span>
+            <h4 class="fw-bold mt-2">Server database quản lí shop PC</h4>
+            <p class="text-muted small mt-2">Phát triển hệ thống quản lý shop máy tính với dữ liệu khách hàng, sản phẩm, hóa đơn và thao tác xử lý cơ bản.</p>
+            <div class="mt-auto pt-3"><span class="badge bg-light text-dark border me-1">MySQL</span><span class="badge bg-light text-dark border">SQL</span></div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="custom-card h-100 p-4 d-flex flex-column">
+            <span class="text-muted small fw-bold">PROJECT / 03</span>
+            <h4 class="fw-bold mt-2">Hệ thống OOP quản lí nhân viên</h4>
+            <p class="text-muted small mt-2">Áp dụng 4 tính chất của lập trình hướng đối tượng để xây dựng mô hình quản lý nhân viên, phân quyền và xử lý dữ liệu.</p>
+            <div class="mt-auto pt-3"><span class="badge bg-light text-dark border me-1">C++</span><span class="badge bg-light text-dark border">OOP</span></div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class="custom-card h-100 p-4 d-flex flex-column">
+            <span class="text-muted small fw-bold">PROJECT / 04</span>
+            <h4 class="fw-bold mt-2">Quản lí mạng khu phức hợp công nghiệp</h4>
+            <p class="text-muted small mt-2">Mô phỏng và quản lý mạng cho khu phức hợp công nghiệp bằng Cisco Packet Tracer, tập trung vào cấu hình và kết nối hệ thống.</p>
+            <div class="mt-auto pt-3"><span class="badge bg-light text-dark border me-1">Packet Tracer</span><span class="badge bg-light text-dark border">Network</span></div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="custom-card h-100 p-4 d-flex flex-column">
+            <span class="text-muted small fw-bold">PROJECT / 05</span>
+            <h4 class="fw-bold mt-2">Website dạy học toán thống kê xác suất</h4>
+            <p class="text-muted small mt-2">Xây dựng nội dung học tập dễ hiểu về toán, thống kê và xác suất nhằm giúp người học tiếp cận kiến thức cơ bản một cách trực quan.</p>
+            <div class="mt-auto pt-3"><span class="badge bg-light text-dark border me-1">HTML</span><span class="badge bg-light text-dark border">JS</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mb-5" id="interests">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">05 / INTERESTS</span>
+        <h2 class="fw-bold display-6">Điều mình <span class="text-gradient">yêu thích.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4"><div class="p-4 custom-card h-100"><span class="text-pink fw-bold">01 / ⌘</span><h4 class="fw-bold mt-3">Công nghệ</h4><p class="text-muted small">Đam mê khám phá các công nghệ thay đổi cuộc sống và tạo ra những giải pháp mới.</p></div></div>
+        <div class="col-md-4"><div class="p-4 custom-card h-100"><span class="text-primary fw-bold">02 / ✳</span><h4 class="fw-bold mt-3">Chính trị xã hội</h4><p class="text-muted small">Quan tâm đến các vấn đề xã hội, môi trường, năng lượng, hạ tầng thế giới và thể chế chính trị.</p></div></div>
+        <div class="col-md-4"><div class="p-4 custom-card h-100"><span class="text-success fw-bold">03 / ↗</span><h4 class="fw-bold mt-3">Khoa học kỹ thuật</h4><p class="text-muted small">Yêu thích đọc, tìm hiểu và suy nghĩ về những điều khoa học, công nghệ và kỹ thuật.</p></div></div>
+      </div>
+    </section>
+    <section class="mb-5" id="goals">
+      <div class="p-5 custom-card bg-dark text-white position-relative overflow-hidden">
+        <span class="text-pink fw-bold small"> NEXT EPISODE</span>
+        <h2 class="fw-bold display-6 my-2">Học hỏi. Xây dựng. Phát triển.</h2>
+        <p class="text-white-50 small col-lg-8 mb-4">Mình muốn tiếp tục nỗ lực mỗi ngày, hoàn thiện kỹ năng lập trình và tư duy công nghệ, đồng thời tạo ra những sản phẩm có thể giúp ích cho xã hội.</p>
+        <a href="#contact" class="btn btn-outline-light btn-sm px-4 rounded-pill">Let's build something ↗</a>
+      </div>
+    </section>
+    <section class="mb-5" id="contact">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">07 / GET IN TOUCH</span>
+        <h2 class="fw-bold display-6">Cùng tạo nên <span class="text-gradient">điều gì đó.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <div class="p-4 custom-card bg-dark text-white h-100 d-flex flex-column justify-content-between">
+            <div>
+              <span class="small text-white-50">OPEN TO CONNECTIONS</span>
+              <h3 class="fw-bold my-3">Liên hệ với tôi nếu bạn muốn trò chuyện, hợp tác!</h3>
+              <p class="text-white-50 small">Một lời chào cũng có thể là khởi đầu của một ý tưởng thú vị.</p>
+            </div>
+            <div class="d-grid gap-2 mt-4">
+              <a href="mailto:25050016@student.bdu.edu.vn" class="text-white small p-2 rounded border border-secondary border-opacity-25 d-flex justify-content-between"><span>✉ 25050016@student.bdu.edu.vn</span><span>↗</span></a>
+              <a href="https://github.com/anhcoder207" target="_blank" class="text-white small p-2 rounded border border-secondary border-opacity-25 d-flex justify-content-between"><span>🐙 github.com/anhcoder207</span><span>↗</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <form class="p-4 custom-card" id="contactForm">
+            <h5 class="fw-bold mb-3">Gửi lời nhắn</h5>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Tên của bạn</label>
+                <input class="form-control form-control-sm" name="name" required placeholder="Nhập tên">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Email</label>
+                <input type="email" class="form-control form-control-sm" name="email" required placeholder="name@example.com">
+              </div>
+              <div class="col-12">
+                <label class="form-label small fw-bold">Lời nhắn</label>
+                <textarea class="form-control form-control-sm" name="message" rows="4" required placeholder="Nội dung..."></textarea>
+              </div>
+              <div class="col-12 d-flex align-items-center justify-content-between">
+                <button type="submit" class="btn btn-dark btn-sm px-4">Gửi tin nhắn ↗</button>
+                <small class="text-muted" id="formNote" style="font-size:10px;"></small>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <footer class="pt-4 border-top d-flex flex-wrap justify-content-between align-items-center gap-3 text-muted small">
+      <div class="d-flex align-items: center gap-2"><span class="brand-mark" style="width:24px;height:24px;font-size:12px;">T</span><strong>LÊ MINH TOÀN</strong></div>
+      <div>© <span id="year">2026</span> Lê Minh Toàn. All rights reserved.</div>
+      <a href="#home" class="fw-bold text-dark">BACK TO TOP ↑</a>
+    </footer>
+  </div>
+</main>
+<script>
+const phrases = ["sinh viên Công nghệ thông tin", "người thích học hỏi", "người mê máy móc", "người hướng tới giải pháp CNTT"];
+let pIdx = 0, cIdx = 0, deleting = false;
+const typingEl = document.getElementById("typingText");
+function typeText() {
+  if (!typingEl) return;
+  let current = phrases[pIdx];
+  typingEl.textContent = current.substring(0, cIdx);
+  if (!deleting && cIdx < current.length) { cIdx++; setTimeout(typeText, 70); }
+  else if (!deleting) { deleting = true; setTimeout(typeText, 1200); }
+  else if (cIdx > 0) { cIdx--; setTimeout(typeText, 35); }
+  else { deleting = false; pIdx = (pIdx + 1) % phrases.length; setTimeout(typeText, 200); }
+}
+typeText();
+const sidebar = document.getElementById("sidebar"), scrim = document.getElementById("sidebarScrim"), toggle = document.getElementById("menuToggle");
+function toggleSidebar(open) {
+  sidebar.classList.toggle("is-open", open);
+  scrim.classList.toggle("is-visible", open);
+}
+toggle?.addEventListener("click", () => toggleSidebar(true));
+scrim?.addEventListener("click", () => toggleSidebar(false));
+const navLinks = document.querySelectorAll(".side-link");
+const currentSectionLabel = document.getElementById("currentSection");
+const sectionLabels = { home: "OVERVIEW", about: "ABOUT ME", education: "EDUCATION", skills: "MY TOOLKIT", projects: "SELECTED WORK", interests: "INTERESTS", contact: "GET IN TOUCH" };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute("id");
+      navLinks.forEach(link => {
+        if (link.getAttribute("href") === `#${id}`) { link.classList.add("active"); }
+        else { link.classList.remove("active"); }
+      });
+      if (currentSectionLabel && sectionLabels[id]) { currentSectionLabel.textContent = sectionLabels[id]; }
+    }
+  });
+}, { rootMargin: "-10% 0px -30% 0px", threshold: 0.1 });
+document.querySelectorAll("section[id]").forEach(section => observer.observe(section));
+
+window.addEventListener("scroll", () => {
+  let scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById("scrollProgress").style.width = scrolled + "%";
+
+  // Đảm bảo khi cuộn xuống sát đáy trang, mục Liên hệ (contact) sẽ sáng lên chính xác
+  if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 30) {
+    navLinks.forEach(link => {
+      if (link.getAttribute("href") === "#contact") { link.classList.add("active"); }
+      else { link.classList.remove("active"); }
+    });
+    if (currentSectionLabel) { currentSectionLabel.textContent = sectionLabels["contact"]; }
+  }
+});
+document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("sideYear").textContent = new Date().getFullYear();
+document.getElementById("contactForm")?.addEventListener("submit", e => {
+  e.preventDefault();
+  const data = new FormData(e.target);
+  const mailto = `mailto:25050016@student.bdu.edu.vn?subject=Liên hệ từ Portfolio&body=Tên: ${data.get("name")}%0D%0AEmail: ${data.get("email")}%0D%0A%0D%0A${data.get("message")}`;
+  document.getElementById("formNote").textContent = "Đang mở ứng dụng email...";
+  window.location.href = mailto;
+});
+</script>
+</body>
+</html>

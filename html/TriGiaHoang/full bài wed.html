@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trì Gia Hoàng | Cyberpunk Portfolio</title>
+    
+    <!-- Nhúng Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Nhúng FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Nhúng Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff003c;
+            --neon-purple: #bc13fe;
+            --dark-bg: #050608;
+            --dark-card: rgba(12, 14, 20, 0.75);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-display { font-family: 'Rajdhani', sans-serif; }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Đốm sáng trôi nổi  */
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .orb-1 { background: radial-gradient(circle, rgba(0, 243, 255, 0.15) 0%, transparent 70%); animation: floatOrb 15s ease-in-out infinite; }
+        .orb-2 { background: radial-gradient(circle, rgba(255, 0, 60, 0.15) 0%, transparent 70%); animation: floatOrb 12s ease-in-out infinite reverse; }
+        .orb-3 { background: radial-gradient(circle, rgba(188, 19, 254, 0.15) 0%, transparent 70%); animation: floatOrb 18s ease-in-out infinite; }
+
+        /* Thẻ kính mờ */
+        .cyber-glass {
+            background: var(--dark-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 243, 255, 0.05);
+            position: relative;
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+        
+        .cyber-glass::before {
+            content: ''; position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            background: linear-gradient(45deg, var(--neon-cyan), transparent 40%, transparent 60%, var(--neon-purple));
+            z-index: -1; border-radius: inherit; opacity: 0.3;
+        }
+
+        /* Thẻ con */
+        .cyber-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.0) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 1px solid rgba(0, 243, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; overflow: hidden; height: 100%;
+        }
+
+        .cyber-item:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.2), inset 0 0 15px rgba(0, 243, 255, 0.1);
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        /* Chữ Gradient */
+        .text-gradient {
+            background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .avatar-ring { box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px var(--neon-purple); }
+
+        /* Tiện ích tùy chỉnh */
+        .w-30vw { width: 30vw; } .h-30vw { height: 30vw; }
+        .w-40vw { width: 40vw; } .h-40vw { height: 40vw; }
+        .w-50vw { width: 50vw; } .h-50vw { height: 50vw; }
+        .blur-60 { filter: blur(60px); } .blur-80 { filter: blur(80px); } .blur-100 { filter: blur(100px); }
+        .avatar-img { width: 144px; height: 144px; }
+        @media (min-width: 768px) { .avatar-img { width: 176px; height: 176px; } }
+
+        .text-neon-cyan { color: var(--neon-cyan) !important; }
+        .text-neon-pink { color: var(--neon-pink) !important; }
+        .text-neon-purple { color: var(--neon-purple) !important; }
+        
+        .bg-cyan-soft { background-color: rgba(0, 243, 255, 0.1); }
+        .bg-pink-soft { background-color: rgba(255, 0, 60, 0.1); }
+        .bg-purple-soft { background-color: rgba(188, 19, 254, 0.1); }
+        .bg-yellow-soft { background-color: rgba(255, 193, 7, 0.1); }
+        .bg-green-soft { background-color: rgba(25, 135, 84, 0.1); }
+        .bg-blue-soft { background-color: rgba(13, 110, 253, 0.1); }
+        .bg-red-soft { background-color: rgba(220, 53, 69, 0.1); }
+
+        .icon-box { width: 48px; height: 48px; flex-shrink: 0; transition: all 0.3s; }
+        .tracking-widest { letter-spacing: 0.1em; }
+        a { text-decoration: none; }
+
+        /* Hover hiệu ứng cho Quiz Button */
+        .quiz-btn { border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: 0.3s; }
+        .quiz-btn:hover { background-color: rgba(0, 243, 255, 0.1); border-color: var(--neon-cyan); }
+    </style>
+</head>
+<body class="py-5 px-3 px-sm-4">
+
+    <!-- Đốm sáng nền -->
+    <div class="position-fixed top-0 start-0 w-100 h-100 pe-none overflow-hidden z-0">
+        <div class="orb-1 position-absolute top-0 start-0 translate-middle w-40vw h-40vw rounded-circle blur-80"></div>
+        <div class="orb-2 position-absolute bottom-0 end-0 translate-middle-y w-50vw h-50vw rounded-circle blur-100"></div>
+        <div class="orb-3 position-absolute top-50 start-50 w-30vw h-30vw rounded-circle blur-60"></div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container-fluid position-relative z-3">
+        
+        <!-- PHẦN 1: THÔNG TIN CƠ BẢN BÊN TRÊN (như cũ) -->
+        <div class="cyber-glass rounded-4 p-4 p-sm-5 mb-5">
+            <header class="d-flex flex-column flex-md-row align-items-center align-items-md-start gap-4 mb-5">
+                <div class="position-relative">
+                    <img src="anhdaidien.png" alt="Trì Gia Hoàng" onerror="this.src='https://placehold.co/400x400/0c0e14/00f3ff?text=TGH'" 
+                         class="avatar-img object-fit-cover rounded-circle avatar-ring border border-2 border-info position-relative z-3">
+                </div>
+                <div class="text-center text-md-start flex-grow-1 mt-3 mt-md-4">
+                    <div class="d-inline-block px-3 py-1 bg-cyan-soft border border-info rounded-pill text-neon-cyan mb-3" style="font-size: 12px; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase;">
+                        <i class="fa-solid fa-bolt me-1"></i> Sinh viên Thiết Kế Web
+                    </div>
+                    <h1 class="font-display fw-bold mb-2 text-gradient" style="font-size: 2.5rem; letter-spacing: 0.05em;">Trì Gia Hoàng</h1>
+                </div>
+            </header>
+
+            <div class="row g-3 g-sm-4">
+                <div class="col-12 col-md-8"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-cyan-soft d-flex align-items-center justify-content-center fs-4 text-neon-cyan"><i class="fa-solid fa-building-columns"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1" style="font-size: 11px; text-transform: uppercase;">Trường Đào Tạo</p><p class="font-display fs-5 fw-semibold text-light mb-0">Đại học Bình Dương</p></div></div></div>
+                <div class="col-12 col-md-4"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-pink-soft d-flex align-items-center justify-content-center fs-4 text-neon-pink"><i class="fa-solid fa-id-badge"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1" style="font-size: 11px; text-transform: uppercase;">MSSV</p><p class="font-display fs-5 fw-semibold text-light mb-0">25050062</p></div></div></div>
+                <div class="col-12 col-md-8"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-purple-soft d-flex align-items-center justify-content-center fs-4 text-neon-purple"><i class="fa-solid fa-microchip"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1" style="font-size: 11px; text-transform: uppercase;">Ngành Học</p><p class="font-display fs-5 fw-semibold text-light mb-0">Công Nghệ Thông Tin</p></div></div></div>
+                <div class="col-12 col-md-4"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-yellow-soft d-flex align-items-center justify-content-center fs-4 text-warning"><i class="fa-solid fa-users-viewfinder"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1" style="font-size: 11px; text-transform: uppercase;">Lớp</p><p class="font-display fs-5 fw-semibold text-light mb-0">28TH02</p></div></div></div>
+                <div class="col-12 col-md-8"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-green-soft d-flex align-items-center justify-content-center fs-4 text-success"><i class="fa-solid fa-envelope"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1" style="font-size: 11px; text-transform: uppercase;">Email Liên Hệ</p><a href="mailto:giahoang703@gmail.com" class="font-display fs-5 fw-semibold text-light mb-0">giahoang703@gmail.com</a></div></div></div>
+                <div class="col-12 col-md-4"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-blue-soft d-flex align-items-center justify-content-center fs-4 text-primary"><i class="fa-solid fa-phone"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1" style="font-size: 11px; text-transform: uppercase;">Điện Thoại</p><a href="tel:0393197294" class="font-display fs-5 fw-semibold text-light mb-0">0393197294</a></div></div></div>
+            </div>
+        </div>
+
+        <!-- PHẦN 2: CÂU HỎI BẢO MẬT (QUIZ) -->
+        <div id="quiz-section" class="cyber-glass rounded-4 p-4 p-sm-5 text-center mb-5" style="transition: all 0.5s ease;">
+            <h3 class="text-warning mb-4">
+                <i class="fa-solid fa-lock me-2"></i> Muốn xem phần tiếp theo phải trả lời đúng câu hỏi sau
+            </h3>
+            
+            <div class="cyber-item rounded-4 p-4 text-start bg-dark">
+                <p class="fs-5 text-light fw-bold mb-1">Hoàng Sa và Trường Sa là của nước nào?</p>
+                <p class="text-secondary fst-italic mb-4">"Which country do Hoang Sa and Truong Sa belong to?"</p>
+                
+                <div class="row g-3">
+                    <div class="col-12 col-sm-6">
+                        <div class="cyber-item rounded-3 p-3 quiz-btn d-flex align-items-center" data-correct="true">
+                            <span class="text-neon-cyan fw-bold fs-5 me-3">A.</span> <span class="text-light">Việt Nam</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="cyber-item rounded-3 p-3 quiz-btn d-flex align-items-center" data-correct="false">
+                            <span class="text-neon-pink fw-bold fs-5 me-3">B.</span> <span class="text-light">Indonesia</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="cyber-item rounded-3 p-3 quiz-btn d-flex align-items-center" data-correct="false">
+                            <span class="text-neon-purple fw-bold fs-5 me-3">C.</span> <span class="text-light">Malaixia</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="cyber-item rounded-3 p-3 quiz-btn d-flex align-items-center" data-correct="false">
+                            <span class="text-danger fw-bold fs-5 me-3">D.</span> <span class="text-light">China</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="quiz-error" class="text-danger mt-4 text-center fw-bold d-none">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Sai rồi! Hãy chọn lại đi (Wrong! Please try again.)
+                </div>
+            </div>
+        </div>
+
+ <!-- PHẦN 3: HỒ SƠ CHI TIẾT (Bị ẩn lúc đầu) -->
+<div id="details-section" class="cyber-glass rounded-4 p-4 p-sm-5 d-none" style="opacity: 0; transition: opacity 0.8s ease;">
+    <h2 class="font-display fw-bold mb-5 text-gradient text-center" style="font-size: 2rem;">
+        <i class="fa-solid fa-user-astronaut me-2"></i> Hồ Sơ Cá Nhân Chi Tiết
+    </h2>
+    
+    <div class="row g-4">
+        <!-- Group 1: Basic Info -->
+        <div class="col-12 col-md-6">
+            <div class="cyber-item rounded-4 p-4 h-100">
+                <h4 class="text-neon-cyan mb-4 border-bottom border-info pb-2"><i class="fa-solid fa-address-card me-2"></i>Thông Tin Cơ Bản</h4>
+                <ul class="list-unstyled text-light fs-6 mb-0">
+                    <li class="mb-3 d-flex">
+                        <strong class="text-secondary text-nowrap" style="min-width: 90px;">Họ và tên:</strong> 
+                        <span>Trì Gia Hoàng</span>
+                    </li>
+                    <li class="mb-3 d-flex">
+                        <strong class="text-secondary text-nowrap" style="min-width: 90px;">Giới tính:</strong> 
+                        <span>Nam</span>
+                    </li>
+                    <li class="mb-0 d-flex">
+                        <strong class="text-secondary text-nowrap" style="min-width: 90px;">Ngày sinh:</strong> 
+                        <span>20/02/2007</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+ <!-- Group 2: Family -->
+<div class="col-12 col-md-6">
+    <div class="cyber-item rounded-4 p-4 h-100">
+        <h4 class="text-neon-pink mb-4 border-bottom border-danger pb-2"><i class="fa-solid fa-people-roof me-2"></i>Gia Đình</h4>
+        <ul class="list-unstyled text-light fs-6 mb-0">
+            <li class="mb-4">
+                <div class="d-flex align-items-center">
+                    <strong class="text-secondary text-nowrap" style="min-width: 50px;">Ba:</strong> 
+                    <span class="text-nowrap">Trì Công Tâm</span> 
+                </div>
+                <div class="mt-2" style="margin-left: 50px;">
+                    <i class="fa-solid fa-phone text-secondary me-2" style="font-size:13px;"></i><a href="tel:0988008079" class="text-info">0988008079</a>
+                </div>
+            </li>
+            <li class="mb-0">
+                <div class="d-flex align-items-center">
+                    <strong class="text-secondary text-nowrap" style="min-width: 50px;">Mẹ:</strong> 
+                    <span class="text-nowrap">Trần Thị Diểm Thùy</span> 
+                </div>
+                <div class="mt-2" style="margin-left: 50px;">
+                    <i class="fa-solid fa-phone text-secondary me-2" style="font-size:13px;"></i><a href="tel:0397150068" class="text-info">0397150068</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+        <!-- Group 3: Hobbies & Personality -->
+        <div class="col-12">
+            <div class="cyber-item rounded-4 p-4">
+                <h4 class="text-neon-purple mb-4 border-bottom border-primary pb-2"><i class="fa-solid fa-heart me-2"></i>Sở Thích & Tính Cách</h4>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="p-3 bg-success bg-opacity-10 rounded-3 h-100 border-start border-success border-4">
+                            <strong class="text-success d-block mb-2"><i class="fa-solid fa-thumbs-up me-1"></i>Thích:</strong>
+                            <span class="text-light">Màu xanh nước, thích ăn trứng và những món ăn đậm đà.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 bg-danger bg-opacity-10 rounded-3 h-100 border-start border-danger border-4">
+                            <strong class="text-danger d-block mb-2"><i class="fa-solid fa-thumbs-down me-1"></i>Không thích:</strong>
+                            <span class="text-light">Ăn thơm, dứa, cá ngừ.</span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="p-3 bg-warning bg-opacity-10 rounded-3 border-start border-warning border-4">
+                            <strong class="text-warning d-block mb-2"><i class="fa-solid fa-face-smile-beam me-1"></i>Tính cách:</strong>
+                            <span class="text-light">Tự nhận mình là 1 chàng trai vui vẻ, luôn hòa đồng, và thích giúp đỡ mọi người, đặc biệt chịu khó <i class="fa-regular fa-face-frown-open text-info ms-1"></i>.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Group 4: Skills, Strengths, Weaknesses -->
+        <div class="col-12">
+            <div class="cyber-item rounded-4 p-4">
+                <h4 class="text-warning mb-4 border-bottom border-warning pb-2"><i class="fa-solid fa-bolt me-2"></i>Kỹ Năng & Năng Lực</h4>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="p-3 border border-secondary rounded-3 bg-dark">
+                            <strong class="text-success d-block mb-1"><i class="fa-solid fa-star me-1"></i>Kỹ năng:</strong>
+                            <span class="text-light">Thành thạo mọi kỹ năng việc nhà <i class="fa-solid fa-thumbs-up text-primary"></i>, khả năng nấu ăn khá tốt.</span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="p-3 border border-secondary rounded-3 bg-dark">
+                            <strong class="text-info d-block mb-1"><i class="fa-solid fa-arrow-trend-up me-1"></i>Điểm mạnh:</strong>
+                            <span class="text-light">Khả năng nói chuyện trước đám đông, tự tin, âm nhạc, chỉ huy nhóm nhỏ, có nhiều ý tưởng sáng tạo.</span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="p-3 border border-secondary rounded-3 bg-dark">
+                            <strong class="text-danger d-block mb-1"><i class="fa-solid fa-arrow-trend-down me-1"></i>Điểm yếu:</strong>
+                            <span class="text-light">Ai biết bạn tự tìm đi <i class="fa-solid fa-face-laugh-squint text-warning ms-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- Nhúng Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Code logic cho Quiz -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizButtons = document.querySelectorAll('.quiz-btn');
+            const quizSection = document.getElementById('quiz-section');
+            const detailsSection = document.getElementById('details-section');
+            const errorMsg = document.getElementById('quiz-error');
+
+            quizButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const isCorrect = this.getAttribute('data-correct') === 'true';
+                    
+                    if(isCorrect) {
+                        // Thành công: Ẩn cảnh báo, bôi xanh đáp án đúng
+                        errorMsg.classList.add('d-none');
+                        this.classList.add('bg-success', 'border-success');
+                        
+                        // Hiệu ứng mờ dần phần Quiz và hiện phần Thông Tin
+                        setTimeout(() => {
+                            quizSection.style.opacity = "0";
+                            setTimeout(() => {
+                                quizSection.classList.add('d-none');
+                                detailsSection.classList.remove('d-none');
+                                // Delay 1 tí rồi Fade in phần chi tiết lên
+                                setTimeout(() => {
+                                    detailsSection.style.opacity = "1";
+                                }, 100);
+                            }, 500); // Đợi 0.5s để mờ hết
+                        }, 500); // Đợi 0.5s sau khi bấm trúng mới bắt đầu chuyển cảnh
+                        
+                    } else {
+                        // Thất bại: Hiện cảnh báo và bôi đỏ đáp án sai
+                        errorMsg.classList.remove('d-none');
+                        this.classList.add('bg-danger', 'border-danger');
+                        
+                        // Hiệu ứng rung lắc (shake)
+                        quizSection.style.transform = "translateX(10px)";
+                        setTimeout(() => quizSection.style.transform = "translateX(-10px)", 100);
+                        setTimeout(() => quizSection.style.transform = "translateX(10px)", 200);
+                        setTimeout(() => quizSection.style.transform = "translateX(0)", 300);
+                        
+                        // Xóa màu đỏ sau 1 giây để người dùng chọn lại
+                        setTimeout(() => {
+                            this.classList.remove('bg-danger', 'border-danger');
+                        }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

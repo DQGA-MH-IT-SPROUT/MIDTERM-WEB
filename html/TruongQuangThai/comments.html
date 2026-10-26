@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f6f8">
+    <meta name="description" content="Bình luận công khai trên trang cá nhân Trương Quang Thái.">
+    <title>Bình luận — Trương Quang Thái</title>
+    <script>
+        if (new URLSearchParams(window.location.search).get("embed") === "1") {
+            document.documentElement.classList.add("comments-embed");
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Đi đến nội dung chính</a>
+    <header class="header">
+        <nav class="nav container" aria-label="Điều hướng chính">
+            <a class="navbar-brand brand" href="index.html">Trương Quang Thái<span>.</span></a>
+            <a class="nav-link" href="index.html">← Trang thông tin</a>
+        </nav>
+    </header>
+    <main id="main-content">
+        <section class="section" id="comments">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="comments-section-label" id="comment-count">Bình luận</h2>
+                </div>
+                <div class="comments-layout">
+                    <div class="comment-tools">
+                        <button class="comment-action comment-visibility-toggle" id="toggle-comments" type="button" aria-expanded="true" aria-controls="comment-feed">Ẩn bình luận</button>
+                    </div>
+                    <div class="comment-composer">
+                        <div class="comment-avatar comment-composer-avatar" id="comment-composer-avatar" aria-hidden="true"></div>
+                        <button class="comment-open-button" id="open-comment-form" type="button" aria-expanded="false" aria-controls="comment-form">Thêm bình luận công khai...</button>
+                    </div>
+                    <form class="comment-form" id="comment-form" hidden>
+                        <div class="comment-form-heading">
+                            <h3>Viết bình luận</h3>
+                            <button class="comment-action" id="cancel-comment" type="button">Đóng</button>
+                        </div>
+                        <div class="comment-form-grid">
+                            <div class="comment-avatar-picker">
+                                <div class="avatar-preview" id="comment-avatar-preview" aria-label="Ảnh đại diện mặc định"></div>
+                                <label for="comment-avatar">Ảnh đại diện <span>(không bắt buộc)</span></label>
+                                <input id="comment-avatar" name="avatar" type="file" accept="image/jpeg,image/png,image/webp">
+                                <button class="comment-action" id="reset-comment-avatar" type="button" hidden>Xóa ảnh đã chọn</button>
+                            </div>
+                            <div class="comment-fields">
+                                <label for="comment-name">Tên hiển thị</label>
+                                <input id="comment-name" name="name" type="text" maxlength="60" autocomplete="name" required placeholder="Tên của bạn">
+                                <label for="comment-message">Bình luận</label>
+                                <textarea id="comment-message" name="message" maxlength="1000" required placeholder="Viết lời nhắn của bạn..."></textarea>
+                            </div>
+                        </div>
+                        <div class="comment-form-actions">
+                            <button class="button primary" type="submit">Gửi bình luận</button>
+                            <button class="button" id="dismiss-comment" type="button">Hủy</button>
+                        </div>
+                        <p class="comment-note">Ảnh JPG, PNG hoặc WebP, tối đa 2 MB. Nếu không chọn ảnh, sẽ dùng ảnh đại diện mặc định.</p>
+                        <p class="comment-status" id="comment-status" role="status" aria-live="polite"></p>
+                    </form>
+                    <div class="comment-list" id="comment-list" aria-live="polite" aria-relevant="additions">
+                        <div id="comment-feed">
+                            <p class="empty-comments" id="empty-comments">Chưa có bình luận. Hãy là người đầu tiên để lại lời nhắn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer class="container footer">
+        <span>© 2026 Trương Quang Thái · Trang giới thiệu cá nhân</span>
+        <a href="index.html">Quay lại trang thông tin</a>
+    </footer>
+    <script src="firebase-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+    <script>
+        const commentForm = document.querySelector("#comment-form");
+        const commentList = document.querySelector("#comment-list");
+        const commentCount = document.querySelector("#comment-count");
+        const emptyComments = document.querySelector("#empty-comments");
+        const commentFeed = document.querySelector("#comment-feed");
+        const toggleCommentsButton = document.querySelector("#toggle-comments");
+        const commentStatus = document.querySelector("#comment-status");
+        const openCommentButton = document.querySelector("#open-comment-form");
+        const commentNameInput = document.querySelector("#comment-name");
+        const cancelCommentButton = document.querySelector("#cancel-comment");
+        const dismissCommentButton = document.querySelector("#dismiss-comment");
+        const commentAvatarInput = document.querySelector("#comment-avatar");
+        const commentAvatarPreview = document.querySelector("#comment-avatar-preview");
+        const commentComposerAvatar = document.querySelector("#comment-composer-avatar");
+        const resetCommentAvatarButton = document.querySelector("#reset-comment-avatar");
+        const commentStorageKey = "portfolio-15-comments";
+        const maxAvatarFileSize = 2 * 1024 * 1024;
+        const commentDateFormatter = new Intl.DateTimeFormat("vi-VN", { dateStyle: "medium", timeStyle: "short" });
+        const replyAvatarSelections = new WeakMap();
+        const firebaseConfig = window.FIREBASE_CONFIG;
+        const cloudConfigured = Boolean(
+            firebaseConfig?.apiKey &&
+            firebaseConfig?.projectId &&
+            !firebaseConfig.apiKey.startsWith("YOUR_")
+        );
+        let saveTimer = 0;
+        let commentAvatarData = "";
+        let commentAvatarProcessing = false;
+        let comments = [];
+        let totalComments = 0;
+        let storageAvailable = true;
+        let commentsVisible = true;
+        let commentsCollection = null;
+        let cloudReady = false;
+        let cloudSaveChain = Promise.resolve();
+        let unsubscribeCloudComments = null;
+        const syncedCloudComments = new Map();
+        const collapsedReplyThreads = new Set();
+
+        function createId() {
+            return globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        }
+
+        function renderAvatar(container, imageData = "") {
+            container.replaceChildren();
+            if (imageData) {
+                const image = document.createElement("img");
+                image.src = imageData;
+                image.alt = "";
+                image.loading = "lazy";
+                container.append(image);
+                return;
+            }
+
+            const svgNamespace = "http://www.w3.org/2000/svg";
+            const icon = document.createElementNS(svgNamespace, "svg");
+            icon.setAttribute("viewBox", "0 0 48 48");
+            icon.setAttribute("aria-hidden", "true");
+            const head = document.createElementNS(svgNamespace, "circle");
+            head.setAttribute("cx", "24");
+            head.setAttribute("cy", "17");
+            head.setAttribute("r", "9");
+            head.setAttribute("fill", "currentColor");
+            const shoulders = document.createElementNS(svgNamespace, "path");
+            shoulders.setAttribute("d", "M7 43c1-10 7-16 17-16s16 6 17 16");
+            shoulders.setAttribute("fill", "currentColor");
+            icon.append(head, shoulders);
+            container.append(icon);
+        }
+
+        renderAvatar(commentAvatarPreview);
+        renderAvatar(commentComposerAvatar);
+
+        async function prepareAvatar(file) {
+            if (!file) return "";
+            if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+                throw new Error("Chỉ hỗ trợ ảnh JPG, PNG hoặc WebP.");
+            }
+            if (file.size > maxAvatarFileSize) {
+                throw new Error("Ảnh đại diện phải nhỏ hơn 2 MB.");
+            }
+
+            const bitmap = await createImageBitmap(file);
+            try {
+                if (bitmap.width * bitmap.height > 25000000) {
+                    throw new Error("Kích thước ảnh quá lớn. Hãy chọn ảnh nhỏ hơn.");
+                }
+                const size = 128;
+                const cropSize = Math.min(bitmap.width, bitmap.height);
+                const sourceX = (bitmap.width - cropSize) / 2;
+                const sourceY = (bitmap.height - cropSize) / 2;
+                const canvas = document.createElement("canvas");
+                canvas.width = size;
+                canvas.height = size;
+                const context = canvas.getContext("2d");
+                if (!context) throw new Error("Không thể xử lý ảnh trên trình duyệt này.");
+                context.drawImage(bitmap, sourceX, sourceY, cropSize, cropSize, 0, 0, size, size);
+                return canvas.toDataURL("image/jpeg", 0.82);
+            } finally {
+                bitmap.close();
+            }
+        }
+
+        function isSafeAvatar(imageData) {
+            return typeof imageData === "string" &&
+                imageData.length <= 60000 &&
+                /^data:image\/jpeg;base64,[A-Za-z0-9+/]+=*$/.test(imageData);
+        }
+
+        function makeElement(tag, className, text) {
+            const element = document.createElement(tag);
+            if (className) element.className = className;
+            if (text) element.textContent = text;
+            return element;
+        }
+
+        function makeActionButton(text, action, className = "comment-action") {
+            const button = makeElement("button", className, text);
+            button.type = "button";
+            button.dataset.action = action;
+            return button;
+        }
+
+        function makeReplyField(tag, id, labelText, placeholder, maxLength) {
+            const label = makeElement("label", "form-label", labelText);
+            label.htmlFor = id;
+            const field = makeElement(tag);
+            Object.assign(field, { id, name: tag === "textarea" ? "message" : "name", required: true, maxLength, placeholder });
+            if (tag === "input") Object.assign(field, { type: "text", autocomplete: "name" });
+            return [label, field];
+        }
+
+        function createReplyForm(comment) {
+            const replyForm = makeElement("form", "reply-form");
+            replyForm.hidden = true;
+            replyForm.dataset.parentId = comment.id;
+
+            const [replyNameLabel, replyName] = makeReplyField("input", `reply-name-${comment.id}`, "Tên hiển thị", "Tên của bạn", 60);
+            const replyAvatarRow = makeElement("div", "reply-avatar-row");
+            const replyAvatarPreview = makeElement("div", "avatar-preview reply-avatar-preview");
+            replyAvatarPreview.setAttribute("aria-label", "Ảnh đại diện mặc định");
+            renderAvatar(replyAvatarPreview);
+            const replyAvatarLabel = makeElement("label", "", "Ảnh đại diện (không bắt buộc)");
+            replyAvatarLabel.htmlFor = `reply-avatar-${comment.id}`;
+            const replyAvatarInput = Object.assign(makeElement("input"), {
+                id: `reply-avatar-${comment.id}`, name: "avatar", type: "file", accept: "image/jpeg,image/png,image/webp"
+            });
+            replyAvatarInput.setAttribute("aria-label", "Chọn ảnh đại diện cho câu trả lời");
+            replyAvatarRow.append(replyAvatarPreview, replyAvatarLabel, replyAvatarInput);
+
+            const [replyMessageLabel, replyMessage] = makeReplyField("textarea", `reply-message-${comment.id}`, "Nội dung trả lời", `Trả lời ${comment.name}...`, 1000);
+            const replyFormActions = makeElement("div", "reply-form-actions");
+            const sendReply = makeElement("button", "button primary", "Gửi trả lời");
+            sendReply.type = "submit";
+            const cancelReply = makeActionButton("Hủy", "cancel-reply", "button");
+            const replyStatus = makeElement("p", "comment-status reply-status");
+            replyStatus.setAttribute("role", "status");
+            replyStatus.setAttribute("aria-live", "polite");
+            replyFormActions.append(sendReply, cancelReply);
+            replyForm.append(replyNameLabel, replyName, replyAvatarRow, replyMessageLabel, replyMessage, replyFormActions, replyStatus);
+            return replyForm;
+        }
+
+        function createCommentElement(comment) {
+            const item = makeElement("article", "comment-item");
+            item.dataset.commentId = comment.id;
+            const avatar = makeElement("div", "comment-avatar");
+            avatar.setAttribute("aria-hidden", "true");
+            renderAvatar(avatar, comment.avatar);
+
+            const body = makeElement("div", "comment-body");
+            const meta = makeElement("div", "comment-meta");
+            const author = makeElement("strong", "", comment.name);
+            const time = makeElement("time");
+            const date = new Date(comment.createdAt);
+            time.dateTime = date.toISOString();
+            time.textContent = commentDateFormatter.format(date);
+            meta.append(author, time);
+
+            const message = makeElement("p", "comment-text", comment.message);
+            const replies = makeElement("div", "reply-list");
+            replies.id = `replies-${comment.id}`;
+            replies.hidden = collapsedReplyThreads.has(comment.id);
+            comment.replies.forEach((reply) => replies.append(createCommentElement(reply)));
+
+            const actions = makeElement("div", "comment-actions");
+            const likeButton = makeActionButton(`Thích${comment.likes ? ` · ${comment.likes}` : ""}`, "like");
+            likeButton.setAttribute("aria-pressed", String(comment.liked));
+            actions.append(likeButton, makeActionButton("Trả lời", "reply"));
+            body.append(meta, message, actions, replies);
+            item.append(avatar, body);
+            updateThreadControl(item, comment);
+            return item;
+        }
+
+        function countComments(items) {
+            return items.reduce((count, comment) => count + 1 + comment.replyCount, 0);
+        }
+
+        function flattenComments(items, parentId = null, result = []) {
+            for (const comment of items) {
+                result.push({
+                    id: comment.id,
+                    parentId,
+                    name: comment.name,
+                    message: comment.message,
+                    createdAt: comment.createdAt,
+                    avatar: comment.avatar,
+                    likes: comment.likes,
+                    liked: comment.liked
+                });
+                flattenComments(comment.replies, comment.id, result);
+            }
+            return result;
+        }
+
+        function buildCommentTree(documents) {
+            const commentsById = new Map();
+            for (const document of documents) {
+                const comment = normalizeComment({ ...document, replies: [] });
+                commentsById.set(comment.id, { comment, parentId: document.parentId });
+            }
+
+            const roots = [];
+            for (const { comment, parentId } of commentsById.values()) {
+                const parent = parentId ? commentsById.get(parentId)?.comment : null;
+                if (parent) {
+                    parent.replies.push(comment);
+                } else {
+                    if (parentId) console.error(`Không tìm thấy bình luận cha của ${comment.id}.`);
+                    roots.push(comment);
+                }
+            }
+
+            function sortReplies(items, isRoot = false) {
+                items.sort((left, right) => {
+                    const dateDifference = Date.parse(left.createdAt) - Date.parse(right.createdAt);
+                    return isRoot ? -dateDifference : dateDifference;
+                });
+                for (const comment of items) {
+                    sortReplies(comment.replies);
+                    comment.replyCount = countComments(comment.replies);
+                }
+            }
+
+            sortReplies(roots, true);
+            return roots;
+        }
+
+        function cacheCommentsLocally() {
+            if (!storageAvailable) return;
+            try {
+                localStorage.setItem(commentStorageKey, JSON.stringify(comments));
+            } catch (error) {
+                storageAvailable = false;
+                console.error("Không thể lưu bản sao cục bộ của bình luận:", error);
+            }
+        }
+
+        function persistCommentsToCloud(successMessage) {
+            if (!cloudConfigured) return;
+            if (!cloudReady || !commentsCollection) {
+                commentStatus.textContent = "Bình luận đã lưu trên thiết bị; đang chờ kết nối Firebase để đồng bộ.";
+                return;
+            }
+
+            const commentsToSync = flattenComments(comments);
+            cloudSaveChain = cloudSaveChain.then(async () => {
+                for (const comment of commentsToSync) {
+                    const serialized = JSON.stringify(comment);
+                    if (syncedCloudComments.get(comment.id) === serialized) continue;
+                    await commentsCollection.doc(comment.id).set(comment);
+                    syncedCloudComments.set(comment.id, serialized);
+                }
+                commentStatus.textContent = successMessage.replace("trên trình duyệt này", "lên Firebase");
+            }).catch((error) => {
+                commentStatus.textContent = "Không thể đồng bộ bình luận với Firebase. Bản sao trên thiết bị vẫn được giữ.";
+                console.error("Không thể đồng bộ bình luận với Firebase:", error);
+            });
+        }
+
+        function updateCommentCount() {
+            commentCount.textContent = `Bình luận (${totalComments})`;
+            emptyComments.hidden = totalComments > 0;
+        }
+
+        function updateThreadControl(item, comment) {
+            const replyCount = comment.replyCount;
+            const body = item.querySelector(":scope > .comment-body");
+            let controls = body.querySelector(":scope > .thread-controls");
+            if (replyCount === 0) {
+                controls?.remove();
+                collapsedReplyThreads.delete(comment.id);
+                return;
+            }
+            if (!controls) {
+                controls = makeElement("div", "thread-controls");
+                body.append(controls);
+            }
+
+            let button = controls.querySelector("button");
+            if (!button) {
+                button = makeActionButton("", "toggle-replies", "comment-action thread-toggle");
+                button.setAttribute("aria-controls", `replies-${comment.id}`);
+                controls.append(button);
+            }
+            const isCollapsed = collapsedReplyThreads.has(comment.id);
+            button.setAttribute("aria-expanded", String(!isCollapsed));
+            button.textContent = `${isCollapsed ? "Hiện" : "Ẩn bớt"} ${replyCount} bình luận`;
+        }
+
+        function updateAncestorThreadControls(item) {
+            let ancestor = item.parentElement.closest(".comment-item");
+            while (ancestor) {
+                const comment = findComment(ancestor.dataset.commentId);
+                if (comment) {
+                    comment.replyCount += 1;
+                    updateThreadControl(ancestor, comment);
+                }
+                ancestor = ancestor.parentElement.closest(".comment-item");
+            }
+        }
+
+        function renderComments() {
+            commentFeed.querySelectorAll(":scope > .comment-item").forEach((item) => item.remove());
+            totalComments = countComments(comments);
+            updateCommentCount();
+            const commentFragment = document.createDocumentFragment();
+            comments.forEach((comment) => commentFragment.append(createCommentElement(comment)));
+            commentFeed.append(commentFragment);
+        }
+
+        function findComment(commentId, items = comments) {
+            for (const comment of items) {
+                if (comment.id === commentId) return comment;
+                const reply = findComment(commentId, comment.replies);
+                if (reply) return reply;
+            }
+            return null;
+        }
+
+        function saveComments(successMessage) {
+            commentStatus.textContent = cloudConfigured ? "Đang lưu và đồng bộ bình luận..." : "Đang lưu bình luận trên thiết bị...";
+            window.clearTimeout(saveTimer);
+            saveTimer = window.setTimeout(() => flushSavedComments(successMessage), 300);
+        }
+
+        function flushSavedComments(successMessage) {
+            if (!saveTimer) return;
+            window.clearTimeout(saveTimer);
+            saveTimer = 0;
+            cacheCommentsLocally();
+            if (cloudConfigured) {
+                persistCommentsToCloud(successMessage);
+            } else if (storageAvailable) {
+                commentStatus.textContent = successMessage;
+            } else {
+                commentStatus.textContent = "Đã cập nhật trong phiên hiện tại; trình duyệt không thể lưu dữ liệu này.";
+            }
+        }
+
+        function normalizeComment(comment) {
+            if (
+                !comment ||
+                typeof comment.name !== "string" ||
+                typeof comment.message !== "string" ||
+                typeof comment.createdAt !== "string" ||
+                Number.isNaN(Date.parse(comment.createdAt)) ||
+                (comment.replies !== undefined && !Array.isArray(comment.replies))
+            ) {
+                throw new Error("Dữ liệu bình luận đã lưu không hợp lệ.");
+            }
+            const normalized = {
+                id: typeof comment.id === "string" ? comment.id : createId(),
+                name: comment.name,
+                message: comment.message,
+                createdAt: comment.createdAt,
+                avatar: isSafeAvatar(comment.avatar) ? comment.avatar : "",
+                likes: Number.isSafeInteger(comment.likes) && comment.likes >= 0 ? comment.likes : 0,
+                liked: comment.liked === true,
+                replies: (comment.replies || []).map(normalizeComment)
+            };
+            normalized.replyCount = countComments(normalized.replies);
+            return normalized;
+        }
+
+        try {
+            const savedComments = localStorage.getItem(commentStorageKey);
+            if (savedComments) {
+                const parsedComments = JSON.parse(savedComments);
+                if (!Array.isArray(parsedComments)) {
+                    throw new Error("Dữ liệu bình luận đã lưu không hợp lệ.");
+                }
+                comments = parsedComments.map(normalizeComment);
+            }
+        } catch (error) {
+            storageAvailable = false;
+            commentStatus.textContent = "Không thể đọc bình luận đã lưu trên trình duyệt này. Bình luận mới chỉ tồn tại trong phiên hiện tại.";
+            console.error("Không thể đọc dữ liệu bình luận:", error);
+        }
+
+        async function connectToFirebase() {
+            if (!cloudConfigured) {
+                commentStatus.textContent = "Bình luận hiện chỉ được lưu trên thiết bị này. Hãy cấu hình Firebase để đồng bộ giữa các máy.";
+                return;
+            }
+            try {
+                if (!window.firebase?.firestore || !window.firebase?.auth) {
+                    throw new Error("Không thể tải Firebase. Kiểm tra kết nối Internet và tải lại trang.");
+                }
+                const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
+                await firebase.auth(app).signInAnonymously();
+                commentsCollection = firebase.firestore(app).collection("comments");
+
+                const existingDocuments = await commentsCollection.get();
+                const existingIds = new Set(existingDocuments.docs.map((document) => document.id));
+                for (const comment of flattenComments(comments)) {
+                    if (!existingIds.has(comment.id)) {
+                        await commentsCollection.doc(comment.id).set(comment);
+                    }
+                }
+
+                const initialSnapshot = await commentsCollection.get();
+                const remoteDocuments = initialSnapshot.docs.map((document) => document.data());
+                for (const document of remoteDocuments) {
+                    syncedCloudComments.set(document.id, JSON.stringify(document));
+                }
+                comments = buildCommentTree(remoteDocuments);
+                renderComments();
+                cloudReady = true;
+                cacheCommentsLocally();
+                commentStatus.textContent = "Đã kết nối Firebase. Bình luận đang được đồng bộ giữa các thiết bị.";
+
+                unsubscribeCloudComments = commentsCollection.onSnapshot((snapshot) => {
+                    const documents = snapshot.docs.map((document) => document.data());
+                    syncedCloudComments.clear();
+                    for (const document of documents) {
+                        syncedCloudComments.set(document.id, JSON.stringify(document));
+                    }
+                    comments = buildCommentTree(documents);
+                    renderComments();
+                    cacheCommentsLocally();
+                }, (error) => {
+                    commentStatus.textContent = "Mất kết nối đồng bộ Firebase. Bình luận đã tải vẫn được giữ trên thiết bị.";
+                    console.error("Không thể nhận cập nhật bình luận từ Firebase:", error);
+                });
+            } catch (error) {
+                commentStatus.textContent = "Không thể kết nối Firebase. Kiểm tra cấu hình và quy tắc Firestore; bình luận vẫn được lưu trên thiết bị.";
+                console.error("Không thể khởi tạo đồng bộ Firebase:", error);
+            }
+        }
+
+        renderComments();
+        connectToFirebase();
+        window.addEventListener("pagehide", () => flushSavedComments("Đã lưu bình luận trên trình duyệt này."));
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "hidden" && saveTimer) {
+                flushSavedComments("Đã lưu bình luận trên trình duyệt này.");
+            }
+        });
+
+        toggleCommentsButton.addEventListener("click", () => {
+            commentsVisible = !commentsVisible;
+            commentFeed.hidden = !commentsVisible;
+            toggleCommentsButton.setAttribute("aria-expanded", String(commentsVisible));
+            toggleCommentsButton.textContent = commentsVisible ? "Ẩn bình luận" : "Hiện bình luận";
+        });
+
+        openCommentButton.addEventListener("click", () => {
+            commentForm.hidden = false;
+            openCommentButton.hidden = true;
+            openCommentButton.setAttribute("aria-expanded", "true");
+            commentNameInput.focus();
+        });
+
+        function closeCommentForm() {
+            commentForm.reset();
+            commentAvatarData = "";
+            commentAvatarProcessing = false;
+            renderAvatar(commentAvatarPreview);
+            commentAvatarPreview.setAttribute("aria-label", "Ảnh đại diện mặc định");
+            resetCommentAvatarButton.hidden = true;
+            commentForm.hidden = true;
+            openCommentButton.hidden = false;
+            openCommentButton.setAttribute("aria-expanded", "false");
+            openCommentButton.focus();
+        }
+
+        cancelCommentButton.addEventListener("click", closeCommentForm);
+        dismissCommentButton.addEventListener("click", closeCommentForm);
+
+        resetCommentAvatarButton.addEventListener("click", () => {
+            commentAvatarInput.value = "";
+            commentAvatarData = "";
+            renderAvatar(commentAvatarPreview);
+            commentAvatarPreview.setAttribute("aria-label", "Ảnh đại diện mặc định");
+            resetCommentAvatarButton.hidden = true;
+        });
+
+        commentAvatarInput.addEventListener("change", async () => {
+            const file = commentAvatarInput.files[0];
+            commentStatus.textContent = "";
+            if (!file) {
+                commentAvatarData = "";
+                commentAvatarProcessing = false;
+                renderAvatar(commentAvatarPreview);
+                commentAvatarPreview.setAttribute("aria-label", "Ảnh đại diện mặc định");
+                resetCommentAvatarButton.hidden = true;
+                return;
+            }
+            commentAvatarProcessing = true;
+            try {
+                commentAvatarData = await prepareAvatar(file);
+                renderAvatar(commentAvatarPreview, commentAvatarData);
+                commentAvatarPreview.setAttribute("aria-label", "Ảnh đại diện đã chọn");
+                resetCommentAvatarButton.hidden = false;
+            } catch (error) {
+                commentAvatarData = "";
+                commentAvatarInput.value = "";
+                renderAvatar(commentAvatarPreview);
+                commentAvatarPreview.setAttribute("aria-label", "Ảnh đại diện mặc định");
+                resetCommentAvatarButton.hidden = true;
+                commentStatus.textContent = error instanceof Error ? error.message : "Không thể đọc ảnh đã chọn.";
+            } finally {
+                commentAvatarProcessing = false;
+            }
+        });
+
+        commentForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (commentAvatarProcessing) {
+                commentStatus.textContent = "Vui lòng đợi ảnh đại diện xử lý xong.";
+                return;
+            }
+            if (!commentForm.reportValidity()) return;
+
+            const formData = new FormData(commentForm);
+            const comment = {
+                id: createId(),
+                name: String(formData.get("name")).trim(),
+                message: String(formData.get("message")).trim(),
+                createdAt: new Date().toISOString(),
+                avatar: commentAvatarData,
+                likes: 0,
+                liked: false,
+                replyCount: 0,
+                replies: []
+            };
+
+            if (!comment.name || !comment.message) {
+                commentStatus.textContent = "Vui lòng nhập tên và nội dung bình luận.";
+                return;
+            }
+
+            comments.unshift(comment);
+            commentFeed.prepend(createCommentElement(comment));
+            totalComments += 1;
+            updateCommentCount();
+            commentStatus.textContent = "";
+            closeCommentForm();
+            saveComments("Đã thêm bình luận và lưu trên trình duyệt này.");
+        });
+
+        commentList.addEventListener("click", (event) => {
+            if (!(event.target instanceof Element)) return;
+            const button = event.target.closest("button[data-action]");
+            const item = button?.closest(".comment-item");
+            if (!button || !item) return;
+
+            const comment = findComment(item.dataset.commentId);
+            if (!comment) return;
+
+            if (button.dataset.action === "like") {
+                comment.liked = !comment.liked;
+                comment.likes = Math.max(0, comment.likes + (comment.liked ? 1 : -1));
+                button.setAttribute("aria-pressed", String(comment.liked));
+                button.textContent = `Thích${comment.likes ? ` · ${comment.likes}` : ""}`;
+                saveComments("Đã cập nhật lượt thích.");
+            } else if (button.dataset.action === "toggle-replies") {
+                const replies = item.querySelector(":scope > .comment-body > .reply-list");
+                const isExpanded = button.getAttribute("aria-expanded") === "true";
+                replies.hidden = isExpanded;
+                if (isExpanded) {
+                    collapsedReplyThreads.add(comment.id);
+                } else {
+                    collapsedReplyThreads.delete(comment.id);
+                }
+                button.setAttribute("aria-expanded", String(!isExpanded));
+                const replyCount = countComments(comment.replies);
+                button.textContent = isExpanded
+                    ? `Hiện ${replyCount} bình luận`
+                    : `Ẩn bớt ${replyCount} bình luận`;
+            } else if (button.dataset.action === "reply") {
+                let replyForm = item.querySelector(":scope > .comment-body > .reply-form");
+                if (!replyForm) {
+                    replyForm = createReplyForm(comment);
+                    item.querySelector(":scope > .comment-body > .comment-actions").after(replyForm);
+                }
+                replyForm.hidden = !replyForm.hidden;
+                if (!replyForm.hidden) replyForm.querySelector('input[name="name"]').focus();
+            } else if (button.dataset.action === "cancel-reply") {
+                const replyForm = button.closest(".reply-form");
+                replyForm.reset();
+                replyAvatarSelections.delete(replyForm);
+                renderAvatar(replyForm.querySelector(".reply-avatar-preview"));
+                replyForm.hidden = true;
+                item.querySelector('[data-action="reply"]').focus();
+            }
+        });
+
+        commentList.addEventListener("change", async (event) => {
+            if (!(event.target instanceof HTMLInputElement) || event.target.name !== "avatar") return;
+            const input = event.target;
+            const form = input.closest(".reply-form");
+            const preview = form?.querySelector(".reply-avatar-preview");
+            const file = input.files[0];
+            if (!form || !preview) return;
+            form.querySelector(".reply-status").textContent = "";
+            if (!file) {
+                replyAvatarSelections.delete(form);
+                renderAvatar(preview);
+                return;
+            }
+            try {
+                form.dataset.avatarProcessing = "true";
+                const imageData = await prepareAvatar(file);
+                replyAvatarSelections.set(form, imageData);
+                renderAvatar(preview, imageData);
+                preview.setAttribute("aria-label", "Ảnh đại diện đã chọn");
+            } catch (error) {
+                input.value = "";
+                replyAvatarSelections.delete(form);
+                renderAvatar(preview);
+                preview.setAttribute("aria-label", "Ảnh đại diện mặc định");
+                form.querySelector(".reply-status").textContent = error instanceof Error ? error.message : "Không thể đọc ảnh đã chọn.";
+            } finally {
+                delete form.dataset.avatarProcessing;
+            }
+        });
+
+        commentList.addEventListener("submit", (event) => {
+            if (!(event.target instanceof HTMLFormElement) || !event.target.matches(".reply-form")) return;
+            event.preventDefault();
+            if (!event.target.reportValidity()) return;
+
+            const replyForm = event.target;
+            if (replyForm.dataset.avatarProcessing === "true") {
+                replyForm.querySelector(".reply-status").textContent = "Vui lòng đợi ảnh đại diện xử lý xong.";
+                return;
+            }
+            const parent = findComment(replyForm.dataset.parentId);
+            const formData = new FormData(replyForm);
+            const name = String(formData.get("name")).trim();
+            const message = String(formData.get("message")).trim();
+            if (!parent || !name || !message) return;
+
+            const reply = {
+                id: createId(),
+                name,
+                message,
+                createdAt: new Date().toISOString(),
+                avatar: replyAvatarSelections.get(replyForm) || "",
+                likes: 0,
+                liked: false,
+                replyCount: 0,
+                replies: []
+            };
+            parent.replies.push(reply);
+            const parentItem = replyForm.closest(".comment-item");
+            parentItem.querySelector(":scope > .comment-body > .reply-list").append(createCommentElement(reply));
+            parent.replyCount += 1;
+            replyForm.reset();
+            replyAvatarSelections.delete(replyForm);
+            renderAvatar(replyForm.querySelector(".reply-avatar-preview"));
+            replyForm.hidden = true;
+            totalComments += 1;
+            updateCommentCount();
+            updateThreadControl(parentItem, parent);
+            updateAncestorThreadControls(parentItem);
+            saveComments("Đã gửi trả lời và lưu trên trình duyệt này.");
+        });
+
+        if (window.parent !== window && window.frameElement) {
+            const commentsSection = document.querySelector("#comments");
+            const resizeFrame = () => {
+                const height = Math.ceil(commentsSection.getBoundingClientRect().bottom + window.scrollY);
+                window.frameElement.height = String(Math.max(320, Math.min(height, 100000)));
+            };
+            new ResizeObserver(resizeFrame).observe(commentsSection);
+            new MutationObserver(resizeFrame).observe(commentsSection, {
+                attributes: true,
+                characterData: true,
+                childList: true,
+                subtree: true
+            });
+            window.addEventListener("resize", resizeFrame);
+            window.addEventListener("load", resizeFrame);
+            resizeFrame();
+        }
+    </script>
+</body>
+</html>
