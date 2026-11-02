@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#faf8f2">
+    <meta
+        name="description"
+        content="Trang giới thiệu Trương Quang Thái, sinh viên năm 2 khóa 25 học tại Trường Đại học Bình Dương."
+        data-i18n-content="metaDescription"
+    >
+    <title>Trương Quang Thái — Giới thiệu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content" data-i18n="skipLink">Đi đến nội dung chính</a>
+    <header class="header">
+        <nav class="navbar navbar-expand-md nav container" aria-label="Điều hướng chính" data-i18n-aria-label="mainNavigation">
+            <a class="navbar-brand brand" href="#home">Trương Quang Thái<span>.</span></a>
+            <button
+                class="navbar-toggler menu-toggle"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#nav-links"
+                aria-expanded="false"
+                aria-controls="nav-links"
+                aria-label="Mở menu"
+                data-i18n-aria-label="openMenu"
+            >
+                <span aria-hidden="true">☰</span>
+            </button>
+            <div class="collapse navbar-collapse nav-links" id="nav-links">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="#about" data-i18n="navAbout">Giới thiệu</a>
+                    <a class="nav-link" href="#education" data-i18n="navEducation">Học vấn</a>
+                    <a class="nav-link" href="#skills" data-i18n="navSkills">Kỹ năng</a>
+                    <a class="nav-link" href="#work" data-i18n="navWork">Dự án</a>
+                    <a class="nav-link" href="#achievements" data-i18n="achievementsLabel">Thành tích</a>
+                    <a class="nav-link" href="#contact" data-i18n="navContact">Liên hệ</a>
+                    <a class="nav-link" href="#challenge" data-i18n="navChallenge">Thử thách</a>
+                </div>
+                <div class="site-controls">
+                    <button class="site-control theme-toggle" id="theme-toggle" type="button" aria-label="Chuyển sang giao diện tối" data-i18n-aria-label="toggleTheme">
+                        <span class="control-icon theme-icon" aria-hidden="true">☀</span>
+                        <span class="control-label" data-i18n="themeLight">Sáng</span>
+                    </button>
+                    <button class="site-control language-toggle" id="language-toggle" type="button" aria-label="Switch to English" data-i18n-aria-label="toggleLanguage">
+                        <span class="control-icon" aria-hidden="true">文</span>
+                        <span id="language-label">VI</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div
+            class="reading-progress"
+            id="reading-progress"
+            role="progressbar"
+            aria-label="Tiến độ đọc trang"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            data-i18n-aria-label="readingProgress"
+        >
+            <span></span>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero container" id="home">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        <span data-i18n="studentStatus">Sinh viên năm 2 · Khóa 25</span>
+                    </p>
+                    <h1 data-i18n-html="heroTitle">Xin chào,<br>em là <span>Thái.</span></h1>
+                    <p class="lead" data-i18n="heroLead">
+                        Đây là web của thiết kế — nơi ghi lại hành trình học Công nghệ thông tin, những điều đang khám phá và sản phẩm em tự tay thực hiện.
+                    </p>
+                    <div class="hero-tags" aria-label="Đôi nét về mình" data-i18n-aria-label="aboutMe">
+                        <span data-i18n="tagCurious">✦ Ham học hỏi</span>
+                        <span data-i18n="tagTech">? Thích công nghệ</span>
+                        <span data-i18n="tagExplore">↗ Luôn thử điều mới</span>
+                    </div>
+                    <div class="actions">
+                        <a class="button primary" href="#about">
+                            <span data-i18n="heroAboutButton">Khám phá câu chuyện</span>
+                            <span aria-hidden="true">↓</span>
+                        </a>
+                        <a class="button" href="#work">
+                            <span data-i18n="heroWorkButton">Xem dự án</span>
+                            <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-portrait">
+                    <span class="portrait-sticker sticker-top" aria-hidden="true">HELLO<br>WORLD!</span>
+                    <button class="flip-card" type="button" aria-pressed="false" aria-label="Lật thẻ để xem sở thích mẫu" data-i18n-aria-label="flipToBack">
+                        <span class="flip-inner">
+                            <span class="flip-face flip-front" aria-hidden="false">
+                                <img class="flip-photo" src="imges/TQT.jpg" alt="" aria-hidden="true">
+                                <span class="flip-hint"><span data-i18n="flipToInterests">Nhấn hoặc chạm để xem mặt sau</span> ↻</span>
+                            </span>
+                            <span class="flip-face flip-back" aria-hidden="true">
+                                <span class="back-header">
+                                    <span class="back-kicker">
+                                        <span aria-hidden="true">✦</span>
+                                        <span data-i18n="backKicker">THÁI Ở PHIÊN BẢN ĐỜI THƯỜNG</span>
+                                    </span>
+                                    <span class="back-count">MY VIBE</span>
+                                </span>
+                                <span class="back-title"><span data-i18n="backTitle">Một chút về</span><br><span data-i18n="backTitleAccent">con người mình</span></span>
+                                <span class="back-group">
+                                    <span class="back-group-heading">
+                                        <span class="back-group-icon" aria-hidden="true">☺</span>
+                                        <span data-i18n="traitsTitle">TÍNH CÁCH</span>
+                                        <span class="back-group-note" data-i18n="traitsCount">6 nét riêng</span>
+                                    </span>
+                                    <span class="back-chips trait-chips">
+                                        <span class="back-chip"><span aria-hidden="true">☀</span><span data-i18n="traitFriendly">Thân thiện</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">♡</span><span data-i18n="traitHonest">Trung thực</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">✳</span><span data-i18n="traitCareful">Kỹ lưỡng</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">◉</span><span data-i18n="traitEmpathetic">Thấu hiểu</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">☯</span><span data-i18n="traitCalm">Bình tĩnh</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">🌿</span><span data-i18n="traitPatient">Điềm đạm, không dễ nóng giận</span></span>
+                                    </span>
+                                </span>
+                                <span class="back-group interest-group">
+                                    <span class="back-group-heading">
+                                        <span class="back-group-icon" aria-hidden="true">✧</span>
+                                        <span data-i18n="interestsTitle">LÚC RẢNH MÌNH THÍCH</span>
+                                    </span>
+                                    <span class="back-chips interest-chips">
+                                        <span class="back-chip"><span aria-hidden="true">📚</span><span data-i18n="interestLearning">Học hỏi</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">⚡</span><span data-i18n="interestChallenge">Thử thách</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">☁</span><span data-i18n="interestQuiet">Yên tĩnh</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">♫</span><span data-i18n="interestMusic">Âm nhạc</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">⚽</span><span data-i18n="interestSports">Thể thao</span></span>
+                                        <span class="back-chip"><span aria-hidden="true">🎧</span><span data-i18n="interestAudio">Audio</span></span>
+                                    </span>
+                                </span>
+                                <span class="back-footer">
+                                    <span data-i18n="learningMotto">HỌC · HỎI · HIỂU · HÀNH</span>
+                                    <span class="flip-hint">
+                                        <span data-i18n="flipBack">Lật lại</span>
+                                        <span aria-hidden="true">↻</span>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </button>
+                    <span class="portrait-sticker sticker-bottom" aria-hidden="true" data-i18n="stickerMotto">HỌC · HỎI · LÀM</span>
+                </div>
+            </div>
+            <div class="quick-info" aria-label="Thông tin cơ bản" data-i18n-aria-label="basicInfo">
+                <div>
+                    <span data-i18n="schoolLabel">Trường</span>
+                    <strong data-i18n="schoolName">Trường Đại học Bình Dương</strong>
+                </div>
+                <div>
+                    <span data-i18n="majorLabel">Ngành</span>
+                    <strong data-i18n="majorName">Công nghệ thông tin</strong>
+                </div>
+                <div>
+                    <span data-i18n="classLabel">Lớp</span>
+                    <strong>28TH01</strong>
+                </div>
+                <div>
+                    <span data-i18n="nameLabel">Họ và tên</span>
+                    <strong>Trương Quang Thái</strong>
+                </div>
+                <div>
+                    <span data-i18n="studentIdLabel">Mã số sinh viên</span>
+                    <strong>25050055</strong>
+                </div>
+                <div>
+                    <span data-i18n="emailLabel">Email</span>
+                    <strong><a href="mailto:25050055@student.bdu.edu.vn">25050055@student.bdu.edu.vn</a></strong>
+                </div>
+                <div>
+                    <span data-i18n="courseLabel">Khóa học</span>
+                    <strong>2024-2029</strong>
+                </div>
+                <div>
+                    <span data-i18n="aspirationLabel">Định hướng</span>
+                    <strong data-i18n="aspirationValue">Làm một người tốt</strong>
+                </div>
+            </div>
+        </section>
+
+        <div class="marquee" aria-label="Thông điệp: Học hỏi mỗi ngày, sáng tạo theo cách riêng" data-i18n-aria-label="marqueeLabel">
+            <div class="marquee-track" aria-hidden="true">
+                <span data-i18n="marqueeLearn">HỌC HỎI MỖI NGÀY</span>
+                <i>✳</i>
+                <span data-i18n="marqueeCreate">SÁNG TẠO THEO CÁCH RIÊNG</span>
+                <i>✳</i>
+                <span data-i18n="marqueeLearn">HỌC HỎI MỖI NGÀY</span>
+                <i>✳</i>
+                <span data-i18n="marqueeCreate">SÁNG TẠO THEO CÁCH RIÊNG</span>
+                <i>✳</i>
+            </div>
+        </div>
+
+        <section class="section" id="about">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="aboutLabel">Giới thiệu</p>
+                </div>
+                <div class="content-grid">
+                    <article class="panel">
+                        <span class="panel-kicker" data-i18n="aboutKicker">MỘT CHÚT VỀ MÌNH</span>
+                        <h3 data-i18n="aboutTitle">Đang lớn từng ngày học tập.</h3>
+                        <p data-i18n="aboutParagraph1">
+                            Em là Trương Quang Thái, sinh viên Trường Đại học Bình Dương.
+                            Em mong muốn đạt điểm tốt môn Thiết kế Web và luôn cố gắng học thêm điều mới
+                            qua từng bài tập.
+                        </p>
+                        <p data-i18n="aboutParagraph2">
+                            Em từng làm đội trưởng nhóm học tập và tham gia chiến dịch Mùa hè xanh
+                            tại xã An Long năm 2026. Trong thời gian tới, em muốn tiếp tục xây nền tảng
+                            vững chắc, thực hành nhiều hơn và tạo ra những sản phẩm tốt hơn.
+                        </p>
+                        <h3 data-i18n="careerGoalTitle">Mục tiêu nghề nghiệp</h3>
+                        <p data-i18n="careerGoalCopy">
+                            Trước mắt, em muốn củng cố nền tảng lập trình, cơ sở dữ liệu và phát triển web
+                            qua các sản phẩm thực tế. Về lâu dài, em định hướng phát triển sự nghiệp
+                            trong lĩnh vực Công nghệ thông tin.
+                        </p>
+                    </article>
+                    <aside class="panel note">
+                        <span class="note-icon" aria-hidden="true">✳</span>
+                        <span class="panel-kicker" data-i18n="guidingPrinciple">KIM CHỈ NAM</span>
+                        <h3 data-i18n="learningMethod">Phương pháp của em</h3>
+                        <p class="quote">
+                            <span data-i18n="learn">Học</span>
+                            <span aria-hidden="true">→</span>
+                            <span data-i18n="ask">Hỏi</span>
+                            <span aria-hidden="true">→</span>
+                            <span data-i18n="understand">Hiểu</span>
+                            <span aria-hidden="true">→</span>
+                            <span data-i18n="practice">Hành</span>
+                        </p>
+                        <p data-i18n="learningMethodCopy">Học thì phải hỏi thì hiểu và hãy hành động.</p>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="education">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="educationLabel">Học vấn</p>
+                    <div>
+                        <h2 data-i18n="educationTitle">Hành trình học tập.</h2>
+                        <p class="section-intro" data-i18n="educationIntro">Một vài thông tin về quá trình học tập hiện tại của mình.</p>
+                    </div>
+                </div>
+                <div class="education">
+                    <article class="education-item">
+                        <span data-i18n="currentStatus">Học Tập</span>
+                        <strong>
+                            <a href="https://bdu.edu.vn/" target="_blank" rel="noopener noreferrer" data-i18n="schoolName">
+                                Trường Đại học Bình Dương
+                            </a>
+                        </strong>
+                        <p data-i18n="studentStatus">Sinh viên năm 2 · Khóa 25</p>
+                    </article>
+                    <article class="education-item">
+                        <span data-i18n="activityLabel">HOẠT ĐỘNG</span>
+                        <strong>
+                            <a
+                                href="https://bdu.edu.vn/tin-tuc-su-kien/tuoi-tre-bdu-chinh-thuc-ra-quan-chien-dich-mua-he-xanh-nam-2026-tai-xa-an-long-2144.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                data-i18n="greenSummerTitle"
+                            >
+                                Chiến dịch Mùa hè xanh 2026
+                            </a>
+                        </strong>
+                        <p data-i18n="greenSummerDescription">Tham gia chiến dịch Mùa hè xanh tại xã An Long.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="skillsLabel">Kỹ năng</p>
+                    <div>
+                        <h2 data-i18n="skillsTitle">Những điều mình đang rèn luyện.</h2>
+                        <p class="section-intro" data-i18n="skillsIntro">Các kỹ năng dưới đây phản ánh quá trình học tập và thực hành hiện tại.</p>
+                    </div>
+                </div>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <strong data-i18n="skillC">C cơ bản</strong>
+                        <span data-i18n="paused">Tạm hoãn</span>
+                    </div>
+                    <div class="skill-item">
+                        <strong>C++ cơ bản</strong>
+                        <span data-i18n="learning">Đang học</span>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Python cơ bản</strong>
+                        <span data-i18n="practicing">Đang thực hành</span>
+                    </div>
+                    <div class="skill-item">
+                        <strong>HTML</strong>
+                        <span data-i18n="learning">Đang học</span>
+                    </div>
+                    <div class="skill-item">
+                        <strong data-i18n="skillDatabase">Cơ sở dữ liệu</strong>
+                        <span data-i18n="learning">Đang học</span>
+                    </div>
+                    <div class="skill-item">
+                        <strong data-i18n="skillNetworking">Mạng cơ bản</strong>
+                        <span data-i18n="learning">Đang học</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="work">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="workLabel">Dự án</p>
+                    <div>
+                        <h2 data-i18n="workTitle">Những điều mình đang thực hiện.</h2>
+                        <p class="section-intro" data-i18n="workIntro">Một số sản phẩm học tập và dự án cá nhân trong quá trình tìm hiểu, thực hành.</p>
+                    </div>
+                </div>
+                <div class="work-list">
+                    <article class="work-item">
+                        <div class="work-mark">
+                            <img src="imges/html.webp" alt="Biểu tượng HTML5" data-i18n-alt="htmlAlt">
+                        </div>
+                        <div class="work-copy">
+                            <span data-i18n="personalProject">DỰ ÁN CÁ NHÂN</span>
+                            <h3 data-i18n="portfolioProject">Website giới thiệu cá nhân</h3>
+                            <p data-i18n="portfolioDescription">Trang responsive giới thiệu hồ sơ, kỹ năng và cách liên hệ.</p>
+                            <p class="work-tech">
+                                <strong data-i18n="technologyLabel">Công nghệ:</strong>
+                                HTML · CSS · JavaScript · Bootstrap 5
+                            </p>
+                            <a class="work-link" href="#home" data-i18n="portfolioLink">Mở website</a>
+                        </div>
+                    </article>
+                    <article class="work-item">
+                        <div class="work-mark">
+                            <img src="imges/pc.webp" alt="Máy tính dùng cho dự án cơ sở dữ liệu mua bán" data-i18n-alt="databaseAlt">
+                        </div>
+                        <div class="work-copy">
+                            <span data-i18n="groupProject">DỰ ÁN NHÓM</span>
+                            <h3 data-i18n="databaseProject">Quản lý cơ sở dữ liệu mua bán máy tính</h3>
+                            <p data-i18n="databaseDescription">Bài tập nhóm xây dựng cơ sở dữ liệu cho hoạt động mua bán máy tính.</p>
+                            <p class="work-tech">
+                                <strong data-i18n="technologyLabel">Công nghệ:</strong>
+                                <span data-i18n="databaseTech">Cơ sở dữ liệu · bài tập môn học</span>
+                            </p>
+                            <a
+                                class="work-link"
+                                href="https://drive.google.com/drive/folders/1SKE0BJPmgL_o9x5Q_sRZiU0lqcI3FEZD"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                data-i18n="databaseViewProject"
+                            >
+                                Nhấn để xem dự án
+                            </a>
+                        </div>
+                    </article>
+                    <article class="work-item">
+                        <div class="work-mark">
+                            <img src="imges/unnamed.webp" alt="Hình minh họa vận động viên" data-i18n-alt="athleteAlt">
+                        </div>
+                        <div class="work-copy">
+                            <span data-i18n="personalProject">Dự án cá nhân</span>
+                            <h3 data-i18n="athleteProject">Quản lý vận động viên (OOP)</h3>
+                            <p data-i18n="athleteDescription">Bài tập cá nhân xây dựng ứng dụng quản lý vận động viên sử dụng lập trình hướng đối tượng.</p>
+                            <p class="work-tech">
+                                <strong data-i18n="technologyLabel">Công nghệ:</strong>
+                                C++ · OOP
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="achievements">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="achievementsLabel">Thành tích</p>
+                </div>
+                <div class="achievement-tabs">
+                    <div class="achievement-tab-list" role="tablist" aria-label="Danh mục thành tích" data-i18n-aria-label="achievementTabsAria">
+                        <button
+                            class="achievement-tab"
+                            id="commendations-tab"
+                            type="button"
+                            role="tab"
+                            aria-selected="true"
+                            aria-controls="commendations-panel"
+                            tabindex="0"
+                            data-i18n="commendationsTab"
+                        >
+                            Giấy khen
+                        </button>
+                        <button
+                            class="achievement-tab"
+                            id="certificates-tab"
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="certificates-panel"
+                            tabindex="-1"
+                            data-i18n="certificatesTab"
+                        >
+                            Chứng chỉ
+                        </button>
+                    </div>
+                    <div class="achievement-tab-panel achievement-gallery-panel" id="commendations-panel" role="tabpanel" aria-labelledby="commendations-tab">
+                        <div class="achievement-gallery">
+                            <a class="achievement-image-link" href="imges/giay-khen-01.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/giay-khen-01.jpg" alt="Giấy khen 1" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/giay-khen-02.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/giay-khen-02.jpg" alt="Giấy khen 2" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/giay-khen-03.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/giay-khen-03.jpg" alt="Giấy khen 3" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/giay-khen-04.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/giay-khen-04.jpg" alt="Giấy khen 4" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/giay-khen-05.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/giay-khen-05.jpg" alt="Giấy khen 5" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/giay-khen-06.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/giay-khen-06.jpg" alt="Giấy khen 6" loading="lazy" decoding="async">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="achievement-tab-panel achievement-gallery-panel" id="certificates-panel" role="tabpanel" aria-labelledby="certificates-tab" hidden>
+                        <div class="achievement-gallery">
+                            <a class="achievement-image-link" href="imges/chung-chi-01.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/chung-chi-01.jpg" alt="Chứng nhận 1" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/chung-chi-02.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/chung-chi-02.jpg" alt="Chứng nhận 2" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/chung-chi-03.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/chung-chi-03.jpg" alt="Chứng nhận 3" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/chung-chi-04.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/chung-chi-04.jpg" alt="Chứng nhận 4" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/chung-chi-05.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/chung-chi-05.jpg" alt="Chứng nhận 5" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/chung-chi-06.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/chung-chi-06.jpg" alt="Chứng nhận 6" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/chung-chi-07.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/chung-chi-07.jpg" alt="Chứng nhận 7" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/chung-chi-08.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/chung-chi-08.jpg" alt="Chứng nhận 8" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/chung-chi-09.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/chung-chi-09.jpg" alt="Chứng nhận 9" loading="lazy" decoding="async">
+                            </a>
+                            <a class="achievement-image-link" href="imges/chung-chi-10.jpg" target="_blank" rel="noopener noreferrer">
+                                <img src="imges/chung-chi-10.jpg" alt="Chứng nhận 10" loading="lazy" decoding="async">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <dialog class="achievement-lightbox" id="achievement-lightbox" aria-label="Xem ảnh thành tích" data-i18n-aria-label="achievementImageDialog">
+                    <button class="achievement-lightbox-close" type="button" aria-label="Đóng ảnh" data-i18n-aria-label="closeAchievementImage">×</button>
+                    <img class="achievement-lightbox-image" id="achievement-lightbox-image" alt="">
+                </dialog>
+            </div>
+        </section>
+
+        <section class="section" id="challenge">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label" data-i18n="challengeLabel">MINI GAME · CARO</p>
+                    <div>
+                        <h2 data-i18n="challengeTitle">Caro — Đấu với bot.</h2>
+                        <p class="section-intro" data-i18n="challengeIntro">Nối 5 quân liên tiếp trước bot để giành chiến thắng. Bạn cầm X, bot cầm O.</p>
+                    </div>
+                </div>
+                <iframe
+                    class="challenge-frame"
+                    id="challenge-frame"
+                    src="minigame/minigame.html"
+                    title="Trạm thử thách vui"
+                    data-i18n-title="minigameTitle"
+                    loading="lazy"
+                ></iframe>
+            </div>
+        </section>
+
+        <section class="container" id="contact">
+            <div class="contact">
+                <div class="contact-details">
+                    <h2 data-i18n="contactTitle">Liên hệ</h2>
+                    <a
+                        class="contact-message-link"
+                        href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=25050055%40student.bdu.edu.vn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                            <path d="M3.5 6.5h17v11h-17zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span data-i18n="contactMessage">Để lại lời nhắn</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container footer">
+        <span data-i18n="copyright">© 2026 Trương Quang Thái · Trang giới thiệu cá nhân</span>
+    </footer>
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Về đầu trang" data-i18n-aria-label="backToTop">
+        <span aria-hidden="true">↑</span>
+    </button>
+    <section class="contact-chat-panel" id="contact-chat-panel" aria-labelledby="contact-chat-title" hidden>
+        <div class="contact-chat-header">
+            <div>
+                <h2 id="contact-chat-title" data-i18n="contactChatTitle">Gửi lời nhắn</h2>
+                <p data-i18n="contactChatIntro">Điền thông tin bên dưới, ứng dụng email sẽ mở để bạn gửi lời nhắn.</p>
+            </div>
+            <button
+                class="contact-chat-close"
+                id="contact-chat-close"
+                type="button"
+                aria-label="Đóng biểu mẫu liên hệ"
+                data-i18n-aria-label="contactChatClose"
+            >
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <form id="contact-chat-form" novalidate>
+            <label for="contact-name" data-i18n="contactNameLabel">Họ và tên</label>
+            <input
+                id="contact-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                maxlength="80"
+                aria-describedby="contact-form-status"
+                required
+            >
+
+            <label for="contact-email" data-i18n="contactEmailLabel">Email của bạn</label>
+            <input
+                id="contact-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                maxlength="254"
+                aria-describedby="contact-form-status"
+                required
+            >
+
+            <label for="contact-message" data-i18n="contactMessageLabel">Nội dung</label>
+            <textarea
+                id="contact-message"
+                name="message"
+                rows="4"
+                maxlength="2000"
+                aria-describedby="contact-form-status"
+                required
+            ></textarea>
+
+            <p class="contact-form-status" id="contact-form-status" role="status" aria-live="polite"></p>
+            <button class="contact-form-submit" type="submit" data-i18n="contactSend">Gửi lời nhắn</button>
+        </form>
+    </section>
+    <button
+        class="contact-chat-toggle"
+        id="contact-chat-toggle"
+        type="button"
+        aria-label="Mở biểu mẫu liên hệ"
+        aria-expanded="false"
+        aria-controls="contact-chat-panel"
+        data-i18n-aria-label="contactChatOpen"
+    >
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+            <path d="M4 5.75A2.75 2.75 0 0 1 6.75 3h10.5A2.75 2.75 0 0 1 20 5.75v7.5A2.75 2.75 0 0 1 17.25 16H10l-5 4v-6.5a2.75 2.75 0 0 1-1-2.1v-5.65Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 8h8M8 11.5h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+    </button>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

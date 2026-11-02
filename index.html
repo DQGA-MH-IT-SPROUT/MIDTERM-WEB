@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d1010">
+  <meta name="description" content="The Villains — chọn một lá bài để khám phá thành viên của nhóm.">
+  <title>The Villains — Chọn thành viên</title>
+  <link rel="stylesheet" href="css/hub.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Đi đến nội dung chính</a>
+  <header class="masthead shell">
+    <a class="brand" href="#top" aria-label="The Villains - Trang chủ">
+      <span class="brand-mark" aria-hidden="true">V</span>
+      <span><span class="brand-name">THE VILLAINS</span><span class="brand-caption">MỘT NHÓM GẮN KẾT</span></span>
+    </a>
+    <div class="table-status"><span class="status-dot" aria-hidden="true"></span>BÀN BÀI ĐÃ SẴN SÀNG</div>
+  </header>
+
+  <main class="shell" id="main">
+    <section class="intro" id="top" aria-labelledby="pageTitle">
+      <p class="intro-kicker">NĂM THÀNH VIÊN · MỘT BÀN BÀI</p>
+      <h1 id="pageTitle">Chọn <span>thành viên.</span></h1>
+      <p class="intro-copy">Mỗi lá bài là một cá tính. Chọn một người để bước vào thế giới của họ.</p>
+      <div class="table-rule" aria-hidden="true">✦</div>
+    </section>
+
+    <section class="table-stage" id="tableStage" aria-label="Bàn bài The Villains">
+      <div class="table-etching" aria-hidden="true"></div>
+      <div class="arc-caption" aria-hidden="true"><span>BỘ BÀI</span><span>THÀNH LẬP 2026</span></div>
+      <div class="card-arc" id="cardArc" aria-label="Chọn một thành viên"></div>
+      <button class="action-button primary reshuffle-button" id="reshuffleButton" type="button" aria-label="Xào lại bộ bài">
+        <span aria-hidden="true">↻</span>
+        <span id="reshuffleLabel">Xào lại</span>
+      </button>
+      <aside class="selected-member" id="memberDetail" aria-live="polite" hidden>
+        <div class="featured-card-slot" id="featuredCardSlot"></div>
+        <div class="member-copy">
+          <p class="member-kicker" id="memberKicker"></p>
+          <h2 id="memberName"></h2>
+          <p class="member-role" id="memberRole"></p>
+          <p class="member-description" id="memberDescription"></p>
+          <div class="member-tags" id="memberTags"></div>
+          <div class="member-actions">
+            <button class="action-button primary" id="previewButton" type="button">Xem trước hồ sơ <span aria-hidden="true">↗</span></button>
+            <button class="action-button" id="clearSelection" type="button">Quay lại bộ bài</button>
+          </div>
+        </div>
+      </aside>
+      <div class="empty-detail" id="emptyDetail">
+        <strong>Lượt chọn là của bạn.</strong>
+        Chọn một lá bài để gặp gỡ thành viên, lắng nghe câu chuyện và khám phá trang cá nhân của họ.
+      </div>
+    </section>
+    <p class="table-instruction"><span aria-hidden="true">✦</span> Di chuột qua lá bài để lật xem, rồi chọn để mở hồ sơ thành viên.</p>
+    <footer class="footer"><span>THE VILLAINS · NĂM THÀNH VIÊN, NĂM THẾ GIỚI</span><span>NƯỚC ĐI TIẾP THEO LÀ CỦA BẠN</span></footer>
+  </main>
+
+  <dialog class="experience-notice" id="experienceNotice" aria-labelledby="experienceTitle" aria-describedby="experienceDescription">
+    <div class="experience-mark" aria-hidden="true">✦</div>
+    <p class="experience-kicker">LƯU Ý TRẢI NGHIỆM</p>
+    <h2 id="experienceTitle">Một chút chuyển động, một chút âm thanh.</h2>
+    <p id="experienceDescription">Hub có hiệu ứng chuyển động và âm thanh khi bạn tương tác với các lá bài. Âm thanh sẽ phát sau thao tác đầu tiên của bạn.</p>
+    <button class="action-button primary experience-dismiss" id="dismissExperience" type="button">Đã hiểu, bắt đầu thôi</button>
+  </dialog>
+
+  <dialog class="profile-preview" id="profilePreview" aria-labelledby="previewTitle">
+    <div class="preview-header">
+      <div class="preview-heading"><span>HỒ SƠ THÀNH VIÊN</span><strong id="previewTitle"></strong></div>
+      <button class="preview-close" id="closePreview" type="button" aria-label="Đóng bản xem trước" title="Đóng bản xem trước">×</button>
+    </div>
+    <iframe class="preview-frame" id="previewFrame" title="Xem trước hồ sơ thành viên" loading="eager"></iframe>
+    <div class="preview-footer">
+      <span class="preview-hint">Xem trước trang cá nhân · nhấn Esc để quay lại</span>
+      <a class="action-button primary" id="enterProfile" href="#">Mở hồ sơ <span aria-hidden="true">↗</span></a>
+    </div>
+  </dialog>
+  <div class="visually-hidden" id="announcement" role="status" aria-live="polite"></div>
+
+  <script src="js/hub.js" defer></script>
+</body>
+</html>

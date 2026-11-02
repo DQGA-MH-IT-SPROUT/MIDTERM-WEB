@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lê Minh Toàn 2026</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styleToan.css">
+
+</head>
+<body>
+<div class="rgb-edge rgb-edge-left" aria-hidden="true"></div>
+<div class="rgb-edge rgb-edge-right" aria-hidden="true"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="rgb-edge-rails" aria-hidden="true"></div>
+<div class="sidebar-scrim" id="sidebarScrim"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="side-brand text-white" href="#home">
+    <span class="brand-mark gear-mark" aria-label="Logo bánh răng đa sắc">
+      <span class="gear gear-a" aria-hidden="true">⚙</span>
+      <span class="gear gear-b" aria-hidden="true">⚙</span>
+      <span class="gear-core" aria-hidden="true">T</span>
+    </span>
+    <div><strong>TOÀN LÊ</strong><br><small class="rainbow-flow-text fw-bold" style="font-size:9px!important;">IN 2026</small></div>
+  </a>
+  <div class="small fw-bold text-white mt-3 mb-2 px-2" style="font-size:9px; letter-spacing:1px;">WORKSPACE</div>
+  <nav class="d-grid gap-1">
+    <a class="side-link active" href="#home"><span>00</span> Introduce</a>
+    <a class="side-link" href="#about"><span>01</span> About me</a>
+    <a class="side-link" href="#education"><span>02</span> Education</a>
+    <a class="side-link" href="#skills"><span>03</span> My toolkit</a>
+    <a class="side-link" href="#projects"><span>04</span> Selected Work</a>
+    <a class="side-link" href="#interests"><span>05</span> Interests</a>
+    <a class="side-link" href="#contact"><span>06</span> Get in touch</a>
+  </nav>
+  <div class="mt-auto pt-3 border-top border-secondary border-opacity-10 text-white" style="font-size:9px;">
+    <div class="d-flex align-items-center gap-2 mb-2"><span class="bg-success rounded-circle" style="width:7px;height:7px;display:inline-block;box-shadow:0 0 10px #28a745;"></span> Online </div>
+    <div>VIỆT NAM · © <span id="sideYear">2026</span></div>
+  </div>
+</aside>
+<main class="main-area">
+  <header class="topbar">
+    <div class="d-flex align-items: center gap-3">
+      <button class="btn btn-outline-secondary btn-sm d-lg-none" id="menuToggle" type="button" aria-label="Mở menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+      <span class="text-muted small tracking-wide">PORTFOLIO / <strong id="currentSection" class="rainbow-flow-text">OVERVIEW</strong></span>
+    </div>
+    <div class="topbar-actions">
+      <button type="button" class="theme-toggle" id="darkModeToggle" aria-label="Chuyển giao diện" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+        <span class="theme-toggle-label">Dark / Light</span>
+      </button>
+      <a href="#contact" class="btn btn-sm contact-cta px-3 rounded-pill fw-bold">Liên hệ ↗</a>
+    </div>
+  </header>
+  <div class="content-wrap">
+    <section class="hero-board mb-5" id="home">
+      <div>
+        <span class="badge bg-light text-secondary border mb-3">HELLO WORLD · 2026</span>
+        <p class="text-muted mb-1">Xin chào, tui tên</p>
+        <h1 class="display-4 fw-bold mb-3">Lê Minh <span class="text-gradient">Toàn.</span></h1>
+        <p class="fw-semibold mb-3">Tui là <span id="typingText" class="typing-text">sinh viên Công nghệ thông tin</span><span class="typing-cursor">|</span></p>
+        <p class="text-muted small lh-lg mb-4">Một sinh viên CNTT trầm tính, thích học hỏi, mê máy móc và luôn muốn biến những ý tưởng thành giải pháp thực tế cho cuộc sống và xã hội.</p>
+        <div class="d-flex gap-2">
+          <a href="#projects" class="btn btn-dark btn-sm px-4 rounded-3 fw-bold">Khám phá dự án ↗</a>
+          <a href="#about" class="btn btn-outline-secondary btn-sm px-4 rounded-3 fw-bold">Tìm hiểu về mình ↓</a>
+        </div>
+      </div>
+      <div class="p-3 border rounded-4 bg-light text-center position-relative avatar-card">
+        <div class="avatar-halo"></div>
+        <span class="badge bg-success bg-opacity-10 text-success mb-2">IT Student @ Binh Duong University</span>
+        <div class="my-3">
+          <img src="avatar.jpeg" alt="Lê Minh Toàn" class="rounded-circle border border-3 border-white shadow avatar-photo" style="width:120px; height:120px; object-fit:cover;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect width=%22120%22 height=%22120%22 fill=%22%23e16ca8%22/%3E%3Ctext x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22%23fff%22%3ELT%3C/text%3E%3C/svg%3E'">
+        </div>
+        <h5 class="fw-bold mb-1">Lê Minh Toàn</h5>
+        <p class="text-muted small mb-0">Phú Lợi, Hồ Chí Minh, Việt Nam</p>
+      </div>
+    </section>
+    <div class="row g-3 mb-5">
+      <div class="col-sm-6 col-xl-3"><div class="p-3 custom-card"><h3 class="fw-bold text-dark mb-0 rainbow-flow-text">08<span class="text-pink fs-6">/10</span></h3><small class="text-muted fw-bold" style="font-size:10px;">CÔNG NGHỆ & MÁY MÓC</small></div></div>
+      <div class="col-sm-6 col-xl-3"><div class="p-3 custom-card"><h3 class="fw-bold text-dark mb-0 rainbow-flow-text">05</h3><small class="text-muted fw-bold" style="font-size:10px;">DỰ ÁN TIÊU BIỂU</small></div></div>
+      <div class="col-sm-6 col-xl-3"><div class="p-3 custom-card"><h3 class="fw-bold text-dark mb-0 rainbow-flow-text">03</h3><small class="text-muted fw-bold" style="font-size:10px;">NHÓM CHỦ ĐỀ QUAN TÂM</small></div></div>
+      <div class="col-sm-6 col-xl-3"><div class="p-3 custom-card"><h3 class="fw-bold text-dark mb-0 rainbow-flow-text">“Stay curious.”</h3><small class="text-muted fw-bold" style="font-size:10px;">TRIẾT LÝ</small></div></div>
+    </div>
+    <section class="mb-5" id="about">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">01 / ABOUT ME</span>
+        <h2 class="fw-bold display-6">Một chút <span class="text-gradient">về tôi.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="p-4 custom-card bg-dark text-white h-100 d-flex flex-column justify-content-between">
+            <span class="small text-white-50">PHILOSOPHY</span>
+            <p class="fs-5 fw-semibold my-4">“Mình tin rằng mỗi giải pháp công nghệ đều có thể giúp đời sống con người tốt đẹp hơn.”</p>
+            <span class="small text-pink">THINK / MAKE / IMPROVE ↗</span>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="p-4 custom-card h-100 d-flex flex-column justify-content-between">
+            <div>
+              <p class="text-muted small lh-lg">Mình là <strong>Lê Minh Toàn</strong>, sinh viên ngành <strong>Công nghệ thông tin</strong> tại Đại học Bình Dương. Mình hướng nội, thích khám phá máy móc và không ngừng học hỏi để tiến bộ mỗi ngày.</p>
+              <p class="text-muted small lh-lg">Mục tiêu của mình là trở thành một kỹ sư IT chuyên nghiệp, sau đó phát triển công ty riêng để đưa các giải pháp công nghệ phục vụ đời sống và xã hội.</p>
+            </div>
+            <div class="row g-2 mt-3 pt-3 border-top">
+              <div class="col-6 col-md-3"><small class="text-muted d-block fw-bold">CHUYÊN NGÀNH</small><strong>CNTT</strong></div>
+              <div class="col-6 col-md-3"><small class="text-muted d-block fw-bold">TRẠNG THÁI</small><strong>Đang học</strong></div>
+              <div class="col-6 col-md-3"><small class="text-muted d-block fw-bold">QUAN TÂM</small><strong>AI · Robot</strong></div>
+              <div class="col-6 col-md-3"><small class="text-muted d-block fw-bold">TINH THẦN</small><strong>Cầu tiến</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mb-5" id="education">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">02 / EDUCATION</span>
+        <h2 class="fw-bold display-6">Hành trình <span class="text-gradient">học tập.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="p-4 custom-card border-top border-4 border-primary">
+            <span class="badge bg-primary bg-opacity-10 text-primary mb-2">HIỆN TẠI</span>
+            <h4 class="fw-bold">Sinh viên Công nghệ thông tin</h4>
+            <p class="text-muted small">Đang là sinh viên năm 2, học tập và rèn luyện các kiến thức lập trình, cấu trúc dữ liệu, hệ thống và phát triển ứng dụng tại Đại học Bình Dương.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-4 custom-card">
+            <span class="badge bg-secondary bg-opacity-10 text-secondary mb-2">TRƯỚC ĐÂY</span>
+            <h4 class="fw-bold">Học phổ thông</h4>
+            <p class="text-muted small">Xây dựng nền tảng tư duy logic, kỹ năng tự học và niềm đam mê với khoa học kỹ thuật tại THPT Huỳnh Thúc Kháng.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mb-5" id="skills">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">03 / MY TOOLKIT</span>
+        <h2 class="fw-bold display-6">Kỹ năng & <span class="text-gradient">công cụ.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <div class="p-4 custom-card">
+            <h5 class="fw-bold mb-4">Kỹ năng chuyên môn</h5>
+            <div class="d-grid gap-3">
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>HTML</span><span>7/10</span></div><div class="skill-track"><span style="width:70%"></span></div></div>
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>CSS</span><span>6/10</span></div><div class="skill-track"><span style="width:60%"></span></div></div>
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>JavaScript</span><span>2/10</span></div><div class="skill-track"><span style="width:20%"></span></div></div>
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>Python</span><span>6/10</span></div><div class="skill-track"><span style="width:60%"></span></div></div>
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>C++</span><span>4/10</span></div><div class="skill-track"><span style="width:40%"></span></div></div>
+              <div><div class="d-flex justify-content-between small mb-1 fw-bold"><span>Hiểu máy tính</span><span>7/10</span></div><div class="skill-track"><span style="width:70%"></span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 d-grid gap-4">
+          <div class="p-4 custom-card">
+            <h5 class="fw-bold mb-3">Soft skills</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge bg-light text-dark border p-2">Tư duy logic máy móc</span>
+              <span class="badge bg-light text-dark border p-2">Sáng tạo độc lạ</span>
+              <span class="badge bg-light text-dark border p-2">Quản lí thời gian</span>
+              <span class="badge bg-light text-dark border p-2">Tư duy ngược</span>
+              <span class="badge bg-light text-dark border p-2">Phản biện tốt</span>
+            </div>
+          </div>
+          <div class="p-4 custom-card">
+            <h5 class="fw-bold mb-3">Công cụ</h5>
+            <div class="row g-2 small fw-bold">
+              <div class="col-4">💻 VSCodium</div>
+              <div class="col-4">🌐 Web Code</div>
+              <div class="col-4">🐙 GitHub</div>
+              <div class="col-4">📊 PPTX / Excel</div>
+              <div class="col-4">🗄️ MySQL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mb-5" id="projects">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">04 / SELECTED WORK</span>
+        <h2 class="fw-bold display-6">Dự án <span class="text-gradient">tiêu biểu.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="custom-card h-100 p-4 d-flex flex-column">
+            <span class="text-muted small fw-bold">PROJECT / 01</span>
+            <h4 class="fw-bold mt-2">Website bán đồ cũ</h4>
+            <p class="text-muted small mt-2">Thiết kế và xây dựng giao diện website mua bán đồ cũ, tập trung vào trải nghiệm người dùng và quy trình lọc sản phẩm.</p>
+            <div class="mt-auto pt-3"><span class="badge bg-light text-dark border me-1">HTML</span><span class="badge bg-light text-dark border">CSS</span></div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="custom-card h-100 p-4 d-flex flex-column">
+            <span class="text-muted small fw-bold">PROJECT / 02</span>
+            <h4 class="fw-bold mt-2">Server database quản lí shop PC</h4>
+            <p class="text-muted small mt-2">Phát triển hệ thống quản lý shop máy tính với dữ liệu khách hàng, sản phẩm, hóa đơn và thao tác xử lý cơ bản.</p>
+            <div class="mt-auto pt-3"><span class="badge bg-light text-dark border me-1">MySQL</span><span class="badge bg-light text-dark border">SQL</span></div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="custom-card h-100 p-4 d-flex flex-column">
+            <span class="text-muted small fw-bold">PROJECT / 03</span>
+            <h4 class="fw-bold mt-2">Hệ thống OOP quản lí nhân viên</h4>
+            <p class="text-muted small mt-2">Áp dụng 4 tính chất của lập trình hướng đối tượng để xây dựng mô hình quản lý nhân viên, phân quyền và xử lý dữ liệu.</p>
+            <div class="mt-auto pt-3"><span class="badge bg-light text-dark border me-1">C++</span><span class="badge bg-light text-dark border">OOP</span></div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class="custom-card h-100 p-4 d-flex flex-column">
+            <span class="text-muted small fw-bold">PROJECT / 04</span>
+            <h4 class="fw-bold mt-2">Quản lí mạng khu phức hợp công nghiệp</h4>
+            <p class="text-muted small mt-2">Mô phỏng và quản lý mạng cho khu phức hợp công nghiệp bằng Cisco Packet Tracer, tập trung vào cấu hình và kết nối hệ thống.</p>
+            <div class="mt-auto pt-3"><span class="badge bg-light text-dark border me-1">Packet Tracer</span><span class="badge bg-light text-dark border">Network</span></div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="custom-card h-100 p-4 d-flex flex-column">
+            <span class="text-muted small fw-bold">PROJECT / 05</span>
+            <h4 class="fw-bold mt-2">Website dạy học toán thống kê xác suất</h4>
+            <p class="text-muted small mt-2">Xây dựng nội dung học tập dễ hiểu về toán, thống kê và xác suất nhằm giúp người học tiếp cận kiến thức cơ bản một cách trực quan.</p>
+            <div class="mt-auto pt-3"><span class="badge bg-light text-dark border me-1">HTML</span><span class="badge bg-light text-dark border">JS</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mb-5" id="interests">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">05 / INTERESTS</span>
+        <h2 class="fw-bold display-6">Điều mình <span class="text-gradient">yêu thích.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="p-4 custom-card h-100">
+            <span class="text-warning fw-bold">01 / ⌘</span>
+            <h4 class="fw-bold mt-3">Công nghệ</h4>
+            <p class="text-muted small">Đam mê khám phá các công nghệ thay đổi cuộc sống và tạo ra những giải pháp mới.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 custom-card h-100">
+            <span class="text-primary fw-bold">02 / ✳</span>
+            <h4 class="fw-bold mt-3">Chính trị xã hội</h4>
+            <p class="text-muted small">Quan tâm đến các vấn đề xã hội, môi trường, năng lượng, hạ tầng thế giới và thể chế chính trị.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 custom-card h-100">
+            <span class="text-success fw-bold">03 / ↗</span>
+            <h4 class="fw-bold mt-3">Khoa học kỹ thuật</h4>
+            <p class="text-muted small">Yêu thích đọc, tìm hiểu và suy nghĩ về những điều khoa học, công nghệ và kỹ thuật.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mb-5" id="goals">
+      <div class="p-5 custom-card bg-dark text-white position-relative overflow-hidden">
+        <span class="text-pink fw-bold small"> NEXT EPISODE</span>
+        <h2 class="fw-bold display-6 my-2">Học hỏi. Xây dựng. Phát triển.</h2>
+        <p class="text-white-50 small col-lg-8 mb-4">Mình muốn tiếp tục nỗ lực mỗi ngày, hoàn thiện kỹ năng lập trình và tư duy công nghệ, đồng thời tạo ra những sản phẩm có thể giúp ích cho xã hội.</p>
+        <a href="#contact" class="btn btn-outline-light btn-sm px-4 rounded-pill">Let's build something ↗</a>
+      </div>
+    </section>
+    <section class="mb-5" id="contact">
+      <div class="mb-4">
+        <span class="text-pink fw-bold small">06 / GET IN TOUCH</span>
+        <h2 class="fw-bold display-6">Cùng tạo nên <span class="text-gradient">điều gì đó.</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <div class="p-4 custom-card bg-dark text-white h-100 d-flex flex-column justify-content-between">
+            <div>
+              <span class="small text-white-50">OPEN TO CONNECTIONS</span>
+              <h3 class="fw-bold my-3">Liên hệ với tôi nếu bạn muốn trò chuyện, hợp tác!</h3>
+              <p class="text-white-50 small">Một lời chào cũng có thể là khởi đầu của một ý tưởng thú vị.</p>
+            </div>
+            <div class="d-grid gap-2 mt-4">
+              <a href="mailto:25050016@student.bdu.edu.vn" class="text-white small p-2 rounded border border-secondary border-opacity-25 d-flex justify-content-between"><span>✉ 25050016@student.bdu.edu.vn</span><span>↗</span></a>
+              <a href="https://github.com/anhcoder207" target="_blank" class="text-white small p-2 rounded border border-secondary border-opacity-25 d-flex justify-content-between"><span>🐙 github.com/anhcoder207</span><span>↗</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <form class="p-4 custom-card" id="contactForm">
+            <h5 class="fw-bold mb-3">Gửi lời nhắn</h5>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Tên của bạn</label>
+                <input class="form-control form-control-sm" name="name" required placeholder="Nhập tên">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Email</label>
+                <input type="email" class="form-control form-control-sm" name="email" required placeholder="name@example.com">
+              </div>
+              <div class="col-12">
+                <label class="form-label small fw-bold">Lời nhắn</label>
+                <textarea class="form-control form-control-sm" name="message" rows="4" required placeholder="Nội dung..."></textarea>
+              </div>
+              <div class="col-12 d-flex align-items-center justify-content-between">
+                <button type="submit" class="btn btn-dark btn-sm px-4">Gửi tin nhắn ↗</button>
+                <small class="text-muted" id="formNote" style="font-size:10px;"></small>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <footer class="pt-4 border-top d-flex flex-wrap justify-content-between align-items-center gap-3 text-muted small">
+      <div class="d-flex align-items-center gap-2"><span class="brand-mark" style="width:24px;height:24px;font-size:12px;">T</span><strong>LEMITO</strong></div>
+      <div>© <span id="year">2026</span> LeMiTo. All rights reserved.</div>
+      <a href="#" id="backToTop" class="fw-bold text-dark">BACK TO TOP ↑</a>
+    </footer>
+  </div>
+</main>
+<script src="Toan.js"></script>
+</body>
+</html>

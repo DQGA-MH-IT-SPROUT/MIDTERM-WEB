@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Vĩnh Kỳ | Portfolio</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <body>
+    <!-- BACKGROUND CHUYỂN ĐỘNG -->
+    <div class="animated-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Thanh tiến trình cuộn -->
+    <div id="scroll-progress"></div>
+    <!-- ... (code cũ giữ nguyên) ... -->
+    <!-- Thanh tiến trình cuộn -->
+    <div id="scroll-progress"></div>
+
+    <!-- 1. Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#home" class="logo">VK<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="#home" data-i18n="nav_home">Trang chủ</a></li>
+                <li><a href="#about" data-i18n="nav_about">Giới thiệu</a></li>
+                <li><a href="#skills" data-i18n="nav_skills">Kỹ năng</a></li>
+                <li><a href="#projects" data-i18n="nav_projects">Dự án</a></li>
+                <li><a href="#goals" data-i18n="nav_goals">Mục tiêu</a></li>
+                <li><a href="#contact" data-i18n="nav_contact">Liên hệ</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="langToggle" class="lang-btn">EN</button>
+                <div class="hamburger">
+                    <i data-lucide="menu"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. Hero Section -->
+    <header id="home" class="hero section-padding">
+        <div class="hero-content">
+            <div class="hero-text" data-aos="fade-right">
+                <p class="greeting" data-i18n="hero_greeting">Xin chào, tôi là</p>
+                <h1>Nguyễn Vĩnh Kỳ</h1>
+                <h2 class="typing-text"><span data-i18n="hero_iam">Một</span> <span id="typed"></span></h2>
+                <p class="motto" data-i18n="hero_motto">"Học hôm nay, xây dựng ngày mai."</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary" data-i18n="btn_projects">Xem Dự Án</a>
+                    <a href="#contact" class="btn btn-outline" data-i18n="btn_contact">Liên Hệ</a>
+                </div>
+            </div>
+            <div class="hero-avatar" data-aos="fade-left">
+                <div class="avatar-frame">
+                    <img src="vinhky.jpg" alt="Avatar" class="avatar-img" onerror="this.src='https://via.placeholder.com/300x300/1a1a24/8a2be2?text=VK'">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. About Me & 4. Education -->
+    <section id="about" class="about section-padding">
+        <div class="section-title" data-aos="fade-up">
+            <h2 data-i18n="title_about">Về Tôi</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="about-container">
+            <div class="about-text glass-card" data-aos="fade-right">
+                <p>Tôi là sinh viên năm 2 chuyên ngành <strong>Kỹ thuật Phần mềm</strong> tại Đại học Bình Dương. Tôi có niềm đam mê lớn với lập trình, phát triển web và luôn khát khao khám phá những công nghệ mới.</p>
+                <p>Tôi liên tục trau dồi kiến thức kỹ thuật thông qua các dự án học thuật và thực hành thực tế. Tôi thích giải quyết vấn đề, học hỏi các khái niệm mới và phát triển những ứng dụng có tính thực tiễn cao.</p>
+                <p>Mục tiêu hiện tại của tôi là củng cố kỹ năng lập trình, tích lũy kinh nghiệm thực tế và từng bước trở thành một <strong>Software Developer</strong> chuyên nghiệp.</p>
+            </div>
+            
+            <div class="education-card glass-card" data-aos="fade-left">
+                <h3 data-i18n="title_edu"><i data-lucide="graduation-cap"></i> Học Vấn</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Đại học Bình Dương</h4>
+                        <p class="highlight">Chuyên ngành: Kỹ thuật Phần mềm</p>
+                        <p class="year">Sinh viên năm 2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Technical Skills & 6. Languages -->
+    <section id="skills" class="skills section-padding">
+        <div class="section-title" data-aos="fade-up">
+            <h2 data-i18n="title_skills">Kỹ năng & Ngôn ngữ</h2>
+            <div class="underline"></div>
+        </div>
+        
+        <div class="skills-grid">
+            <div class="skill-category glass-card" data-aos="fade-up" data-aos-delay="100">
+                <h3><i data-lucide="code-2"></i> Lập trình & Web</h3>
+                <div class="skill-tags">
+                    <span>Python</span><span>C++</span><span>HTML5</span>
+                    <span>CSS3</span><span>JavaScript</span><span>SQL</span>
+                </div>
+            </div>
+
+            <div class="skill-category glass-card" data-aos="fade-up" data-aos-delay="200">
+                <h3><i data-lucide="brain-circuit"></i> Kiến thức Cốt lõi</h3>
+                <div class="skill-tags">
+                    <span>OOP</span><span>Cấu trúc Dữ liệu (DSA)</span><span>CSDL Cơ bản</span>
+                </div>
+            </div>
+
+            <div class="skill-category glass-card" data-aos="fade-up" data-aos-delay="300">
+                <h3><i data-lucide="wrench"></i> Công cụ Phát triển</h3>
+                <div class="skill-tags">
+                    <span>VS Code</span><span>Git</span><span>GitHub</span>
+                </div>
+            </div>
+
+            <div class="skill-category glass-card languages" data-aos="fade-up" data-aos-delay="400">
+                <h3><i data-lucide="languages"></i> Ngoại ngữ</h3>
+                <div class="language-items">
+                    <div class="lang-item">
+                        <span class="lang-name">Tiếng Anh</span>
+                        <span class="lang-cert">IELTS Overall 6.0</span>
+                    </div>
+                    <div class="lang-item">
+                        <span class="lang-name">Tiếng Trung</span>
+                        <span class="lang-cert">HSK Level 3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Projects -->
+    <section id="projects" class="projects section-padding">
+        <div class="section-title" data-aos="fade-up">
+            <h2 data-i18n="title_projects">Dự án Nổi bật</h2>
+            <div class="underline"></div>
+        </div>
+        
+        <div class="project-grid">
+            <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://via.placeholder.com/400x250/1a1a24/8a2be2?text=QL+Sinh+Vien" alt="Dự án 1" class="project-img">
+                <div class="project-content">
+                    <h3>Hệ thống Quản lý Sinh viên</h3>
+                    <div class="tech-stack"><span>Python</span><span>OOP</span></div>
+                    <p>Ứng dụng quản lý sinh viên hỗ trợ các chức năng thêm, tìm kiếm, hiển thị và sắp xếp thông tin trực quan.</p>
+                    <div class="project-links">
+                        <a href="#" class="btn-icon"><i data-lucide="github"></i> Source Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://via.placeholder.com/400x250/1a1a24/8a2be2?text=QL+Khach+San" alt="Dự án 2" class="project-img">
+                <div class="project-content">
+                    <h3>Hệ thống Quản lý Khách sạn</h3>
+                    <div class="tech-stack"><span>Python</span><span>OOP</span><span>JSON</span></div>
+                    <p>Ứng dụng xử lý thông tin phòng, đặt phòng, dữ liệu khách hàng, quy trình trả phòng và xuất hóa đơn.</p>
+                    <div class="project-links">
+                        <a href="#" class="btn-icon"><i data-lucide="github"></i> Source Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://via.placeholder.com/400x250/1a1a24/8a2be2?text=Portfolio" alt="Dự án 3" class="project-img">
+                <div class="project-content">
+                    <h3>Personal Portfolio</h3>
+                    <div class="tech-stack"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+                    <p>Website portfolio cá nhân hiển thị hồ sơ, học vấn, kỹ năng, dự án và thông tin liên hệ (dark theme).</p>
+                    <div class="project-links">
+                        <a href="#" class="btn-icon"><i data-lucide="github"></i> Source Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Career Goals -->
+    <section id="goals" class="goals section-padding">
+        <div class="section-title" data-aos="fade-up">
+            <h2 data-i18n="title_goals">Mục tiêu Nghề nghiệp</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="goals-container">
+            <div class="goal-card glass-card" data-aos="fade-right">
+                <div class="goal-icon"><i data-lucide="target"></i></div>
+                <h3 data-i18n="goal_short">Mục tiêu Ngắn hạn</h3>
+                <ul>
+                    <li>Cải thiện kỹ năng lập trình Python và C++.</li>
+                    <li>Nắm vững nền tảng về OOP và thuật toán (DSA).</li>
+                    <li>Phát triển thêm nhiều dự án thực tế về Web Development.</li>
+                    <li>Nâng cao kỹ năng giao tiếp bằng Tiếng Anh và Tiếng Trung.</li>
+                </ul>
+            </div>
+            <div class="goal-card glass-card" data-aos="fade-left">
+                <div class="goal-icon"><i data-lucide="rocket"></i></div>
+                <h3 data-i18n="goal_long">Mục tiêu Dài hạn</h3>
+                <ul>
+                    <li>Trở thành một Software Developer chuyên nghiệp.</li>
+                    <li>Tích lũy kinh nghiệm phát triển phần mềm trong môi trường thực tế.</li>
+                    <li>Xây dựng các ứng dụng hữu ích và mang lại giá trị cho người dùng.</li>
+                    <li>Không ngừng khám phá và cập nhật các công nghệ mới.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Contact -->
+    <section id="contact" class="contact section-padding">
+        <div class="section-title" data-aos="fade-up">
+            <h2 data-i18n="title_contact">Liên Hệ</h2>
+            <div class="underline"></div>
+        </div>
+        
+        <div class="contact-wrapper">
+            <div class="contact-info glass-card" data-aos="fade-right">
+                <i data-lucide="mail" class="contact-icon"></i>
+                <h3 data-i18n="contact_title">Kết nối với tôi!</h3>
+                <p data-i18n="contact_desc">Tôi luôn cởi mở với các cơ hội mới và những cuộc trò chuyện về công nghệ.</p>
+                <div class="email-box">
+                    <span id="email-text">vinhky0000000@gmail.com</span>
+                    <button id="copy-btn" class="btn-icon-small" title="Copy Email"><i data-lucide="copy"></i></button>
+                </div>
+            </div>
+
+            <form id="contactForm" class="contact-form glass-card" data-aos="fade-left">
+                <h3 data-i18n="form_title">Gửi tin nhắn</h3>
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Họ và tên của bạn">
+                    <small class="error-msg"></small>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email của bạn">
+                    <small class="error-msg"></small>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" rows="4" placeholder="Nội dung tin nhắn..."></textarea>
+                    <small class="error-msg"></small>
+                </div>
+                <button type="submit" class="btn btn-primary"><i data-lucide="send"></i> <span data-i18n="btn_send">Gửi Tin Nhắn</span></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Nút Scroll to Top -->
+    <button id="scrollTopBtn" title="Lên đầu trang"><i data-lucide="arrow-up"></i></button>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="#home" class="logo">VK<span>.</span></a>
+            <p>&copy; 2026 Nguyễn Vĩnh Kỳ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="script.js"></script>
+</body>
+</html>

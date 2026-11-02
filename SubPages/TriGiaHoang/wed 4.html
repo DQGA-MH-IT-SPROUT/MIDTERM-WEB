@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trì Gia Hoàng | Cyberpunk Portfolio</title>
+    
+    <!-- Nhúng Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Nhúng FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Nhúng Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff003c;
+            --neon-purple: #bc13fe;
+            --dark-bg: #050608;
+            --dark-card: rgba(12, 14, 20, 0.75);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-display { font-family: 'Rajdhani', sans-serif; }
+
+        @keyframes scrollCyberGrid {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 30px 30px; }
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.06) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-top: 80px;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            animation: scrollCyberGrid 4s linear infinite;
+        }
+
+        body.light-mode {
+            background-color: #f4f6f9;
+            background-image: none;
+            color: #212529;
+            animation: none;
+        }
+        body.light-mode .cyber-glass {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #dee2e6;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        body.light-mode .cyber-glass::before { display: none; }
+        body.light-mode .cyber-item {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-left: 3px solid var(--neon-cyan);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        body.light-mode .text-light { color: #212529 !important; }
+        body.light-mode .bg-dark { background-color: #f8f9fa !important; }
+        body.light-mode .text-secondary { color: #6c757d !important; }
+        body.light-mode .text-gradient { background: linear-gradient(to right, #0056b3, #6f42c1); -webkit-background-clip: text; }
+        body.light-mode .navbar, body.light-mode .dropdown-menu { background-color: #ffffff !important; border-color: #dee2e6 !important; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        body.light-mode .nav-link, body.light-mode .dropdown-item { color: #212529 !important; }
+        body.light-mode .navbar-brand { color: #0056b3 !important; }
+        body.light-mode input, body.light-mode textarea { background-color: #fff !important; color: #212529 !important; border-color: #ced4da !important; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .orb-1 { background: radial-gradient(circle, rgba(0, 243, 255, 0.15) 0%, transparent 70%); animation: floatOrb 15s ease-in-out infinite; }
+        .orb-2 { background: radial-gradient(circle, rgba(255, 0, 60, 0.15) 0%, transparent 70%); animation: floatOrb 12s ease-in-out infinite reverse; }
+        .orb-3 { background: radial-gradient(circle, rgba(188, 19, 254, 0.15) 0%, transparent 70%); animation: floatOrb 18s ease-in-out infinite; }
+
+        .cyber-glass {
+            background: var(--dark-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 243, 255, 0.05);
+            position: relative;
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+        
+        .cyber-glass::before {
+            content: ''; position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            background: linear-gradient(45deg, var(--neon-cyan), transparent 40%, transparent 60%, var(--neon-purple));
+            z-index: -1; border-radius: inherit; opacity: 0.3;
+        }
+
+        .cyber-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.0) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 1px solid rgba(0, 243, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; overflow: hidden; height: 100%;
+        }
+
+        .cyber-item:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.2), inset 0 0 15px rgba(0, 243, 255, 0.1);
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .avatar-ring { box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px var(--neon-purple); }
+
+        .w-30vw { width: 30vw; } .h-30vw { height: 30vw; }
+        .w-40vw { width: 40vw; } .h-40vw { height: 40vw; }
+        .w-50vw { width: 50vw; } .h-50vw { height: 50vw; }
+        .blur-60 { filter: blur(60px); } .blur-80 { filter: blur(80px); } .blur-100 { filter: blur(100px); }
+        .avatar-img { width: 144px; height: 144px; }
+        @media (min-width: 768px) { .avatar-img { width: 176px; height: 176px; } }
+
+        .text-neon-cyan { color: var(--neon-cyan) !important; }
+        .text-neon-pink { color: var(--neon-pink) !important; }
+        .text-neon-purple { color: var(--neon-purple) !important; }
+        
+        .bg-cyan-soft { background-color: rgba(0, 243, 255, 0.1); }
+        .bg-pink-soft { background-color: rgba(255, 0, 60, 0.1); }
+        .bg-purple-soft { background-color: rgba(188, 19, 254, 0.1); }
+        .bg-yellow-soft { background-color: rgba(255, 193, 7, 0.1); }
+        .bg-green-soft { background-color: rgba(25, 135, 84, 0.1); }
+        .bg-blue-soft { background-color: rgba(13, 110, 253, 0.1); }
+        .bg-red-soft { background-color: rgba(220, 53, 69, 0.1); }
+
+        .icon-box { width: 48px; height: 48px; flex-shrink: 0; transition: all 0.3s; }
+        .tracking-widest { letter-spacing: 0.1em; }
+        a { text-decoration: none; }
+
+        .quiz-btn { border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: 0.3s; }
+        .quiz-btn:hover { background-color: rgba(0, 243, 255, 0.1); border-color: var(--neon-cyan); }
+    </style>
+</head>
+<body class="py-5 px-3 px-sm-4">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 fixed-top" style="backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 243, 255, 0.2);">
+        <div class="container">
+            <a class="navbar-brand font-display fw-bold text-gradient lang" data-vi="TGH Portfolio" data-en="TGH Portfolio" href="#">TGH Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link lang" data-vi="Giới thiệu" data-en="About Me" href="#gioi-thieu">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link lang" data-vi="Học vấn & Hoạt động" data-en="Education & Activities" href="#hoc-van">Học vấn</a></li>
+                    <li class="nav-item"><a class="nav-link lang" data-vi="Mục tiêu" data-en="Career Goals" href="#muc-tieu">Mục tiêu</a></li>
+                    <li class="nav-item"><a class="nav-link lang" data-vi="Dự án" data-en="Projects" href="#du-an">Dự án</a></li>
+                    <li class="nav-item"><a class="nav-link lang" data-vi="Liên hệ" data-en="Contact" href="#lien-he">Liên hệ</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle lang" href="#" role="button" data-bs-toggle="dropdown" data-vi="<i class='fa-solid fa-gear'></i> Cài đặt" data-en="<i class='fa-solid fa-gear'></i> Settings">
+                            <i class="fa-solid fa-gear"></i> Cài đặt
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end bg-dark border-info">
+                            <li><a class="dropdown-item text-light d-flex justify-content-between align-items-center" href="#" id="toggle-theme">
+                                <span class="lang" data-vi="Chế độ Sáng / Tối" data-en="Light / Dark Mode">Chế độ Sáng / Tối</span>
+                                <i class="fa-solid fa-circle-half-stroke ms-3"></i>
+                            </a></li>
+                            <li><hr class="dropdown-divider border-secondary"></li>
+                            <li><a class="dropdown-item text-light d-flex justify-content-between align-items-center" href="#" id="toggle-lang">
+                                <span class="lang" data-vi="Ngôn ngữ: VN / EN" data-en="Language: EN / VN">Ngôn ngữ: VN / EN</span>
+                                <i class="fa-solid fa-language ms-3"></i>
+                            </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Đốm sáng nền -->
+    <div class="position-fixed top-0 start-0 w-100 h-100 pe-none overflow-hidden z-0">
+        <div class="orb-1 position-absolute top-0 start-0 translate-middle w-40vw h-40vw rounded-circle blur-80"></div>
+        <div class="orb-2 position-absolute bottom-0 end-0 translate-middle-y w-50vw h-50vw rounded-circle blur-100"></div>
+        <div class="orb-3 position-absolute top-50 start-50 w-30vw h-30vw rounded-circle blur-60"></div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container-fluid position-relative z-3">
+        
+        <!-- PHẦN 1: THÔNG TIN CƠ BẢN -->
+        <div id="gioi-thieu" class="cyber-glass rounded-4 p-4 p-sm-5 mb-5">
+            <header class="d-flex flex-column flex-md-row align-items-center align-items-md-start gap-4 mb-5">
+                <div class="position-relative">
+                    <img src="anhdaidien.png" alt="Trì Gia Hoàng" onerror="this.src='https://placehold.co/400x400/0c0e14/00f3ff?text=TGH'" 
+                         class="avatar-img object-fit-cover rounded-circle avatar-ring border border-2 border-info position-relative z-3">
+                </div>
+                <div class="text-center text-md-start flex-grow-1 mt-3 mt-md-4">
+                    <div class="d-inline-block px-3 py-1 bg-cyan-soft border border-info rounded-pill text-neon-cyan mb-3 lang" data-vi="<i class='fa-solid fa-bolt me-1'></i> Sinh viên Thiết Kế Web" data-en="<i class='fa-solid fa-bolt me-1'></i> Web Design Student" style="font-size: 12px; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase;">
+                        <i class="fa-solid fa-bolt me-1"></i> Sinh viên Thiết Kế Web
+                    </div>
+                    <h1 class="font-display fw-bold mb-2 text-gradient" style="font-size: 2.5rem; letter-spacing: 0.05em;">Trì Gia Hoàng</h1>
+                </div>
+            </header>
+
+            <div class="row g-3 g-sm-4">
+                <div class="col-12 col-md-8"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-cyan-soft d-flex align-items-center justify-content-center fs-4 text-neon-cyan"><i class="fa-solid fa-building-columns"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1 lang" data-vi="Trường Đào Tạo" data-en="University" style="font-size: 11px; text-transform: uppercase;">Trường Đào Tạo</p><p class="font-display fs-5 fw-semibold text-light mb-0 lang" data-vi="Đại học Bình Dương" data-en="Binh Duong University">Đại học Bình Dương</p></div></div></div>
+                <div class="col-12 col-md-4"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-pink-soft d-flex align-items-center justify-content-center fs-4 text-neon-pink"><i class="fa-solid fa-id-badge"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1 lang" data-vi="MSSV" data-en="Student ID" style="font-size: 11px; text-transform: uppercase;">MSSV</p><p class="font-display fs-5 fw-semibold text-light mb-0">25050062</p></div></div></div>
+                <div class="col-12 col-md-8"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-purple-soft d-flex align-items-center justify-content-center fs-4 text-neon-purple"><i class="fa-solid fa-microchip"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1 lang" data-vi="Ngành Học" data-en="Major" style="font-size: 11px; text-transform: uppercase;">Ngành Học</p><p class="font-display fs-5 fw-semibold text-light mb-0 lang" data-vi="Công Nghệ Thông Tin" data-en="Information Technology">Công Nghệ Thông Tin</p></div></div></div>
+                <div class="col-12 col-md-4"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-yellow-soft d-flex align-items-center justify-content-center fs-4 text-warning"><i class="fa-solid fa-users-viewfinder"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1 lang" data-vi="Lớp" data-en="Class" style="font-size: 11px; text-transform: uppercase;">Lớp</p><p class="font-display fs-5 fw-semibold text-light mb-0">28TH02</p></div></div></div>
+                <div class="col-12 col-md-8"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-green-soft d-flex align-items-center justify-content-center fs-4 text-success"><i class="fa-solid fa-envelope"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1 lang" data-vi="Email Liên Hệ" data-en="Email Address" style="font-size: 11px; text-transform: uppercase;">Email Liên Hệ</p><a href="mailto:giahoang703@gmail.com" class="font-display fs-5 fw-semibold text-light mb-0">giahoang703@gmail.com</a></div></div></div>
+                <div class="col-12 col-md-4"><div class="cyber-item rounded-3 p-4 d-flex align-items-center gap-3"><div class="icon-box rounded-3 bg-blue-soft d-flex align-items-center justify-content-center fs-4 text-primary"><i class="fa-solid fa-phone"></i></div><div><p class="text-secondary tracking-widest fw-semibold mb-1 lang" data-vi="Điện Thoại" data-en="Phone Number" style="font-size: 11px; text-transform: uppercase;">Điện Thoại</p><a href="tel:0393197294" class="font-display fs-5 fw-semibold text-light mb-0">0393197294</a></div></div></div>
+            </div>
+        </div>
+
+        <!-- PHẦN 2 (MỚI): HỌC VẤN, KINH NGHIỆM & HOẠT ĐỘNG -->
+        <div id="hoc-van" class="cyber-glass rounded-4 p-4 p-sm-5 mb-5">
+            <h3 class="font-display fw-bold mb-4 text-center text-neon-cyan lang" data-vi="<i class='fa-solid fa-graduation-cap me-2'></i>Học Vấn & Hoạt Động" data-en="<i class='fa-solid fa-graduation-cap me-2'></i>Education & Activities"><i class="fa-solid fa-graduation-cap me-2"></i>Học Vấn & Hoạt Động</h3>
+            <div class="row g-4">
+                
+                <!-- Cột trái: Học vấn & Kinh nghiệm -->
+                <div class="col-md-6">
+                    <div class="cyber-item rounded-3 p-4 h-100">
+                        <h5 class="text-warning fw-bold mb-3 lang" data-vi="<i class='fa-solid fa-book-open me-2'></i>Học Vấn & Kinh Nghiệm" data-en="<i class='fa-solid fa-book-open me-2'></i>Education & Experience"><i class="fa-solid fa-book-open me-2"></i>Học Vấn & Kinh Nghiệm</h5>
+                        <ul class="list-unstyled text-light">
+                            <li class="mb-3 border-bottom border-secondary border-opacity-25 pb-2">
+                                <strong class="text-info">Học vấn:</strong> 
+                                <span class="lang" data-vi="Sinh viên năm 2 khoa Công nghệ thông tin - Đại học Bình Dương." data-en="2nd-year IT student at Binh Duong University.">Sinh viên năm 2 khoa Công nghệ thông tin - Đại học Bình Dương.</span>
+                            </li>
+                            <li>
+                                <strong class="text-info">Kinh nghiệm làm việc:</strong> 
+                                <span class="lang" data-vi="Chưa có. Đang trong quá trình học tập, trau dồi kiến thức và tìm kiếm cơ hội cọ xát thực tế." data-en="None yet. Currently studying, accumulating knowledge, and looking for practical opportunities.">Chưa có. Đang trong quá trình học tập, trau dồi kiến thức và tìm kiếm cơ hội cọ xát thực tế.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cột phải: Hoạt động, Giải thưởng & Chứng chỉ -->
+                <div class="col-md-6">
+                    <div class="cyber-item rounded-3 p-4 h-100">
+                        <h5 class="text-neon-pink fw-bold mb-3 lang" data-vi="<i class='fa-solid fa-medal me-2'></i>Hoạt Động & Giải Thưởng" data-en="<i class='fa-solid fa-medal me-2'></i>Activities & Awards"><i class="fa-solid fa-medal me-2"></i>Hoạt Động & Giải Thưởng</h5>
+                        <ul class="list-unstyled text-light">
+                            <li class="mb-2">
+                                <strong class="text-danger">Hoạt động:</strong> 
+                                <span class="lang" data-vi="Tích cực tham gia các hội thao và hoạt động vui chơi ngoại khóa do Khoa tổ chức." data-en="Actively participates in sports festivals and extracurricular activities organized by the Faculty.">Tích cực tham gia các hội thao và hoạt động vui chơi ngoại khóa do Khoa tổ chức.</span>
+                            </li>
+                            <li class="mb-2">
+                                <strong class="text-danger">Giải thưởng / Thành tích:</strong> 
+                                <span class="text-warning fw-bold lang" data-vi="Giải 3 môn Cờ vua (Cấp Khoa)." data-en="3rd Prize in Chess (Faculty level).">Giải 3 môn Cờ vua (Cấp Khoa).</span>
+                            </li>
+                            <li>
+                                <strong class="text-danger">Chứng chỉ:</strong> 
+                                <span class="lang" data-vi="Chưa có." data-en="None yet.">Chưa có.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHẦN 3: MỤC TIÊU NGHỀ NGHIỆP & KỸ NĂNG -->
+        <div id="muc-tieu" class="cyber-glass rounded-4 p-4 p-sm-5 mb-5">
+            <div class="row g-4 d-flex">
+                <!-- Cột trái: Mục tiêu (Đã cập nhật) -->
+                <div class="col-md-6 d-flex flex-column">
+                    <h3 class="font-display fw-bold mb-4 text-neon-cyan lang" data-vi="<i class='fa-solid fa-bullseye me-2'></i>Định Hướng & Mục Tiêu" data-en="<i class='fa-solid fa-bullseye me-2'></i>Career Goals"><i class="fa-solid fa-bullseye me-2"></i>Định Hướng & Mục Tiêu</h3>
+                    <div class="cyber-item rounded-3 p-4 flex-grow-1">
+                        <h6 class="text-warning fw-bold lang" data-vi="Mục Tiêu Trọng Tâm" data-en="Core Objectives">Mục Tiêu Trọng Tâm</h6>
+                        <p class="text-light mb-4 lang" data-vi="Nắm vững và hiểu rõ bản chất của các ngôn ngữ lập trình phổ biến. Đặc biệt, khát khao tìm hiểu và thành thạo sử dụng các công nghệ mới, tiêu biểu là Trí tuệ nhân tạo (AI) để ứng dụng vào công việc và phát triển phần mềm." data-en="Master the fundamentals of popular programming languages. Specifically eager to learn and proficiently use new technologies like Artificial Intelligence (AI) for software development.">Nắm vững và hiểu rõ bản chất của các ngôn ngữ lập trình phổ biến. Đặc biệt, khát khao tìm hiểu và thành thạo sử dụng các công nghệ mới, tiêu biểu là Trí tuệ nhân tạo (AI) để ứng dụng vào công việc và phát triển phần mềm.</p>
+                        
+                        <h6 class="text-warning fw-bold lang" data-vi="Định Hướng Tương Lai" data-en="Future Orientation">Định Hướng Tương Lai</h6>
+                        <p class="text-light mb-0 lang" data-vi="Phấn đấu trở thành một lập trình viên đa năng, luôn cập nhật các xu hướng công nghệ tương lai. Ứng dụng sức mạnh của AI để tự động hóa và tối ưu hóa các dự án cá nhân cũng như doanh nghiệp." data-en="Strive to become a versatile developer, always updated with future tech trends. Applying the power of AI to automate and optimize both personal and business projects.">Phấn đấu trở thành một lập trình viên đa năng, luôn cập nhật các xu hướng công nghệ tương lai. Ứng dụng sức mạnh của AI để tự động hóa và tối ưu hóa các dự án cá nhân cũng như doanh nghiệp.</p>
+                    </div>
+                </div>
+                
+                <!-- Cột phải: Kỹ năng chuyên môn -->
+                <div class="col-md-6 d-flex flex-column">
+                    <h3 class="font-display fw-bold mb-4 text-neon-purple lang" data-vi="<i class='fa-solid fa-code me-2'></i>Kỹ Năng Ngôn Ngữ" data-en="<i class='fa-solid fa-code me-2'></i>Programming Skills"><i class="fa-solid fa-code me-2"></i>Kỹ Năng Ngôn Ngữ</h3>
+                    <div class="cyber-item rounded-3 p-4 flex-grow-1 d-flex flex-column justify-content-center gap-3">
+                        <!-- Python -->
+                        <div class="d-flex align-items-center justify-content-between p-3 rounded-3" style="background: rgba(0, 243, 255, 0.1); border: 1px solid var(--neon-cyan);">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="fa-brands fa-python fa-2x text-neon-cyan"></i>
+                                <span class="fs-5 fw-bold text-light">Python</span>
+                            </div>
+                            <span class="badge border border-info text-info bg-transparent lang" data-vi="Tốt" data-en="Good">Tốt</span>
+                        </div>
+                        <!-- C++ -->
+                        <div class="d-flex align-items-center justify-content-between p-3 rounded-3" style="background: rgba(188, 19, 254, 0.1); border: 1px solid var(--neon-purple);">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="fa-solid fa-c fa-2x text-neon-purple"></i>
+                                <span class="fs-5 fw-bold text-light">C++</span>
+                            </div>
+                            <span class="badge border border-primary text-primary bg-transparent lang" data-vi="Khá" data-en="Fair">Khá</span>
+                        </div>
+                        <!-- HTML -->
+                        <div class="d-flex align-items-center justify-content-between p-3 rounded-3" style="background: rgba(255, 0, 60, 0.1); border: 1px solid var(--neon-pink);">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="fa-brands fa-html5 fa-2x text-neon-pink"></i>
+                                <span class="fs-5 fw-bold text-light">HTML</span>
+                            </div>
+                            <span class="badge border border-danger text-danger bg-transparent lang" data-vi="Tốt" data-en="Good">Tốt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHẦN: DỰ ÁN CÁ NHÂN -->
+        <div id="du-an" class="cyber-glass rounded-4 p-4 p-sm-5 mb-5">
+            <h3 class="font-display fw-bold mb-4 text-neon-pink text-center lang" data-vi="<i class='fa-solid fa-laptop-code me-2'></i>Dự Án Cá Nhân" data-en="<i class='fa-solid fa-laptop-code me-2'></i>Personal Projects"><i class="fa-solid fa-laptop-code me-2"></i>Dự Án Cá Nhân</h3>
+            <div class="row g-4">
+                
+                <!-- Dự án 1: Hệ thống CSDL -->
+                <div class="col-md-6">
+                    <div class="cyber-item rounded-3 p-0 h-100 d-flex flex-column">
+                        <div style="height: 200px; overflow: hidden;" class="rounded-top-3 border-bottom border-secondary border-opacity-25">
+                            <img src="duan1.png" alt="CSDL Bán Máy Tính" class="w-100 h-100 object-fit-cover" onerror="this.src='https://placehold.co/600x400/0c0e14/00f3ff?text=Anh+Du+An+1'">
+                        </div>
+                        <div class="p-4 flex-grow-1">
+                            <h5 class="text-light fw-bold lang" data-vi="Hệ Thống CSDL Bán Máy Tính" data-en="Computer Sales Database System">Hệ Thống CSDL Bán Máy Tính</h5>
+                            <p class="text-secondary small lang" data-vi="Thiết kế và xây dựng cơ sở dữ liệu quản lý sản phẩm, khách hàng, hóa đơn và tồn kho cho cửa hàng kinh doanh thiết bị máy tính." data-en="Designed and built a database to manage products, customers, invoices, and inventory for a computer hardware store.">Thiết kế và xây dựng cơ sở dữ liệu quản lý sản phẩm, khách hàng, hóa đơn và tồn kho cho cửa hàng kinh doanh thiết bị máy tính.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-info text-dark">SQL Server</span>
+                                <span class="badge bg-primary">MySQL</span>
+                                <span class="badge bg-warning text-dark">Phân tích ERD</span>
+                            </div>
+                            <button class="btn btn-outline-info btn-sm w-100 lang" data-bs-toggle="modal" data-bs-target="#modalDuAn1" data-vi="Xem Chi Tiết" data-en="View Details">Xem Chi Tiết</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dự án 2: Hệ thống quản trị mạng -->
+                <div class="col-md-6">
+                    <div class="cyber-item rounded-3 p-0 h-100 d-flex flex-column">
+                        <div style="height: 200px; overflow: hidden;" class="rounded-top-3 border-bottom border-secondary border-opacity-25">
+                            <img src="duan2.png" alt="Hệ Thống Quản Trị Mạng" class="w-100 h-100 object-fit-cover" onerror="this.src='https://placehold.co/600x400/0c0e14/ffc107?text=Anh+Du+An+2'">
+                        </div>
+                        <div class="p-4 flex-grow-1">
+                            <h5 class="text-light fw-bold lang" data-vi="Hệ Thống Quản Trị Mạng" data-en="Network Administration System">Hệ Thống Quản Trị Mạng</h5>
+                            <p class="text-secondary small lang" data-vi="Thiết kế, cấu hình và quản trị hệ thống mạng nội bộ (LAN/WAN) an toàn, phân quyền tối ưu hiệu suất cho mô hình doanh nghiệp." data-en="Designed, configured, and managed a secure and performance-optimized local area network (LAN/WAN) for businesses.">Thiết kế, cấu hình và quản trị hệ thống mạng nội bộ (LAN/WAN) an toàn, phân quyền tối ưu hiệu suất cho mô hình doanh nghiệp.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-info text-dark">Cisco Packet Tracer</span>
+                                <span class="badge bg-primary">Windows Server</span>
+                                <span class="badge bg-warning text-dark">Bảo Mật</span>
+                            </div>
+                            <button class="btn btn-outline-warning btn-sm w-100 lang" data-bs-toggle="modal" data-bs-target="#modalDuAn2" data-vi="Xem Chi Tiết" data-en="View Details">Xem Chi Tiết</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PHẦN: LIÊN HỆ -->
+        <div id="lien-he" class="cyber-glass rounded-4 p-4 p-sm-5 mb-5">
+            <h3 class="font-display fw-bold mb-4 text-gradient text-center lang" data-vi="<i class='fa-solid fa-address-book me-2'></i>Liên Hệ Với Tôi" data-en="<i class='fa-solid fa-address-book me-2'></i>Contact Me"><i class="fa-solid fa-address-book me-2"></i>Liên Hệ Với Tôi</h3>
+            <div class="row g-4">
+                <div class="col-md-7">
+                    <div class="cyber-item rounded-3 p-4">
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <label class="form-label text-light lang" data-vi="Họ và tên" data-en="Full Name">Họ và tên</label>
+                                <input type="text" class="form-control bg-dark text-light border-info" id="cName" placeholder="Nhập tên của bạn">
+                                <div class="invalid-feedback lang" data-vi="Vui lòng nhập tên của bạn." data-en="Please enter your name.">Vui lòng nhập tên của bạn.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-light lang" data-vi="Email" data-en="Email Address">Email</label>
+                                <input type="email" class="form-control bg-dark text-light border-info" id="cEmail" placeholder="name@example.com">
+                                <div class="invalid-feedback lang" data-vi="Vui lòng nhập email hợp lệ." data-en="Please enter a valid email.">Vui lòng nhập email hợp lệ.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-light lang" data-vi="Lời nhắn" data-en="Message">Lời nhắn</label>
+                                <textarea class="form-control bg-dark text-light border-info" id="cMessage" rows="4" placeholder="Nhập nội dung..."></textarea>
+                                <div class="invalid-feedback lang" data-vi="Vui lòng nhập lời nhắn." data-en="Please enter your message.">Vui lòng nhập lời nhắn.</div>
+                            </div>
+                            <button type="submit" class="btn btn-info w-100 fw-bold lang" data-vi="<i class='fa-solid fa-paper-plane me-2'></i> Gửi Lời Nhắn" data-en="<i class='fa-solid fa-paper-plane me-2'></i> Send Message"><i class="fa-solid fa-paper-plane me-2"></i> Gửi Lời Nhắn</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="cyber-item rounded-3 p-4 h-100 d-flex flex-column justify-content-center">
+                        <p class="text-light text-center mb-4 lang" data-vi="Kết nối với tôi qua các nền tảng:" data-en="Connect with me via:">Kết nối với tôi qua các nền tảng:</p>
+                        <div class="d-grid gap-3">
+                            <a href="https://facebook.com/" target="_blank" class="btn btn-outline-primary d-flex align-items-center justify-content-center gap-2">
+                                <i class="fa-brands fa-facebook fs-4"></i> Facebook
+                            </a>
+                            <a href="https://youtube.com/" target="_blank" class="btn btn-outline-danger d-flex align-items-center justify-content-center gap-2">
+                                <i class="fa-brands fa-youtube fs-4"></i> YouTube
+                            </a>
+                            <a href="https://tiktok.com/" target="_blank" class="btn btn-outline-light d-flex align-items-center justify-content-center gap-2" style="border-color: #ff0050;">
+                                <i class="fa-brands fa-tiktok fs-4" style="color: #00f2fe;"></i> TikTok
+                            </a>
+                            <a href="mailto:giahoang703@gmail.com" class="btn btn-outline-info d-flex align-items-center justify-content-center gap-2">
+                                <i class="fa-solid fa-envelope fs-4"></i> Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHẦN: CÂU HỎI BẢO MẬT (QUIZ) -->
+        <div id="quiz-section" class="cyber-glass rounded-4 p-4 p-sm-5 text-center mb-5" style="transition: opacity 0.5s ease, transform 0.5s ease;">
+            <h3 class="text-warning mb-4 lang" data-vi="<i class='fa-solid fa-lock me-2'></i> Muốn xem chi tiết cá nhân phải trả lời đúng câu hỏi sau" data-en="<i class='fa-solid fa-lock me-2'></i> Answer correctly to view personal details">
+                <i class="fa-solid fa-lock me-2"></i> Muốn xem chi tiết cá nhân phải trả lời đúng câu hỏi sau
+            </h3>
+            
+            <div class="cyber-item rounded-4 p-4 text-start bg-dark">
+                <p class="fs-5 text-light fw-bold mb-1">Hoàng Sa và Trường Sa là của nước nào?</p>
+                <p class="text-secondary fst-italic mb-4">"Which country do Hoang Sa and Truong Sa belong to?"</p>
+                
+                <div class="row g-3">
+                    <div class="col-12 col-sm-6">
+                        <div class="cyber-item rounded-3 p-3 quiz-btn d-flex align-items-center" data-correct="true">
+                            <span class="text-neon-cyan fw-bold fs-5 me-3">A.</span> <span class="text-light">Việt Nam</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="cyber-item rounded-3 p-3 quiz-btn d-flex align-items-center" data-correct="false">
+                            <span class="text-neon-pink fw-bold fs-5 me-3">B.</span> <span class="text-light">Indonesia</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="cyber-item rounded-3 p-3 quiz-btn d-flex align-items-center" data-correct="false">
+                            <span class="text-neon-purple fw-bold fs-5 me-3">C.</span> <span class="text-light">Malaixia</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="cyber-item rounded-3 p-3 quiz-btn d-flex align-items-center" data-correct="false">
+                            <span class="text-danger fw-bold fs-5 me-3">D.</span> <span class="text-light">China</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="quiz-error" class="text-danger mt-4 text-center fw-bold d-none">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Sai rồi! Hãy chọn lại đi (Wrong! Please try again.)
+                </div>
+            </div>
+        </div>
+
+        <!-- PHẦN: HỒ SƠ CHI TIẾT -->
+        <div id="details-section" class="cyber-glass rounded-4 p-4 p-sm-5 d-none position-relative" style="opacity: 0; transition: opacity 0.8s ease;">
+            
+            <div class="position-absolute top-0 end-0 mt-3 me-3 z-3">
+                <button id="btn-relock" class="btn btn-outline-warning btn-sm lang" data-vi="<i class='fa-solid fa-lock'></i> Khóa lại" data-en="<i class='fa-solid fa-lock'></i> Lock again">
+                    <i class="fa-solid fa-lock"></i> Khóa lại
+                </button>
+            </div>
+
+            <h2 class="font-display fw-bold mb-5 text-gradient text-center lang" data-vi="<i class='fa-solid fa-user-astronaut me-2'></i> Hồ Sơ Cá Nhân Chi Tiết" data-en="<i class='fa-solid fa-user-astronaut me-2'></i> Detailed Personal Profile" style="font-size: 2rem;">
+                <i class="fa-solid fa-user-astronaut me-2"></i> Hồ Sơ Cá Nhân Chi Tiết
+            </h2>
+            
+            <div class="row g-4">
+                <div class="col-12 col-md-6">
+                    <div class="cyber-item rounded-4 p-4 h-100">
+                        <h4 class="text-neon-cyan mb-4 border-bottom border-info pb-2 lang" data-vi="<i class='fa-solid fa-address-card me-2'></i>Thông Tin Cơ Bản" data-en="<i class='fa-solid fa-address-card me-2'></i>Basic Info"><i class="fa-solid fa-address-card me-2"></i>Thông Tin Cơ Bản</h4>
+                        <ul class="list-unstyled text-light fs-6 mb-0">
+                            <li class="mb-3 d-flex">
+                                <strong class="text-secondary text-nowrap lang" data-vi="Họ và tên:" data-en="Full Name:" style="min-width: 90px;">Họ và tên:</strong> 
+                                <span>Trì Gia Hoàng</span>
+                            </li>
+                            <li class="mb-3 d-flex">
+                                <strong class="text-secondary text-nowrap lang" data-vi="Giới tính:" data-en="Gender:" style="min-width: 90px;">Giới tính:</strong> 
+                                <span class="lang" data-vi="Nam" data-en="Male">Nam</span>
+                            </li>
+                            <li class="mb-0 d-flex">
+                                <strong class="text-secondary text-nowrap lang" data-vi="Ngày sinh:" data-en="Birth Date:" style="min-width: 90px;">Ngày sinh:</strong> 
+                                <span>20/02/2007</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="cyber-item rounded-4 p-4 h-100">
+                        <h4 class="text-neon-pink mb-4 border-bottom border-danger pb-2 lang" data-vi="<i class='fa-solid fa-people-roof me-2'></i>Gia Đình" data-en="<i class='fa-solid fa-people-roof me-2'></i>Family"><i class="fa-solid fa-people-roof me-2"></i>Gia Đình</h4>
+                        <ul class="list-unstyled text-light fs-6 mb-0">
+                            <li class="mb-4">
+                                <div class="d-flex align-items-center">
+                                    <strong class="text-secondary text-nowrap lang" data-vi="Ba:" data-en="Father:" style="min-width: 50px;">Ba:</strong> 
+                                    <span class="text-nowrap">Trì Công Tâm</span> 
+                                </div>
+                                <div class="mt-2" style="margin-left: 50px;">
+                                    <i class="fa-solid fa-phone text-secondary me-2" style="font-size:13px;"></i><a href="tel:0988008079" class="text-info">0988008079</a>
+                                </div>
+                            </li>
+                            <li class="mb-0">
+                                <div class="d-flex align-items-center">
+                                    <strong class="text-secondary text-nowrap lang" data-vi="Mẹ:" data-en="Mother:" style="min-width: 50px;">Mẹ:</strong> 
+                                    <span class="text-nowrap">Trần Thị Diểm Thùy</span> 
+                                </div>
+                                <div class="mt-2" style="margin-left: 50px;">
+                                    <i class="fa-solid fa-phone text-secondary me-2" style="font-size:13px;"></i><a href="tel:0397150068" class="text-info">0397150068</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-12">
+                    <div class="cyber-item rounded-4 p-4">
+                        <h4 class="text-neon-purple mb-4 border-bottom border-primary pb-2 lang" data-vi="<i class='fa-solid fa-heart me-2'></i>Sở Thích & Tính Cách" data-en="<i class='fa-solid fa-heart me-2'></i>Hobbies & Personality"><i class="fa-solid fa-heart me-2"></i>Sở Thích & Tính Cách</h4>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success bg-opacity-10 rounded-3 h-100 border-start border-success border-4">
+                                    <strong class="text-success d-block mb-2 lang" data-vi="<i class='fa-solid fa-thumbs-up me-1'></i>Thích:" data-en="<i class='fa-solid fa-thumbs-up me-1'></i>Likes:"><i class="fa-solid fa-thumbs-up me-1"></i>Thích:</strong>
+                                    <span class="text-light lang" data-vi="Màu xanh nước, thích ăn trứng và những món ăn đậm đà." data-en="Blue color, loves eating eggs and rich-flavored foods.">Màu xanh nước, thích ăn trứng và những món ăn đậm đà.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-danger bg-opacity-10 rounded-3 h-100 border-start border-danger border-4">
+                                    <strong class="text-danger d-block mb-2 lang" data-vi="<i class='fa-solid fa-thumbs-down me-1'></i>Không thích:" data-en="<i class='fa-solid fa-thumbs-down me-1'></i>Dislikes:"><i class="fa-solid fa-thumbs-down me-1"></i>Không thích:</strong>
+                                    <span class="text-light lang" data-vi="Ăn thơm, dứa, cá ngừ." data-en="Pineapple and tuna.">Ăn thơm, dứa, cá ngừ.</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="p-3 bg-warning bg-opacity-10 rounded-3 border-start border-warning border-4">
+                                    <strong class="text-warning d-block mb-2 lang" data-vi="<i class='fa-solid fa-face-smile-beam me-1'></i>Tính cách:" data-en="<i class='fa-solid fa-face-smile-beam me-1'></i>Personality:"><i class="fa-solid fa-face-smile-beam me-1"></i>Tính cách:</strong>
+                                    <span class="text-light lang" data-vi="Tự nhận mình là 1 chàng trai vui vẻ, luôn hòa đồng, và thích giúp đỡ mọi người, đặc biệt chịu khó <i class='fa-regular fa-face-frown-open text-info ms-1'></i>." data-en="Considers himself a cheerful guy, sociable, and loves helping others. Very hardworking <i class='fa-regular fa-face-frown-open text-info ms-1'></i>.">Tự nhận mình là 1 chàng trai vui vẻ, luôn hòa đồng, và thích giúp đỡ mọi người, đặc biệt chịu khó <i class="fa-regular fa-face-frown-open text-info ms-1"></i>.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="cyber-item rounded-4 p-4">
+                        <h4 class="text-warning mb-4 border-bottom border-warning pb-2 lang" data-vi="<i class='fa-solid fa-bolt me-2'></i>Kỹ Năng & Năng Lực" data-en="<i class='fa-solid fa-bolt me-2'></i>Skills & Abilities"><i class="fa-solid fa-bolt me-2"></i>Kỹ Năng & Năng Lực</h4>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="p-3 border border-secondary rounded-3 bg-dark">
+                                    <strong class="text-success d-block mb-1 lang" data-vi="<i class='fa-solid fa-star me-1'></i>Kỹ năng:" data-en="<i class='fa-solid fa-star me-1'></i>Skills:"><i class="fa-solid fa-star me-1"></i>Kỹ năng:</strong>
+                                    <span class="text-light lang" data-vi="Thành thạo mọi kỹ năng việc nhà <i class='fa-solid fa-thumbs-up text-primary'></i>, khả năng nấu ăn khá tốt." data-en="Master of all household chores <i class='fa-solid fa-thumbs-up text-primary'></i>, quite good at cooking.">Thành thạo mọi kỹ năng việc nhà <i class="fa-solid fa-thumbs-up text-primary"></i>, khả năng nấu ăn khá tốt.</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="p-3 border border-secondary rounded-3 bg-dark">
+                                    <strong class="text-info d-block mb-1 lang" data-vi="<i class='fa-solid fa-arrow-trend-up me-1'></i>Điểm mạnh:" data-en="<i class='fa-solid fa-arrow-trend-up me-1'></i>Strengths:"><i class="fa-solid fa-arrow-trend-up me-1"></i>Điểm mạnh:</strong>
+                                    <span class="text-light lang" data-vi="Khả năng nói chuyện trước đám đông, tự tin, âm nhạc, chỉ huy nhóm nhỏ, có nhiều ý tưởng sáng tạo." data-en="Public speaking, confident, musical skills, small group leadership, and highly creative ideas.">Khả năng nói chuyện trước đám đông, tự tin, âm nhạc, chỉ huy nhóm nhỏ, có nhiều ý tưởng sáng tạo.</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="p-3 border border-secondary rounded-3 bg-dark">
+                                    <strong class="text-danger d-block mb-1 lang" data-vi="<i class='fa-solid fa-arrow-trend-down me-1'></i>Điểm yếu:" data-en="<i class='fa-solid fa-arrow-trend-down me-1'></i>Weaknesses:"><i class="fa-solid fa-arrow-trend-down me-1"></i>Điểm yếu:</strong>
+                                    <span class="text-light lang" data-vi="Ai biết bạn tự tìm đi <i class='fa-solid fa-face-laugh-squint text-warning ms-1'></i>" data-en="Who knows, find it out yourself <i class='fa-solid fa-face-laugh-squint text-warning ms-1'></i>">Ai biết bạn tự tìm đi <i class="fa-solid fa-face-laugh-squint text-warning ms-1"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- NÚT SCROLL TO TOP -->
+    <button id="scrollTopBtn" class="btn btn-info rounded-circle position-fixed bottom-0 end-0 m-4 z-3 shadow-lg d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; opacity: 0; visibility: hidden; transition: all 0.3s ease;">
+        <i class="fa-solid fa-arrow-up fs-5"></i>
+    </button>
+
+    <!-- MODAL DỰ ÁN 1 -->
+    <div class="modal fade" id="modalDuAn1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark border-info">
+                <div class="modal-header border-secondary border-opacity-25">
+                    <h5 class="modal-title text-info fw-bold"><i class="fa-solid fa-database me-2"></i>Hệ Thống CSDL</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-light">
+                    <img src="duan1.png" class="w-100 rounded-3 mb-3" alt="Demo Dự Án 1" onerror="this.src='https://placehold.co/600x300/0c0e14/00f3ff?text=Hinh+Du+An'">
+                    <p>Dự án này sử dụng SQL Server để thiết kế các bảng dữ liệu, tạo relationship, viết các Store Procedure và Trigger để tự động hóa việc tính toán hàng tồn kho khi có giao dịch phát sinh.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DỰ ÁN 2 -->
+    <div class="modal fade" id="modalDuAn2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark border-warning">
+                <div class="modal-header border-secondary border-opacity-25">
+                    <h5 class="modal-title text-warning fw-bold"><i class="fa-solid fa-network-wired me-2"></i>Quản Trị Mạng</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-light">
+                    <img src="duan2.png" class="w-100 rounded-3 mb-3" alt="Demo Dự Án 2" onerror="this.src='https://placehold.co/600x300/0c0e14/ffc107?text=Hinh+Du+An'">
+                    <p>Mô phỏng hạ tầng mạng doanh nghiệp trên phần mềm Cisco Packet Tracer. Cấu hình chia VLAN, định tuyến OSPF, thiết lập Access Control List (ACL) để chặn truy cập trái phép và dựng Windows Server cấp IP động (DHCP).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nhúng Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JS Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- 1. LOGIC CHO QUIZ BẢO MẬT & NÚT KHÓA LẠI ---
+            const quizButtons = document.querySelectorAll('.quiz-btn');
+            const quizSection = document.getElementById('quiz-section');
+            const detailsSection = document.getElementById('details-section');
+            const errorMsg = document.getElementById('quiz-error');
+            const btnRelock = document.getElementById('btn-relock');
+
+            quizButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const isCorrect = this.getAttribute('data-correct') === 'true';
+                    if(isCorrect) {
+                        errorMsg.classList.add('d-none');
+                        this.classList.add('bg-success', 'border-success');
+                        setTimeout(() => {
+                            quizSection.style.opacity = "0";
+                            setTimeout(() => {
+                                quizSection.classList.add('d-none');
+                                detailsSection.classList.remove('d-none');
+                                setTimeout(() => {
+                                    detailsSection.style.opacity = "1";
+                                }, 100);
+                            }, 500); 
+                        }, 500); 
+                    } else {
+                        errorMsg.classList.remove('d-none');
+                        this.classList.add('bg-danger', 'border-danger');
+                        quizSection.style.transform = "translateX(10px)";
+                        setTimeout(() => quizSection.style.transform = "translateX(-10px)", 100);
+                        setTimeout(() => quizSection.style.transform = "translateX(10px)", 200);
+                        setTimeout(() => quizSection.style.transform = "translateX(0)", 300);
+                        setTimeout(() => {
+                            this.classList.remove('bg-danger', 'border-danger');
+                        }, 1000);
+                    }
+                });
+            });
+
+            btnRelock.addEventListener('click', function() {
+                detailsSection.style.opacity = "0";
+                setTimeout(() => {
+                    detailsSection.classList.add('d-none');
+                    quizButtons.forEach(b => {
+                        b.classList.remove('bg-success', 'border-success', 'bg-danger', 'border-danger');
+                    });
+                    errorMsg.classList.add('d-none');
+                    quizSection.classList.remove('d-none');
+                    setTimeout(() => {
+                        quizSection.style.opacity = "1";
+                    }, 100);
+                }, 800);
+            });
+
+            // --- 2. LOGIC CHO CHẾ ĐỘ SÁNG TỐI ---
+            const toggleThemeBtn = document.getElementById('toggle-theme');
+            toggleThemeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.classList.toggle('light-mode');
+            });
+
+            // --- 3. LOGIC CHO NGÔN NGỮ ---
+            let currentLang = 'vi';
+            const toggleLangBtn = document.getElementById('toggle-lang');
+            toggleLangBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                currentLang = currentLang === 'vi' ? 'en' : 'vi';
+                
+                const langElements = document.querySelectorAll('.lang');
+                langElements.forEach(el => {
+                    if(currentLang === 'en' && el.hasAttribute('data-en')) {
+                        el.innerHTML = el.getAttribute('data-en');
+                    } else if(currentLang === 'vi' && el.hasAttribute('data-vi')) {
+                        el.innerHTML = el.getAttribute('data-vi');
+                    }
+                });
+            });
+
+            // --- 4. LOGIC KIỂM TRA FORM LIÊN HỆ ---
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('cName');
+                const email = document.getElementById('cEmail');
+                const message = document.getElementById('cMessage');
+                let isValid = true;
+                
+                if(name.value.trim() === '') { name.classList.add('is-invalid'); isValid = false; } 
+                else { name.classList.remove('is-invalid'); }
+                
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if(!emailRegex.test(email.value)) { email.classList.add('is-invalid'); isValid = false; } 
+                else { email.classList.remove('is-invalid'); }
+
+                if(message.value.trim() === '') { message.classList.add('is-invalid'); isValid = false; } 
+                else { message.classList.remove('is-invalid'); }
+
+                if(isValid) {
+                    alert(currentLang === 'vi' ? 'Cảm ơn bạn! Lời nhắn đã được gửi.' : 'Thank you! Message sent successfully.');
+                    contactForm.reset();
+                }
+            });
+
+            // --- 5. LOGIC SCROLL TO TOP ---
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.style.opacity = "1";
+                    scrollTopBtn.style.visibility = "visible";
+                } else {
+                    scrollTopBtn.style.opacity = "0";
+                    scrollTopBtn.style.visibility = "hidden";
+                }
+            });
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
